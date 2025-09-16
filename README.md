@@ -56,6 +56,8 @@ elmo-hikes/
 
 ## Contributors
 
+- **Mittapap** - BCIT CST Student with a passion for solving a challenge problem and user-friendly applications. Fun fact: Loves watching Japanese anime with popcorn.
+- **Mitt and Armin** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
 - **Xinyue Wang** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: Loves solving Rubik's Cubes in under a minute.
 - **Mitt and Armin** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
 
