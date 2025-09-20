@@ -59,7 +59,6 @@ elmo-hikes/
 - **Armin Hadjifaradji** - BCIT CST Student. Hobbies: Watching movies
 - **Xinyue(Ivy) Wang** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: Loves solving Rubik's Cubes in under a minute.
 - **Mittapap** - BCIT CST Student with a passion for solving a challenge problem and user-friendly applications. Fun fact: Loves watching Japanese anime with popcorn.
-- **Xinyue Wang** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: Loves solving Rubik's Cubes in under a minute.
 
 ---
 
