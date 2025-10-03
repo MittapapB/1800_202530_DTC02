@@ -1,0 +1,50 @@
+.logo-bar {
+  background-color: burlywood;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  font-size: xx-large;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1040;
+}
+.nav-top {
+  background-color: #fa9500;
+  position: fixed;
+  top: 60px; /* logo 高度 = 50px，这里偏移 50px */
+  left: 0;
+  width: 100%;
+  z-index: 1030;
+}
+.nav-top .nav-link {
+  color: white;
+}
+.nav-top .nav-link.active {
+  background-color: #eb6424;
+}
+
+.nav-bottom {
+  background-color: #fa9500;
+}
+.nav-bottom .nav-link {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-bottom .nav-link.active {
+  background-color: #eb6424;
+}
+.nav-link:hover {
+  background-color: #eb6424;
+  color: white;
+}
+
+body {
+  padding-top: 120px;
+  padding-bottom: 60px;
+}
