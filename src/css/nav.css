@@ -1,10 +1,11 @@
 .logo-bar {
-  background-color: burlywood;
+  color: #eb6424;
+  font: bolder;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 15px;
+  padding: 20px;
   font-size: xx-large;
   position: fixed;
   top: 0;
@@ -15,7 +16,7 @@
 .nav-top {
   background-color: #fa9500;
   position: fixed;
-  top: 60px; /* logo 高度 = 50px，这里偏移 50px */
+  top: 60px;
   left: 0;
   width: 100%;
   z-index: 1030;
@@ -44,7 +45,15 @@
   color: white;
 }
 
-body {
-  padding-top: 120px;
-  padding-bottom: 60px;
+@media (max-width: 992px) {
+  .search-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+    background-color: white;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
 }
