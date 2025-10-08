@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>My BCIT Project</title>
@@ -20,10 +20,19 @@
 
     <!-- body style  -->
     <link rel="stylesheet" href="./src/css/body.css" />
+
+    <!-- footer style  -->
+    <link rel="stylesheet" href="./src/css/footer.css" />
+
+    <!-- Font-Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
 
-  <body>
-    <div class="logo-bar">LineLog</div>
+  <body class="">
+    <div class="logo-bar">MealWave</div>
 
     <div class="container main-content">
       <div class="card p-3 mb-3">
@@ -143,7 +152,7 @@
         </svg>
         Home</a
       >
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="./src/pages/favorite.html">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -166,7 +175,7 @@
         </svg>
         Favorites</a
       >
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="/src/pages/profile.html">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -190,9 +199,11 @@
       >
     </nav>
     <!-- Welcome Banner -->
-    <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
+    <div class="container col-xxl-8 px-4 pt-0 py-5 py-md-5">
+      <div
+        class="row flex-lg-row-reverse align-items-center justify-content-center pt-0 pb-5 py-md-5"
+      >
+        <div class="col-10 col-sm-8 col-lg-6 mb-3 d-md-mb-0">
           <img
             src="https://picsum.photos/id/395/700/500"
             class="d-block mx-lg-auto img-fluid"
@@ -203,26 +214,118 @@
           />
         </div>
         <div class="col-lg-6">
-          <h1 class="display-5 fw-bold lh-1 mb-3">
+          <h1 class="display-5 fw-bold cta-text lh-1 mb-3">
             Welcome to MealWave App
           </h1>
           <p class="lead">
-            Our team DTC-2 is developing a web application to help 
-            restaurant customers to plan their visits more efficiently 
-            by sharing and browsing wait times contributed by customers.
+            Curious about how long the wait is at your favorite restaurant?
+            Discover real-time updates shared by diners like you —
+            <span class="fw-semibold cta-text"
+              >then sign in to share yours</span
+            >
+            and
+            <span class="fw-semibold cta-text">help others skip the wait!</span>
           </p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
-              Primary
+            <button
+              type="button"
+              class="btn btn-primary btn-lg px-4 me-md-2"
+              onclick="window.location.href='/src/pages/sign-in.html'"
+            >
+              Sign in
             </button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-              Default
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-lg px-4"
+              onclick="window.location.href='/src/pages/create-account.html'"
+            >
+              Create an account
             </button>
           </div>
         </div>
       </div>
     </div>
-
     <div class="b-example-divider"></div>
   </body>
+  <footer class="bg-dark text-light py-5 d-none d-lg-block">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="mb-4">About Us</h5>
+          <p class="mb-4">
+            We are dedicated to helping diners plan their restaurant visits more
+            efficiently by sharing and browsing real-time wait times from the
+            community.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon bg-primary"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-icon bg-info"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="social-icon bg-danger"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="social-icon bg-primary"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5 class="mb-4">Support & Settings</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="footer-link">FAQ</a></li>
+            <li class="mb-2"><a href="#" class="footer-link">Settings</a></li>
+            <li class="mb-2">
+              <a href="#" class="footer-link">Report an Issue</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- <div class="col-lg-2 col-md-6">
+          <h5 class="mb-4">Services</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="footer-link">Web Design</a></li>
+            <li class="mb-2">
+              <a href="#" class="footer-link">Development</a>
+            </li>
+            <li class="mb-2"><a href="#" class="footer-link">Marketing</a></li>
+            <li class="mb-2"><a href="#" class="footer-link">Consulting</a></li>
+            <li class="mb-2"><a href="#" class="footer-link">Analytics</a></li>
+          </ul>
+        </div> -->
+
+        <div class="col-lg-4 col-md-6">
+          <h5 class="mb-4">Contact Info</h5>
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <i class="fas fa-map-marker-alt me-2"></i>
+              555 Seymour St Vancouver, BC V6B 3H6, Canada
+            </li>
+            <li class="mb-3">
+              <i class="fas fa-phone me-2"></i>
+              <a href="tel:+1234567890" class="footer-link">+1 (234) 567-890</a>
+            </li>
+            <li class="mb-3">
+              <i class="fas fa-envelope me-2"></i>
+              <a href="mailto:contact@example.com" class="footer-link"
+                >contact@example.com</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-12">
+          <hr class="mb-4" />
+          <div class="text-center">
+            <p class="mb-0">&copy; 2025 MealWave. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>
