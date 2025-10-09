@@ -143,5 +143,165 @@
         </svg>
       </button>
     </div>
+
+    <div class="container mx-auto max-w-6xl px-4 pt-0 py-5 md:py-5">
+      <div
+        class="flex flex-col lg:flex-row-reverse items-center justify-center pt-5 pb-5 md:py-5 md:mt-11"
+      >
+        <div class="w-10/12 sm:w-8/12 lg:w-1/2 mb-3 md:mb-0">
+          <img
+            src="https://picsum.photos/id/395/700/500"
+            alt=""
+            width="700"
+            height="500"
+            loading="lazy"
+            class="block w-5/6 h-5/6 mx-auto lg:mx-0"
+          />
+        </div>
+
+        <div class="lg:w-1/2 mt-3">
+          <h1 class="text-4xl font-bold leading-none mt-3 mb-3">
+            Welcome to MealWave App
+          </h1>
+
+          <p class="text-lg text-gray-700">
+            Curious about how long the wait is at your favorite restaurant?
+            Discover real-time updates shared by diners like you —
+            <span class="font-semibold text-[#eb6424]"
+              >then sign in to share yours</span
+            >
+            and
+            <span class="font-semibold text-[#eb6424]"
+              >help others skip the wait!</span
+            >
+          </p>
+
+          <div class="mt-4 flex flex-col md:flex-row gap-2 md:justify-start">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-lg hover:cursor-pointer bg-[#fa9500] hover:bg-[#eb6424] text-white text-lg px-6 py-3"
+              onclick="window.location.href='/src/pages/sign-in.html'"
+            >
+              Sign in
+            </button>
+
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-lg border border-gray-400 text-gray-700 hover:cursor-pointer hover:bg-gray-100 text-lg px-6 py-3"
+              onclick="window.location.href='/src/pages/create-account.html'"
+            >
+              Create an account
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-100 py-12 md:mt-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <!-- Top Section -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
+          <!-- About Us -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">About Us</h5>
+            <p class="mb-4 text-gray-300">
+              We are dedicated to helping diners plan their restaurant visits
+              more efficiently by sharing and browsing real-time wait times from
+              the community.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-sky-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Support & Settings -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Support & Settings</h5>
+            <ul>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-[#fa9500] transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-[#fa9500] transition-colors"
+                  >Settings</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-[#fa9500] transition-colors"
+                  >Report an Issue</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Contact Info</h5>
+            <ul>
+              <li class="mb-3 flex items-start">
+                <i class="fas fa-map-marker-alt mr-2 mt-1 text-[#fa9500]"></i>
+                555 Seymour St Vancouver, BC V6B 3H6, Canada
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-phone mr-2 text-[#fa9500]"></i>
+                <a
+                  href="tel:+1234567890"
+                  class="hover:text-[#fa9500] transition-colors"
+                  >+1 (234) 567-890</a
+                >
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-envelope mr-2 text-[#fa9500]"></i>
+                <a
+                  href="mailto:contact@example.com"
+                  class="hover:text-[#fa9500] transition-colors"
+                  >contact@example.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Divider -->
+        <div
+          class="mt-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+        >
+          <p>&copy; 2025 MealWave. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/src/main.js"></script>
   </body>
 </html>
