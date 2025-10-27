@@ -41,13 +41,13 @@ export function Navbar() {
     .querySelector('[data-page="favorites"]')
     .addEventListener(
       "click",
-      () => (window.location.href = "/favorites.html")
+      () => (window.location.href = "../pages/favorite.html"),
     );
   nav
     .querySelector('[data-page="profile"]')
     .addEventListener(
       "click",
-      () => (window.location.href = "/src/pages/profile.html")
+      () => (window.location.href = "/src/pages/profile.html"),
     );
 
   const path = window.location.pathname;
