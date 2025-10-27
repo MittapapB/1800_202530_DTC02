@@ -9,6 +9,7 @@
 .bg-accent-green {
   background-color: #89ac46;
 }
+
 .bg-accent-green-light {
   background-color: #e7f2d1;
 }
@@ -55,6 +56,10 @@
   color: #89ac46;
 }
 
+.text-green-dark {
+  color: #5f812f;
+}
+
 .add-record a {
   display: flex;
   align-items: center;
@@ -66,6 +71,15 @@
 
 .add-record a:hover {
   color: #89ac46;
+}
+
+.btn-primary {
+  color: #d97100;
+  background-color: #ffe6bf;
+}
+.btn-primary:hover {
+  color: #fef3e2;
+  background-color: #d97100;
 }
 
 .add-record a svg {
@@ -103,6 +117,12 @@
   font-weight: 600;
 }
 
+.lobster-two-bold {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
 /* Box shadow */
 .shadow-soft {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -129,8 +149,6 @@
 .icon {
   stroke: currentColor; /* use text color by default */
   color: #fa9500; /* default icon color (primary) */
-  width: 24px;
-  height: 24px;
 }
 .icon-primary {
   color: #fa9500;
