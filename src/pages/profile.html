@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,19 +22,48 @@
       rel="stylesheet"
     /> -->
   </head>
-  <body class="min-h-screen flex justify-center p-4 bg-[#fef3e2]">
-    <main class="w-full max-w-lg bg-[#fef3e2] pb-8 flex flex-col">
+  <body class="bg-[#FEF3E2] min-h-screen flex justify-center p-4">
+    <main class="bg-[#FEF3E2] w-full max-w-lg pb-8 flex flex-col">
       <button
-        class="mt-4 w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 text-[#eb5c2b] text-lg shadow border border-black/10 hover:cursor-pointer hover:bg-[#eb5c2b] hover:text-gray-200"
+        class="mt-4 w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#eb5c2b] text-lg shadow border border-black/10 hover:cursor-pointer hover:bg-[#eb5c2b] hover:text-gray-200"
         onclick="window.location.href='/src/pages/main.html'"
       >
         <i class="fa-solid fa-arrow-left"></i>
       </button>
 
-      <div class="min-h-[60vh]"></div>
+      <div class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center">
+        <img
+          class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover"
+          src="../../images/elmo.jpg"
+        />
+        <div class="relative container flex flex-row justify-center items-center">
+        <!-- 3 buttons -->
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold mx-2 my-5 py-2 px-10 rounded-full"
+        >
+          Log-In
+        </button>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold mx-2 my-5 py-2 px-4 rounded-full"
+        >
+            Create Account
+        </button>
+      </div>
+        <div class="flex flex-col ">
+          <h1 class="text-lg font-bold justify-items-center">Account</h1>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41] font-bold mx-2 my-2 py-2 px-4 rounded-full">Update Profile</button>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Change Password</button>
+          <h1 class="text-lg font-bold justify-items-center">My Data</h1>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">My Recent</button>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">My Comments</button>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Saved Favourites</button>
+          <h1 class="text-lg font-bold justify-items-center">Preferences</h1>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Theme</button>
+          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Languages</button>
+        </div>
       <button
         id="toLogout"
-        class="underline text-[#eb5c2b] hover:opacity-80 hover:cursor-pointer"
+        class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mb-5 py-2 px-4 rounded-full"
       >
         Log-out
       </button>
