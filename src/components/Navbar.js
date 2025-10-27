@@ -45,7 +45,10 @@ export function Navbar() {
     );
   nav
     .querySelector('[data-page="profile"]')
-    .addEventListener("click", () => (window.location.href = "/profile.html"));
+    .addEventListener(
+      "click",
+      () => (window.location.href = "/src/pages/profile.html")
+    );
 
   const path = window.location.pathname;
   if (path.includes("index.html") || path === "/") {
