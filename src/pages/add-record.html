@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Time Record</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./tailwind.config.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="bg-background-main">
+    <!-- Header -->
+    <div class="ml-8 mt-10">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M5 12l14 0" />
+        <path d="M5 12l6 6" />
+        <path d="M5 12l6 -6" />
+      </svg>
+    </div>
+    <div class="relative text-center text-3xl mt-2 text-title font-extrabold">
+      Espana Restaurant
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-heart absolute right-4 top-1/2 -translate-y-1/2 mr-2"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
+        />
+      </svg>
+    </div>
+    <div class="text-center mt-10 mb-6">
+      <h2 class="text-2xl font-bold text-green-dark mb-2">
+        How long have you been waiting?
+      </h2>
+      <p class="text-accent-orange text-xl font-medium text-green-dark">
+        Share your experience with us!
+      </p>
+    </div>
+
+    <!-- Time Record -->
+    <div class="card mx-6 mt-8 text-lg">
+      <form
+        id="add-time-form"
+        class="flex-col space-y-6"
+        action="./thank-you.html"
+        method="get"
+      >
+        <div class="form-group">
+          <label for="record-date" class="text-primary font-bold mr-3"
+            >Date:
+          </label>
+          <input
+            type="date"
+            id="record-date"
+            name="record-date"
+            class="bg-background-subtle rounded-2xl py-2 px-3 border-gray-300 border-1"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="record-time" class="text-primary font-bold mr-3"
+            >Time:
+          </label>
+          <input
+            type="time"
+            id="record-time"
+            name="record-time"
+            class="bg-background-subtle rounded-2xl py-2 px-3 border-gray-300 border-1"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="waiting-time" class="text-primary font-bold mr-3"
+            >Waiting Time (min):</label
+          >
+          <input
+            type="number"
+            id="waiting-time"
+            name="waiting-time"
+            min="0"
+            class="bg-background-subtle rounded-2xl p-2 border-gray-300 border-1"
+          />
+        </div>
+
+        <!-- Wait Time Experience -->
+        <div
+          class="form-group mt-10 p-4 bg-background-table rounded shadow-lg rounded-lg"
+        >
+          <h3 class="text-primary font-bold mb-2">
+            Wait Time Experience (Optional)
+          </h3>
+
+          <!-- Rating stars -->
+          <div id="star-rating" class="flex gap-2 mb-4 cursor-pointer">
+            <svg
+              data-star="1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fa9500"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="star"
+            >
+              <polygon
+                points="12 2 15 10 23 10 17 14 19 22 12 18 5 22 7 14 1 10 9 10 12 2"
+              />
+            </svg>
+            <svg
+              data-star="2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fa9500"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="star"
+            >
+              <polygon
+                points="12 2 15 10 23 10 17 14 19 22 12 18 5 22 7 14 1 10 9 10 12 2"
+              />
+            </svg>
+            <svg
+              data-star="3"
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fa9500"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="star"
+            >
+              <polygon
+                points="12 2 15 10 23 10 17 14 19 22 12 18 5 22 7 14 1 10 9 10 12 2"
+              />
+            </svg>
+            <svg
+              data-star="4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fa9500"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="star"
+            >
+              <polygon
+                points="12 2 15 10 23 10 17 14 19 22 12 18 5 22 7 14 1 10 9 10 12 2"
+              />
+            </svg>
+            <svg
+              data-star="5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fa9500"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="star"
+            >
+              <polygon
+                points="12 2 15 10 23 10 17 14 19 22 12 18 5 22 7 14 1 10 9 10 12 2"
+              />
+            </svg>
+          </div>
+
+          <!-- Feedback text area -->
+          <label for="feedback" class="text-primary font-semibold block mb-1"
+            >Your Comments (Optional):</label
+          >
+          <textarea
+            id="feedback"
+            name="feedback"
+            rows="4"
+            placeholder="Share your experience here..."
+            class="w-full border border-gray-300 rounded p-2 text-primary bg-background-main focus:outline-none focus:ring-2 focus:ring-accent-green resize-none"
+          ></textarea>
+        </div>
+
+        <div class="flex justify-center mt-10 mb-30">
+          <button
+            type="submit"
+            class="btn-primary bg-primary-light submit-record px-3 py-2 rounded-full text-xl font-bold w-[60%]"
+          >
+            Submit Record
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- import navbar -->
+    <div id="navbar"></div>
+    <script type="module">
+      import { Navbar } from "../components/Navbar.js";
+      document.getElementById("navbar").appendChild(Navbar());
+    </script>
+    <script type="module" src="../js/submit-record.js"></script>
+  </body>
+</html>

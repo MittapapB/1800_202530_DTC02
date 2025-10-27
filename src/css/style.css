@@ -1,0 +1,165 @@
+/* Background colors (only light backgrounds) */
+.bg-primary {
+  background-color: #fa9500;
+}
+.bg-primary-light {
+  background-color: #ffe6bf;
+}
+
+.bg-accent-green {
+  background-color: #89ac46;
+}
+
+.bg-accent-green-light {
+  background-color: #e7f2d1;
+}
+
+.bg-warning {
+  background-color: #eb6424;
+}
+.bg-warning-light {
+  background-color: #ffdccb;
+}
+
+.bg-background-main {
+  background-color: #fef3e2;
+}
+.bg-background-subtle {
+  background-color: #fff9f4;
+}
+
+.bg-background-table {
+  background-color: #fff9f4 !important;
+}
+
+/* Text colors */
+.text-primary {
+  color: #2e2a26;
+}
+.text-secondary {
+  color: #6e665d;
+}
+.text-light {
+  color: #afa89d;
+}
+
+.text-highlight {
+  color: #fa9500;
+  font: bold;
+}
+
+.text-title {
+  color: #d97100;
+}
+
+.text-hover {
+  color: #89ac46;
+}
+
+.text-green-dark {
+  color: #5f812f;
+}
+
+.add-record a {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fa9500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.add-record a:hover {
+  color: #89ac46;
+}
+
+.btn-primary {
+  color: #d97100;
+  background-color: #ffe6bf;
+}
+.btn-primary:hover {
+  color: #fef3e2;
+  background-color: #d97100;
+}
+
+.add-record a svg {
+  stroke: currentColor;
+  transition: stroke 0.2s;
+}
+
+/* Font family */
+.font-sans {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Margins & paddings */
+.ml-8 {
+  margin-left: 2rem;
+}
+.mt-10 {
+  margin-top: 2.5rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+
+/* Center text */
+.text-center {
+  text-align: center;
+}
+
+/* Text size */
+.text-2xl {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.lobster-two-bold {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Box shadow */
+.shadow-soft {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Positioning */
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.right-4 {
+  right: 1rem;
+}
+.top-1-2 {
+  top: 50%;
+}
+.translate-y-1-2 {
+  transform: translateY(-50%);
+}
+
+/* Icon color */
+.icon {
+  stroke: currentColor; /* use text color by default */
+  color: #fa9500; /* default icon color 
+  (primary) */
+}
+.icon-primary {
+  color: #fa9500;
+} /* main icon color */
+.icon-accent {
+  color: #89ac46;
+} /* accent green */
+.icon-warning {
+  color: #eb6424;
+} /* warning red/orange */
+.icon-light {
+  color: #afa89d;
+} /* light text color */

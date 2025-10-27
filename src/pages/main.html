@@ -3,164 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App" />
-
-    <!-- tailwind cdn package -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- nav section style -->
-    <!-- <link rel="stylesheet" href="./src/css/nav.css" /> -->
-
-    <!-- body style  -->
-    <!-- <link rel="stylesheet" href="./src/css/body.css" /> -->
-
-    <!-- footer style  -->
-    <!-- <link rel="stylesheet" href="./src/css/footer.css" /> -->
-
-    <!-- Font-Awesome -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Google Font: Itim -->
+    <title>Home Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./tailwind.config.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <!-- Dev your new code here -->
-
-  <!-- Color Palette
-  Green：         #89AC46
-  Light orange：  #fa9500
-  Dark orange:    #eb6424
-  Lightest:       #FEF3E2
-   -->
-  <body class="font-[Itim] pt-[60px] md:pt-[120px]">
+  <body class="bg-background-main">
     <div
-      class="bg-[#fa9500] text-[#FEF3E2] text-5xl font-extrabold text-center p-3 fixed top-0 w-full"
+      class="bg-[#fa9500] text-[#FEF3E2] text-5xl font-extrabold text-center p-3 fixed top-0 w-full lobster-two-bold"
     >
       MealWave
     </div>
-
-    <nav>
-      <div
-        class="flex fixed w-full bottom-0 justify-between text-2xl bg-[#FEF3E2] p-3"
+    <!-- Search bar -->
+    <div class="relative w-full max-w-md mx-auto mt-25">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
       >
-        <div
-          class="flex flex-col items-center justify-center gap-0 text-[#eb6424] p-1 mx-3 rounded-2xl hover:bg-[#eb6424] hover:text-[#FEF3E2]"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="36"
-            height="36"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-home"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-            <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-          </svg>
-          Home
-        </div>
-        <div
-          class="flex flex-col items-center justify-center gap-0 text-[#eb6424] p-1 mx-3 rounded-2xl hover:bg-[#eb6424] hover:text-[#FEF3E2]"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="36"
-            height="36"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-heart"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-            />
-          </svg>
-          Favorites
-        </div>
-        <div
-          class="flex flex-col items-center justify-center gap-0 text-[#eb6424] p-1 mx-3 rounded-2xl hover:bg-[#eb6424] hover:text-[#FEF3E2] hover:cursor-pointer"
-          onclick="window.location.href='/src/pages/profile.html'"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="36"
-            height="36"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-user-circle"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-            <path
-              d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
-            />
-          </svg>
-          Profile
-        </div>
-      </div>
-    </nav>
-
-    <div class="flex justify-center mt-6 gap-3">
-      <div class="flex items-center w-[70%] max-w-lg">
-        <input
-          type="search"
-          placeholder="Search restaurants here..."
-          class="border-[#eb6424] border-2 rounded-full p-2 w-full"
-        />
-      </div>
-      <button
-        class="text-[#eb6424] hover:text-[#FEF3E2] hover:bg-[#eb6424] p-1 m-3 rounded-s-lg transition"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="36"
-          height="36"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
+        <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-search"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-          <path d="M21 21l-6 -6" />
-        </svg>
-      </button>
+          d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
+        />
+      </svg>
+      <svg
+        class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-filter"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z"
+        />
+      </svg>
+
+      <input
+        type="search"
+        placeholder="Search restaurants here..."
+        class="border-[#eb6424] border-2 rounded-full p-2 pl-10 pr-10 w-full focus:outline-none"
+      />
     </div>
 
-    <div class="max-w-md mx-auto">
-      <h1 class="text-2xl font-bold leading-none mt-3 mb-3">
-        Welcome to MealWave<span id="name-goes-here">friend</span>
+    <!--  Welcome Banner    -->
+    <div class="max-w-md mt-6 mx-4 md:mx-auto">
+      <h1 class="text-2xl font-bold leading-none mt-3 mb-3 text-title">
+        Welcome to MealWave <span id="name-goes-here">friend</span>
       </h1>
-      <p>Check the current wait times and plan your next meal smarter.</p>
+      <p class="text-title">
+        Check the current wait times and plan your next meal smarter.
+      </p>
     </div>
 
-    <div class="min-h-[60vh]"></div>
+    <!-- Recommend info -->
+    <div
+      class="max-w-4xl mx-auto mt-3 mb-10 grid grid-cols-2 gap-2 text-green-dark bg-background-main p-4 rounded-lg overflow-y-auto max-h-[600px]"
+    >
+      <!-- card 1 -->
+      <div
+        class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4"
+      >
+        <img
+          src="../../images/Resto1.webp"
+          alt="Restaurant A"
+          class="w-full h-32 object-cover rounded-lg mb-2"
+        />
+        <span class="font-bold text-lg">Restaurant A</span>
+        <span class="text-secondary mt-1">Last Wait: 15 min</span>
+      </div>
+
+      <!-- card 2 -->
+      <div
+        class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4"
+      >
+        <img
+          src="../../images/resto2.jpg"
+          alt="Restaurant B"
+          class="w-full h-32 object-cover rounded-lg mb-2"
+        />
+        <span class="font-bold text-lg">Restaurant B</span>
+        <span class="text-secondary mt-1">Last Wait: 12 min</span>
+      </div>
+
+      <!-- card 3 -->
+      <div
+        class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4"
+      >
+        <img
+          src="../../images/resto3.jpg"
+          alt="Restaurant C"
+          class="w-full h-32 object-cover rounded-lg mb-2"
+        />
+        <span class="font-bold text-lg">Restaurant C</span>
+        <span class="text-secondary mt-1">Last Wait: 18 min</span>
+      </div>
+
+      <!-- card 4 -->
+      <div
+        class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4"
+      >
+        <img
+          src="../../images/resto4.jpg"
+          alt="Restaurant D"
+          class="w-full h-32 object-cover rounded-lg mb-2"
+        />
+        <span class="font-bold text-lg">Restaurant D</span>
+        <span class="text-secondary mt-1">Last Wait: 10 min</span>
+      </div>
+
+      <!-- card 5 -->
+      <div
+        class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4"
+      >
+        <img
+          src="../../images/resto5.jpg"
+          alt="Restaurant E"
+          class="w-full h-32 object-cover rounded-lg mb-2"
+        />
+        <span class="font-bold text-lg">Restaurant E</span>
+        <span class="text-secondary mt-1">Last Wait: 10 min</span>
+      </div>
+
+      <!-- card 6 -->
+      <div
+        class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4"
+      >
+        <img
+          src="../../images/resto6.jpeg"
+          alt="Restaurant F"
+          class="w-full h-32 object-cover rounded-lg mb-2"
+        />
+        <span class="font-bold text-lg">Restaurant F</span>
+        <span class="text-secondary mt-1">Last Wait: 10 min</span>
+      </div>
+    </div>
 
     <footer class="bg-gray-900 text-gray-100 py-12 md:mt-16">
       <div class="max-w-6xl mx-auto px-6">
@@ -267,6 +260,12 @@
       </div>
     </footer>
 
-    <script type="module" src="/src/main.js"></script>
+    <!-- import navbar -->
+    <div id="navbar"></div>
+    <script type="module">
+      import { Navbar } from "../components/Navbar.js";
+      document.getElementById("navbar").appendChild(Navbar());
+    </script>
+    <script type="module" src="../js/submit-record.js"></script>
   </body>
 </html>
