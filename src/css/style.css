@@ -2,6 +2,11 @@
 .bg-primary {
   background-color: #fa9500;
 }
+
+.bg-primary:hover {
+  background-color: #89ac46;
+}
+
 .bg-primary-light {
   background-color: #ffe6bf;
 }

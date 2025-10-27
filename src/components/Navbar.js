@@ -3,9 +3,9 @@ export function Navbar() {
   const nav = document.createElement("nav");
 
   nav.innerHTML = `
-    <div class="flex fixed w-full bottom-0 justify-between text-2xl bg-[#FEF3E2] p-3">
+    <div class="flex fixed w-full bottom-0 justify-evenly text-lg bg-[#FEF3E2] p-1 px-4 max-width-768px">
       <div class="flex flex-col items-center justify-center gap-0 text-[#eb6424] p-1 mx-3 rounded-2xl hover:bg-[#eb6424] hover:text-[#FEF3E2]" data-page="home">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
           <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
@@ -15,7 +15,7 @@ export function Navbar() {
       </div>
 
       <div class="flex flex-col items-center justify-center gap-0 text-[#eb6424] p-1 mx-3 rounded-2xl hover:bg-[#eb6424] hover:text-[#FEF3E2]" data-page="favorites">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
         </svg>
@@ -23,7 +23,7 @@ export function Navbar() {
       </div>
 
       <div class="flex flex-col items-center justify-center gap-0 text-[#eb6424] p-1 mx-3 rounded-2xl hover:bg-[#eb6424] hover:text-[#FEF3E2]" data-page="profile">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
           <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
@@ -41,13 +41,13 @@ export function Navbar() {
     .querySelector('[data-page="favorites"]')
     .addEventListener(
       "click",
-      () => (window.location.href = "../pages/favorite.html"),
+      () => (window.location.href = "../pages/favorite.html")
     );
   nav
     .querySelector('[data-page="profile"]')
     .addEventListener(
       "click",
-      () => (window.location.href = "/src/pages/profile.html"),
+      () => (window.location.href = "/src/pages/profile.html")
     );
 
   const path = window.location.pathname;
