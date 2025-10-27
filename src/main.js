@@ -9,8 +9,7 @@ function showDashboard() {
   // You can "go to console" to check out current users.
   onAuthReady((user) => {
     if (!user) {
-      // If no user is signed in → redirect back to login page.
-      location.href = "index.html";
+      nameElement.textContent = "";
       return;
     }
 
@@ -20,7 +19,7 @@ function showDashboard() {
 
     // Update the welcome message with their name/email.
     if (nameElement) {
-      nameElement.textContent = `${name}!`;
+      nameElement.textContent = `, ${name}!`;
     }
   });
 }

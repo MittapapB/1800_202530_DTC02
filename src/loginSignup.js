@@ -51,6 +51,13 @@ function initAuthUI() {
     if (submitBtn) submitBtn.disabled = disabled;
   }
 
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("mode") === "signup") {
+    setVisible(loginView, false);
+    setVisible(signupView, true);
+    signupView?.querySelector("input")?.focus();
+  }
+
   // --- Event Listeners ---
   // Toggle buttons
   toSignupBtn?.addEventListener("click", (e) => {
