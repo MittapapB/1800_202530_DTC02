@@ -1,9 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
+    <!-- style.css -->
+    <link rel="stylesheet" href="../css/style.css" />
 
     <!-- tailwind cdn -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -13,63 +15,111 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
     />
-
-    <!-- Google Font: Itim -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
-    /> -->
+    />
   </head>
-  <body class="bg-[#FEF3E2] min-h-screen flex justify-center p-4">
-    <main class="bg-[#FEF3E2] w-full max-w-lg pb-8 flex flex-col">
-      <button
-        class="mt-4 w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#eb5c2b] text-lg shadow border border-black/10 hover:cursor-pointer hover:bg-[#eb5c2b] hover:text-gray-200"
-        onclick="window.location.href='/src/pages/main.html'"
-      >
-        <i class="fa-solid fa-arrow-left"></i>
-      </button>
+  <body
+    class="bg-[#FEF3E2] min-h-screen flex justify-center p-4 mb-16 text-nunito"
+  >
+    <!-- import back button -->
+    <script type="module">
+      import { BackButton } from "../components/BackButton.js";
+      document.body.appendChild(BackButton({ target: "main.html" }));
+    </script>
+    <div
+      class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center p-4 space-y-6"
+    >
+      <!-- Profile Image -->
+      <img
+        class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover"
+        src="../../images/elmo.jpg"
+        alt="Profile"
+      />
 
-      <div class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center">
-        <img
-          class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover"
-          src="../../images/elmo.jpg"
-        />
-        <div class="relative container flex flex-row justify-center items-center">
-        <!-- 3 buttons -->
+      <!-- Log-In / Create Account -->
+      <div class="flex flex-row justify-center items-center gap-4">
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold mx-2 my-5 py-2 px-10 rounded-full"
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
         >
           Log-In
         </button>
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold mx-2 my-5 py-2 px-4 rounded-full"
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-6 rounded-full"
         >
-            Create Account
+          Create Account
         </button>
       </div>
-        <div class="flex flex-col ">
-          <h1 class="text-lg font-bold justify-items-center">Account</h1>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41] font-bold mx-2 my-2 py-2 px-4 rounded-full">Update Profile</button>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Change Password</button>
-          <h1 class="text-lg font-bold justify-items-center">My Data</h1>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">My Recent</button>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">My Comments</button>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Saved Favourites</button>
-          <h1 class="text-lg font-bold justify-items-center">Preferences</h1>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Theme</button>
-          <button class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mx-2 my-2 py-2 px-4 rounded-full">Languages</button>
-        </div>
+
+      <!-- Sections -->
+      <div class="flex flex-col w-full max-w-xs space-y-4 text-center">
+        <!-- Account Section -->
+        <h2 class="text-lg font-bold">Account</h2>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          Update Profile
+        </button>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          Change Password
+        </button>
+
+        <!-- My Data Section -->
+        <h2 class="text-lg font-bold mt-4">My Data</h2>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          My Recent
+        </button>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          My Comments
+        </button>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          Saved Favourites
+        </button>
+
+        <!-- Preferences Section -->
+        <h2 class="text-lg font-bold mt-4">Preferences</h2>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          Theme
+        </button>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
+          Languages
+        </button>
+      </div>
+
+      <!-- Logout Button -->
       <button
         id="toLogout"
-        class="bg-[#F6D860] hover:bg-[#95CD41]  font-bold mb-5 py-2 px-4 rounded-full"
+        class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full mt-6"
       >
         Log-out
       </button>
-    </main>
+    </div>
+
     <script type="module" src="/src/js/firebaseConfig.js"></script>
     <script type="module" src="/src/js/authentication.js"></script>
     <script type="module" src="/src/js/profile.js"></script>
+    <!-- import navbar -->
+    <div id="navbar"></div>
+    <script type="module">
+      import { Navbar } from "../components/Navbar.js";
+      document.getElementById("navbar").appendChild(Navbar());
+    </script>
+    <script type="module" src="../js/submit-record.js"></script>
   </body>
 </html>
