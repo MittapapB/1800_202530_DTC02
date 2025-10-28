@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./tailwind.config.js"></script>
     <link rel="stylesheet" href="../css/style.css" />
+
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -62,16 +63,6 @@
       </p>
     </div>
 
-    <!-- Time Record -->
-    <div class="card mx-6 mt-8 text-lg">
-      <form
-        id="add-time-form"
-        class="flex-col space-y-6"
-        action="./thank-you.html"
-        method="get"
-      >
-
-
     <div
       class="card mx-2 md:mx-6 mt-8 text-base p-6 bg-[#FEF3E2] rounded-2xl shadow-lg"
     >
@@ -100,7 +91,10 @@
         <div
           class="form-group flex flex-col md:flex-row items-start md:items-center gap-2"
         >
-          <label for="record-time" class="text-green-dark font-semibold w-28 mt-4">
+          <label
+            for="record-time"
+            class="text-green-dark font-semibold w-28 mt-4"
+          >
             Time:
           </label>
           <input
@@ -115,7 +109,10 @@
         <div
           class="form-group flex flex-col md:flex-row items-start md:items-center gap-2"
         >
-          <label for="waiting-time" class="text-green-dark font-semibold w-28 mt-4">
+          <label
+            for="waiting-time"
+            class="text-green-dark font-semibold w-28 mt-4"
+          >
             Waiting Time (min):
           </label>
           <input
@@ -128,7 +125,7 @@
         </div>
 
         <!-- Wait Time Experience -->
-        <div class="form-group mt-8 p-4 bg-white rounded-2xl shadow">
+        <div class="form-group mt-6 p-4 bg-white rounded-2xl shadow">
           <h3 class="text-green-dark font-bold mb-3 text-lg">
             Wait Time Experience (Optional)
           </h3>
