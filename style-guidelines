@@ -1,0 +1,120 @@
+==============================
+Project Content & Style Guidelines
+==============================
+
+## 1 Font
+
+## Usage add in class Size
+
+Title text-nunito 20px-24px
+Subtitle text-nunito 16px-18px
+Body text-nunito 14px-16px
+Logo logo-lobste 48px
+
+<!-- Styles predifined:
+<!-- 
+.logo-lobster {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 48px;
+}
+
+.text-nunito {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+} -->
+
+Import below links into head:
+
+<!--
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+     -->
+
+---
+
+## 2 Color Guidelines
+
+## Type HEX Usage
+
+Primary Orange #EB6424 Buttons, icons, highlighted text
+Secondary Green #89AC46 Success states, tags
+Light Orange Bg #FA9500 Hover background or accents
+Cream Page Bg #FEF3E2 Main page background
+Gray Text #A0A0A0 Secondary text
+
+Tip: Highlight text with primary orange. Ensure contrast with background.
+
+---
+
+3. Links
+
+---
+
+Internal page:
+<a href="/pages/main.html">Go to Main Page</a>
+
+External link:
+<a href="https://example.com" target="_blank" rel="noopener noreferrer">External Site</a>
+
+Navbar or button navigation should use window.location.href or <a> tags.
+
+---
+
+4. Images & Icons
+
+---
+
+Icons: Use SVG for scalability and color control.
+Image sizes:
+
+- Header icons: 24x24 or 18x18 (Mobile)
+- Content images: maintain aspect ratio, responsive
+
+---
+
+5. Page Element Links
+
+---
+
+## Page Component/Element Link/Path
+
+Main page Back button /pages/main.html
+Favorites Navbar Favorites /pages/favorites.html
+Profile Navbar Profile /pages/profile.html
+Restaurant Favorite Heart Button Layout only, no interaction yet
+
+---
+
+6. Component Naming
+
+---
+
+JS components in /src/components/
+Use PascalCase filenames, e.g.:
+Navbar.js
+BackButton.js
+RestaurantHeader.js
+Each component exports a function:
+export function ComponentName() { ... }
+
+---
+
+7. Tailwind Style Conventions
+
+---
+
+Button: rounded-full bg-[#FEF3E2] text-[#EB6424] shadow border border-black/10
+Hover: hover:bg-[#EB6424] hover:text-[#FEF3E2] transition-colors duration-200
+Text: text-[#A0A0A0] font-medium text-sm md:text-base
+Flex layout: flex items-center justify-center gap-2
