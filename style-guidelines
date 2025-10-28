@@ -4,72 +4,66 @@ Project Content & Style Guidelines
 
 ## 1 Font
 
-## Usage add in class Size
+## Usage class name
 
-Title text-nunito 20px-24px
-Subtitle text-nunito 16px-18px
-Body text-nunito 14px-16px
-Logo logo-lobste 48px
+Title text-nunito
+Subtitle text-nunito
+Body text-nunito
+Logo logo-lobste
 
-<!-- Styles predifined:
-<!-- 
-.logo-lobster {
-  font-family: "Lobster Two", sans-serif;
-  font-weight: 800;
-  font-style: normal;
-  font-size: 48px;
+---
+
+2 Text color and bg color
+
+<!-- import style.css -->
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+.bg-primary (orange)
+
+.bg-primary:hover (green)
+
+.bg-background-main {
+background-color: #fff8f0;
+}
+.bg-background-subtle {
+background-color: #fff9f4;
 }
 
-.text-nunito {
-  font-family: "Nunito Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100,
-    "YTLC" 500;
-} -->
+/_ Text colors _/
+.text-highlight (orange)
 
-Import below links into head:
+.text-title (dark orange)
 
-<!--
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+.text-green-dark
+
+3.  Links
+    <!-- import style.css -->
+        <link rel="stylesheet" href="../css/style.css" />
+
+<!-- Google fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
-     -->
 
----
+<!-- import BackButton component-->
 
-## 2 Color Guidelines
+        <script type="module">
+          import { BackButton } from "../components/BackButton.js";
+          document.body.appendChild(BackButton({ target: "main.html" }));
+        </script>
 
-## Type HEX Usage
+<!-- import Navbar component -->
 
-Primary Orange #EB6424 Buttons, icons, highlighted text
-Secondary Green #89AC46 Success states, tags
-Light Orange Bg #FA9500 Hover background or accents
-Cream Page Bg #FEF3E2 Main page background
-Gray Text #A0A0A0 Secondary text
-
-Tip: Highlight text with primary orange. Ensure contrast with background.
-
----
-
-3. Links
-
----
-
-Internal page:
-<a href="/pages/main.html">Go to Main Page</a>
-
-External link:
-<a href="https://example.com" target="_blank" rel="noopener noreferrer">External Site</a>
-
-Navbar or button navigation should use window.location.href or <a> tags.
-
----
+    <div id="navbar"></div>
+    <script type="module">
+      import { Navbar } from "../components/Navbar.js";
+      document.getElementById("navbar").appendChild(Navbar());
+    </script>
 
 4. Images & Icons
 
