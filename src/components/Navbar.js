@@ -59,20 +59,15 @@ export function Navbar() {
   nav.querySelectorAll(".nav-item").forEach((el) => {
     const svg = el.querySelector("svg");
 
-    // 当前页面
     if (el.dataset.page === currentPage) {
-      // 设置实心填充橙色
       svg.setAttribute("fill", "#eb6424");
-      svg.setAttribute("stroke", "none");
-      // 文字也改为橙色
+      svg.setAttribute("stroke", "#FAF3E2");
       el.querySelector("span").classList.add("text-[#eb6424]");
     } else {
-      // 非当前页默认空心
       svg.setAttribute("fill", "none");
-      svg.setAttribute("stroke", "#fa9500"); // 默认描边色
+      svg.setAttribute("stroke", "#fa9500");
     }
 
-    // hover 效果
     el.addEventListener("mouseenter", () => {
       if (el.dataset.page !== currentPage) {
         svg.setAttribute("stroke", "#eb6424");
