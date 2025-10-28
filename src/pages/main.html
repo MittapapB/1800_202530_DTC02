@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -20,9 +20,9 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-background-main">
+  <body class="bg-background-main text-nunito">
     <div
-      class="bg-[#fa9500] text-[#FEF3E2] text-5xl font-extrabold text-center p-3 fixed top-0 w-full lobster-two-bold z-20"
+      class="bg-[#fa9500] text-[#FEF3E2] text-center p-1 fixed top-0 w-full text-logo-lobster z-20"
     >
       MealWave
     </div>
@@ -272,7 +272,7 @@
       import { Navbar } from "../components/Navbar.js";
       document.getElementById("navbar").appendChild(Navbar());
     </script>
-    <script type="module" src="../js/submit-record.js"></script>
-    <script type="module" src="../js/main.js"></script>
+    <!-- <script type="module" src="../js/submit-record.js"></script>
+    <script type="module" src="../js/main.js"></script> -->
   </body>
 </html>
