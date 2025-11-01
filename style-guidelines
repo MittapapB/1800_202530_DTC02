@@ -2,18 +2,16 @@
 Project Content & Style Guidelines
 ==============================
 
-## 1 Font
+1 Font style and size
 
-## Usage class name
-
-Title text-nunito
-Subtitle text-nunito
-Body text-nunito
-Logo logo-lobste
+Title text-nunito 20-24px (text-2xl)
+Subtitle text-nunito 16-20px (text-xl)
+Body text-nunito 14-16px (sm: text-sm md:text-base)
+Logo logo-lobste 48px
 
 ---
 
-2 Text color and bg color
+2 Text color and BG color
 
 <!-- import style.css -->
 
