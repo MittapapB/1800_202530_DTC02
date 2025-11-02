@@ -22,7 +22,7 @@
   </head>
   <body class="bg-background-main text-nunito">
     <div
-      class="bg-[#fa9500] text-[#FEF3E2] text-center p-1 fixed top-0 w-full text-logo-lobster z-20"
+      class="bg-primary text-[#FEF3E2] text-center p-1 fixed top-0 w-full text-logo-lobster z-20"
     >
       MealWave
     </div>
@@ -76,6 +76,16 @@
       <p class="text-title">
         Check the current wait times and plan your next meal smarter.
       </p>
+    </div>
+
+    <!-- Add Restaurant Button -->
+    <div class="max-w-4xl mx-auto mt-10 flex justify-end px-4">
+      <a
+        href="./add-restaurant.html"
+        class="bg-primary text-white font-semibold py-2 px-4 rounded-full shadow-md transition"
+      >
+        + Add a Restaurant
+      </a>
     </div>
 
     <!-- Recommend info -->
@@ -208,21 +218,21 @@
               <li class="mb-2">
                 <a
                   href="#"
-                  class="text-gray-100 hover:text-[#fa9500] transition-colors"
+                  class="text-gray-100 hover:text-highlight transition-colors"
                   >FAQ</a
                 >
               </li>
               <li class="mb-2">
                 <a
                   href="#"
-                  class="text-gray-100 hover:text-[#fa9500] transition-colors"
+                  class="text-gray-100 hover:text-highlight transition-colors"
                   >Settings</a
                 >
               </li>
               <li class="mb-2">
                 <a
                   href="#"
-                  class="text-gray-100 hover:text-[#fa9500] transition-colors"
+                  class="text-gray-100 hover:text-highlight transition-colors"
                   >Report an Issue</a
                 >
               </li>
@@ -234,22 +244,22 @@
             <h5 class="text-lg font-semibold mb-4">Contact Info</h5>
             <ul>
               <li class="mb-3 flex items-start">
-                <i class="fas fa-map-marker-alt mr-2 mt-1 text-[#fa9500]"></i>
+                <i class="fas fa-map-marker-alt mr-2 mt-1 text-highlight"></i>
                 555 Seymour St Vancouver, BC V6B 3H6, Canada
               </li>
               <li class="mb-3 flex items-center">
-                <i class="fas fa-phone mr-2 text-[#fa9500]"></i>
+                <i class="fas fa-phone mr-2 text-highlight"></i>
                 <a
                   href="tel:+1234567890"
-                  class="hover:text-[#fa9500] transition-colors"
+                  class="hover:text-highlight transition-colors"
                   >+1 (234) 567-890</a
                 >
               </li>
               <li class="mb-3 flex items-center">
-                <i class="fas fa-envelope mr-2 text-[#fa9500]"></i>
+                <i class="fas fa-envelope mr-2 text-highlight"></i>
                 <a
                   href="mailto:contact@example.com"
-                  class="hover:text-[#fa9500] transition-colors"
+                  class="hover:text-highlight transition-colors"
                   >contact@example.com</a
                 >
               </li>
@@ -272,7 +282,7 @@
       import { Navbar } from "../components/Navbar.js";
       document.getElementById("navbar").appendChild(Navbar());
     </script>
-    <!-- <script type="module" src="../js/submit-record.js"></script>
-    <script type="module" src="../js/main.js"></script> -->
+    <script type="module" src="../js/submit-record.js"></script>
+    <script type="module" src="../js/main.js"></script>
   </body>
 </html>
