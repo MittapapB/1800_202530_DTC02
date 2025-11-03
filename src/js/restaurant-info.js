@@ -4,6 +4,15 @@ import { doc, getDoc } from "firebase/firestore";
 const url = new URL(window.location.href);
 const restaurantId = url.searchParams.get("restaurant-id");
 
+function addRecordBtnSetup() {
+  if (restaurantId) {
+    const addRecordBtn = document.getElementById("add-record-btn");
+    if (addRecordBtn) {
+      addRecordBtn.href = `./add-record.html?restaurant-id=${restaurantId}`;
+    }
+  }
+}
+
 async function loadRestaurantData() {
   try {
     const RestaurantRef = doc(db, "restaurant", restaurantId);
@@ -32,4 +41,5 @@ async function loadRestaurantData() {
 if (restaurantId) {
   console.log("in");
   loadRestaurantData();
+  addRecordBtnSetup();
 }
