@@ -3,6 +3,7 @@ import {
   addDoc,
   collection,
   serverTimestamp,
+  Timestamp,
   doc,
   getDoc,
   updateDoc,
@@ -31,7 +32,6 @@ paintStars(0);
 
 onAuthStateChanged(auth, (user) => {
   const form = document.getElementById("add-time-form");
-  if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -41,19 +41,20 @@ onAuthStateChanged(auth, (user) => {
     }
 
     const url = new URL(window.location.href);
-    const restaurantId = url.searchParams.get("restaurant_id");
+    const restaurantId = url.searchParams.get("restaurant-id");
 
     const waitTime = parseInt(document.getElementById("waiting-time").value);
     const dateStr = document.getElementById("record-date").value;
     const timeStr = document.getElementById("record-time").value;
-    const comments = (document.getElementById("feedback")?.value || "").trim();
-    const rating = Number(starContainer?.dataset.rating || 0);
+    const visitDate = new Date(`${dateStr}T${timeStr}`);
+    const visitTimestamp = Timestamp.fromDate(visitDate);
+    const comments = (document.getElementById("feedback").value || "").trim();
+    const rating = Number(starContainer.dataset.rating || 0);
 
     await addDoc(collection(db, "restaurant", restaurantId, "time_record"), {
       user_id: user.uid,
       wait_time_minutes: waitTime,
-      visit_timestamp: timeStr,
-      visit_datestamp: dateStr,
+      visit_timestamp: visitTimestamp,
       rating: rating,
       comments: comments,
       submitted_at: serverTimestamp(),
@@ -79,13 +80,3 @@ onAuthStateChanged(auth, (user) => {
     alert("Wait time submitted!");
   });
 });
-// document.addEventListener("DOMContentLoaded", () => {
-//   const submitBtn = document.querySelector(".submit-record");
-
-//   if (submitBtn) {
-//     submitBtn.addEventListener("click", (e) => {
-//       e.preventDefault();
-//       console.log("Record submitted successfully!");
-//     });
-//   }
-// });
