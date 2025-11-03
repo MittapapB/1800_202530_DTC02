@@ -19,12 +19,14 @@ const paintStars = (n) => {
 };
 
 let current = 0;
-starContainer.addEventListener("click", (e) => {
-  const svg = e.target.closest("svg");
-  if (!svg) return;
-  current = Number(svg.dataset.value || 0);
-  paintStars(current);
-});
+if (starContainer) {
+  starContainer.addEventListener("click", (e) => {
+    const svg = e.target.closest("svg");
+    if (!svg) return;
+    current = Number(svg.dataset.value || 0);
+    paintStars(current);
+  });
+}
 paintStars(0);
 
 onAuthStateChanged(auth, (user) => {
