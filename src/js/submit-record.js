@@ -1,5 +1,12 @@
 import { db, auth } from "./firebaseConfig.js";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 const starContainer = document.getElementById("star-rating");
@@ -49,6 +56,23 @@ onAuthStateChanged(auth, (user) => {
       comments: comments,
       submitted_at: serverTimestamp(),
     });
+
+    const restaurantRef = doc(db, "restaurant", restaurantId);
+    const restaurantDoc = await getDoc(restaurantRef);
+
+    if (restaurantDoc.exists()) {
+      const data = restaurantDoc.data();
+      const prevTotal = data.total_record_number || 0;
+      const prevAvg = data.avg_wait_time || 0;
+
+      const newTotal = prevTotal + 1;
+      const newAvg = (prevAvg * prevTotal + waitTime) / newTotal;
+
+      await updateDoc(restaurantRef, {
+        total_record_number: newTotal,
+        avg_wait_time: newAvg,
+      });
+    }
 
     alert("Wait time submitted!");
   });
