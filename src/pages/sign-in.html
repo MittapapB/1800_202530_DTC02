@@ -14,6 +14,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Nunito+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
 
     <!-- Google Font: Itim -->
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,25 +31,48 @@
     /> -->
   </head>
 
-  <body class="min-h-screen flex justify-center p-4 bg-[#fef3e2]">
-    <main class="w-full max-w-md bg-[#fef3e2] px-4 pb-8 pt-4 flex flex-col">
+  <body
+    class="min-h-screen flex justify-center p-4 bg-background-main text-nunito"
+  >
+    <main
+      class="w-full max-w-md bg-background-main px-4 pb-8 pt-4 flex flex-col"
+    >
       <div
         id="authAlert"
         class="hidden w-full rounded-md border border-red-400 bg-red-100 text-red-700 text-sm px-3 py-2"
         role="alert"
       ></div>
 
-      <button
+      <div>
+        <!-- Back button -->
+        <script type="module">
+          import { BackButton } from "../components/BackButton.js";
+          document.body.appendChild(BackButton({ target: "main.html" }));
+        </script>
+      </div>
+
+      <!-- <button
         class="mt-4 w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 text-[#eb5c2b] text-lg shadow border border-black/10 hover:cursor-pointer hover:bg-[#eb5c2b] hover:text-gray-200"
         onclick="window.location.href='/src/pages/main.html'"
       >
         <i class="fa-solid fa-arrow-left"></i>
-      </button>
+      </button> -->
+
       <!-- Login view -->
       <section id="loginView" class="mt-8">
-        <h1 class="text-4xl font-bold text-[#eb5c2b] text-center">
-          Welcome back<br />to MealWave!
+        <h1
+          class="text-center font-semibold text-[2rem] sm:text-[2.5rem] md:text-[3rem] text-[#eb5c2b] leading-snug tracking-tight"
+        >
+          Welcome back to<br />
+          <span class="text-logo-lobster text-[#f3723b] block mt-1">
+            MealWave
+          </span>
         </h1>
+
+        <!-- <h1 class="text-4xl font-bold text-[#eb5c2b] text-center">
+          Welcome back to<br />
+          <span class="text-logo-lobster">MealWave</span> !
+        </h1> -->
 
         <form id="loginForm" class="mt-16 flex flex-col gap-4">
           <div class="flex flex-col gap-1">
@@ -84,7 +114,7 @@
 
           <button
             type="submit"
-            class="w-full mt-8 rounded-md bg-gray-300 text-[#eb5c2b] text-lg font-semibold py-3 border border-gray-400 shadow hover:bg-[#eb5c2b] hover:cursor-pointer hover:text-white"
+            class="w-full mt-8 rounded-md bg-primary text-white text-lg font-semibold py-3 border border-gray-400 shadow hover:cursor-pointer"
           >
             Log-in
           </button>
