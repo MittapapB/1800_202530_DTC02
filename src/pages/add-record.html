@@ -27,10 +27,19 @@
         <!-- import back button -->
         <script type="module">
           import { BackButton } from "../components/BackButton.js";
-          document.body.appendChild(BackButton({ target: "main.html" }));
+          const url = new URL(window.location.href);
+          const restaurantId = url.searchParams.get("restaurant-id");
+          document.body.appendChild(
+            BackButton({
+              target: `restaurant-info.html?restaurant-id=${restaurantId}`,
+            })
+          );
         </script>
       </div>
-      <div class="flex-1 text-center text-2xl text-title font-bold">
+      <div
+        id="restaurant-name"
+        class="flex-1 text-center text-2xl text-title font-bold"
+      >
         Restaurant Name
       </div>
       <button

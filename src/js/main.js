@@ -41,7 +41,7 @@ function cardTemplate({ id, name, image_url, avg_wait_time, index }) {
           alt="${name ? name : "Restaurant"}"
           class="w-full h-32 object-cover rounded-lg mb-2"
         />
-        <span class="font-bold text-lg text-gray-900">${
+        <span class="font-bold sm:text-lg text-md text-gray-900">${
           name || "Restaurant"
         }</span>
         <span class="text-secondary mt-1">Avg Wait: ${avg}</span>
