@@ -86,6 +86,10 @@ onAuthStateChanged(auth, (user) => {
       });
     }
 
-    alert("Wait time submitted!");
+    alert("Thank you! The record has been submitted.");
+
+    const encodeParam = encodeURIComponent(restaurantId);
+    const targetPage = "restaurant-info.html";
+    window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
   });
 });
