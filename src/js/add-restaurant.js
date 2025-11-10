@@ -1,6 +1,6 @@
-import { db } from "./firebaseConfig.js";
+import { db, storage } from "./firebaseConfig.js";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const form = document.getElementById("addRestaurantForm");
 const confirmation = document.getElementById("confirmation");
@@ -29,19 +29,22 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    // let imageUrl = "";
-    // if (imageFile) {
-    //   const storageRef = ref(storage, `restaurant_images/${restaurantId}`);
-    //   await uploadBytes(storageRef, imageFile);
-    //   imageUrl = await getDownloadURL(storageRef);
-    // }
+    let imageUrl = "";
+    if (imageFile) {
+      const storagePath = `restaurant_images/${restaurantId}/${Date.now()}-${
+        imageFile.name
+      }`;
+      const storageRef = ref(storage, storagePath);
+      await uploadBytes(storageRef, imageFile);
+      imageUrl = await getDownloadURL(storageRef);
+    }
 
     // Create restaurant document
     await setDoc(restaurantDocRef, {
       name,
       address,
       cuisine: cuisine || "",
-      //image_url: imageUrl,
+      image_url: imageUrl,
       avg_wait_time: 0,
     });
 
