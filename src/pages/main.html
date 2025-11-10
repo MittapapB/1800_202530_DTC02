@@ -64,10 +64,17 @@
       </svg>
 
       <input
+        id="searchInput"
         type="search"
         placeholder="Search restaurants here..."
+        autocomplete="off"
         class="border-[#eb6424] border-2 rounded-full p-2 pl-10 pr-10 w-full max-w-md sm:max-w-lg md:max-w-2xl focus:outline-none"
       />
+
+      <div
+        id="suggestions"
+        class="absolute left-0 right-0 mt-2 bg-background-main text-[#eb6424] border border-gray-200 rounded-xl shadow-lg hidden max-h-64 overflow-y-auto"
+      ></div>
     </div>
 
     <!--  Welcome Banner    -->
@@ -208,6 +215,7 @@
       document.getElementById("navbar").appendChild(Navbar());
     </script>
     <!-- <script type="module" src="../js/submit-record.js"></script> -->
+    <script type="module" src="../js/autocomplete.js"></script>
     <script type="module" src="../js/main.js"></script>
   </body>
 </html>
