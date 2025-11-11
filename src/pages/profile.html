@@ -6,9 +6,7 @@
     <title>Profile - MealWave</title>
     <!-- style.css -->
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- tailwind cdn -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
@@ -40,14 +38,16 @@
       />
 
       <!-- Log-In / Create Account -->
-      <div class="flex flex-row justify-center items-center gap-4">
+      <div id="authButtons" class="flex flex-row justify-center items-center gap-4">
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
+          onclick="window.location.href='/src/pages/sign-up.html'"
         >
           Log-In
         </button>
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-6 rounded-full"
+          onclick="window.location.href='/src/pages/sign-up.html'"
         >
           Create Account
         </button>
