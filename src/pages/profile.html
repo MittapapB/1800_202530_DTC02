@@ -1,16 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
+    <title>Profile - MealWave</title>
     <!-- style.css -->
     <link rel="stylesheet" href="../css/style.css" />
-
-    <!-- tailwind cdn -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
@@ -37,24 +33,27 @@
       <!-- Profile Image -->
       <img
         class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover"
-        src="../../images/elmo.jpg"
+        src="../../images/default-avatar.jpg"
         alt="Profile"
       />
-
+      <!-- User's Name Shown when logged in -->
+        <h1 id="userName" class="text-2xl font-bold hidden"></h1>
       <!-- Log-In / Create Account -->
-      <div class="flex flex-row justify-center items-center gap-4">
+      <div id="authButtons" class="flex flex-row justify-center items-center gap-4">
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
+          onclick="window.location.href='/src/pages/sign-in.html'"
         >
           Log-In
         </button>
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-6 rounded-full"
+          onclick="window.location.href='/src/pages/sign-in.html'"
         >
           Create Account
         </button>
       </div>
-
+      
       <!-- Sections -->
       <div class="flex flex-col w-full max-w-xs space-y-4 text-center">
         <!-- Account Section -->
@@ -87,20 +86,6 @@
         >
           Saved Favourites
         </button>
-
-        <!-- Preferences Section -->
-        <h2 class="text-lg font-bold mt-4">Preferences</h2>
-        <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
-        >
-          Theme
-        </button>
-        <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
-        >
-          Languages
-        </button>
-      </div>
 
       <!-- Logout Button -->
       <button
