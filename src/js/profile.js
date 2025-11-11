@@ -8,7 +8,7 @@ function initProfilePage() {
   const userName = document.getElementById("userName");
 
   onAuthStateChanged(auth, (user) => {
-    if (!user) {
+    if (user) {
       if (authButtons) authButtons.classList.add("hidden");
 
       if (userName) {
