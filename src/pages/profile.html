@@ -20,7 +20,7 @@
     />
   </head>
   <body
-    class="bg-[#FEF3E2] min-h-screen flex justify-center p-4 mb-16 text-nunito"
+    class="bg-[#FEF3E2] min-h-screen flex justify-center mb-5 text-nunito"
   >
     <!-- import back button -->
     <script type="module">
@@ -28,7 +28,7 @@
       document.body.appendChild(BackButton({ target: "main.html" }));
     </script>
     <div
-      class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center p-4 space-y-6"
+      class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center pt-4 space-y-6"
     >
       <!-- Profile Image -->
       <img
@@ -95,6 +95,110 @@
         Log-out
       </button>
     </div>
+    <footer class="bg-gray-900 text-gray-100 py-12 md:mt-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <!-- Top Section -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
+          <!-- About Us -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">About Us</h5>
+            <p class="mb-4 text-gray-300">
+              We are dedicated to helping diners plan their restaurant visits
+              more efficiently by sharing and browsing real-time wait times from
+              the community.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-sky-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Support & Settings -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Support & Settings</h5>
+            <ul>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-highlight transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-highlight transition-colors"
+                  >Settings</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-highlight transition-colors"
+                  >Report an Issue</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Contact Info</h5>
+            <ul>
+              <li class="mb-3 flex items-start">
+                <i class="fas fa-map-marker-alt mr-2 mt-1 text-highlight"></i>
+                555 Seymour St Vancouver, BC V6B 3H6, Canada
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-phone mr-2 text-highlight"></i>
+                <a
+                  href="tel:+1234567890"
+                  class="hover:text-highlight transition-colors"
+                  >+1 (234) 567-890</a
+                >
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-envelope mr-2 text-highlight"></i>
+                <a
+                  href="mailto:contact@example.com"
+                  class="hover:text-highlight transition-colors"
+                  >contact@example.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Divider -->
+        <div
+          class="mt-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+        >
+          <p>&copy; 2025 MealWave. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
 
     <script type="module" src="/src/js/firebaseConfig.js"></script>
     <script type="module" src="/src/js/authentication.js"></script>
