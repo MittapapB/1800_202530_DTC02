@@ -5,33 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile - MealWave</title>
     <link rel="stylesheet" href="../css/style.css" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      rel="stylesheet"
-    />
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"/>
+    <!-- Tailwindcss -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body
-    class="bg-background-main min-h-screen text-nunito"
-  >
-    <!-- import back button -->
+    <!-- back button -->
     <script type="module">
       import { BackButton } from "../components/BackButton.js";
       document.body.appendChild(BackButton({ target: "main.html" }));
     </script>
-
-    <div class="flex flex-col justify-center items-center pt-4">
+    <!-- Firebase and profile scripts -->
+    <script type="module" src="/src/js/firebaseConfig.js"></script>
+    <script type="module" src="/src/js/authentication.js"></script>
+    <script type="module" src="/src/js/profile.js"></script>
+    <!-- nav bar -->
+    <script type="module">
+      import { Navbar } from "../components/Navbar.js";
+      document.getElementById("navbar").appendChild(Navbar());
+    </script>
+  </head>
+  <body class="bg-background-main text-nunito">
+    <div class="flex flex-col justify-center items-center pt-4 mt-10">
       <!-- Profile Image -->
       <img
-        class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover mt-10"
+        class="w-30 h-30 rounded-full border-5 border-slate-50 object-cover"
         src="../../images/default-avatar.jpg"
-        alt="Profile"
+        alt="Profile image"
       />
       <!-- User's Name Shown when logged in -->
         <h1 id="userName" class="text-2xl font-bold hidden"></h1>
@@ -40,7 +42,7 @@
       <!-- if the user has not logged in,  -->
       <!-- when clicking on the profile icon -->
       <!-- it should redirect back to sign up page -->
-      <div id="authButtons" class="flex flex-row justify-center items-center gap-4">
+      <div id="authButtons" class="hidden flex-row justify-center items-center gap-4">
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
           onclick="window.location.href='/src/pages/sign-in.html'"
@@ -201,15 +203,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/src/js/firebaseConfig.js"></script>
-    <script type="module" src="/src/js/authentication.js"></script>
-    <script type="module" src="/src/js/profile.js"></script>
-    <!-- import navbar -->
     <div id="navbar"></div>
-    <script type="module">
-      import { Navbar } from "../components/Navbar.js";
-      document.getElementById("navbar").appendChild(Navbar());
-    </script>
-    <script type="module" src="../js/submit-record.js"></script>
   </body>
 </html>
