@@ -8,8 +8,14 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"/>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <!-- Tailwindcss -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- back button -->
@@ -42,7 +48,10 @@
       <!-- if the user has not logged in,  -->
       <!-- when clicking on the profile icon -->
       <!-- it should redirect back to sign up page -->
-      <div id="authButtons" class="hidden flex-row justify-center items-center gap-4">
+      <div
+        id="authButtons"
+        class="hidden flex-row justify-center items-center gap-4"
+      >
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
           onclick="window.location.href='/src/pages/sign-in.html'"
@@ -100,120 +109,21 @@
           Report an Issue
         </button>
 
-      <!-- Logout Button -->
-      <button
-        id="toLogout"
-        class="btn-primary text-lg font-bold mt-10 py-3 rounded-lg border border-slate-950"
-      >
-        Log-out
-      </button>
-    </div>
-
-
-    <footer class="bg-gray-900 text-gray-100 py-12 mt-10">
-      <div class="max-w-6xl mx-auto px-6">
-        <!-- Top Section -->
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
-          <!-- About Us -->
-          <div>
-            <h5 class="text-lg font-semibold mb-4">About Us</h5>
-            <p class="mb-4 text-gray-300">
-              We are dedicated to helping diners plan their restaurant visits
-              more efficiently by sharing and browsing real-time wait times from
-              the community.
-            </p>
-            <div class="flex space-x-3">
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-sky-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Support & Settings -->
-          <div>
-            <h5 class="text-lg font-semibold mb-4">Support & Settings</h5>
-            <ul>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="text-gray-100 hover:text-highlight transition-colors"
-                  >FAQ</a
-                >
-              </li>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="text-gray-100 hover:text-highlight transition-colors"
-                  >Settings</a
-                >
-              </li>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="text-gray-100 hover:text-highlight transition-colors"
-                  >Report an Issue</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact Info -->
-          <div>
-            <h5 class="text-lg font-semibold mb-4">Contact Info</h5>
-            <ul>
-              <li class="mb-3 flex items-start">
-                <i class="fas fa-map-marker-alt mr-2 mt-1 text-highlight"></i>
-                555 Seymour St Vancouver, BC V6B 3H6, Canada
-              </li>
-              <li class="mb-3 flex items-center">
-                <i class="fas fa-phone mr-2 text-highlight"></i>
-                <a
-                  href="tel:+1234567890"
-                  class="hover:text-highlight transition-colors"
-                  >+1 (234) 567-890</a
-                >
-              </li>
-              <li class="mb-3 flex items-center">
-                <i class="fas fa-envelope mr-2 text-highlight"></i>
-                <a
-                  href="mailto:contact@example.com"
-                  class="hover:text-highlight transition-colors"
-                  >contact@example.com</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Bottom Divider -->
-        <div
-          class="my-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+        <!-- Logout Button -->
+        <button
+          id="toLogout"
+          class="btn-primary text-lg font-bold mt-10 py-3 rounded-lg border border-slate-950"
         >
-          <p>&copy; 2025 MealWave. All rights reserved.</p>
-        </div>
+          Log-out
+        </button>
       </div>
-    </footer>
+
+      <div
+        class="my-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+      >
+        <p>&copy; 2025 MealWave. All rights reserved.</p>
+      </div>
+    </div>
 
     <div id="navbar"></div>
   </body>
