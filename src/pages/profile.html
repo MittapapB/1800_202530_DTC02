@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile - MealWave</title>
+    <!-- tailwindcss -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- Fonts -->
+    <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,17 +18,15 @@
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
-    <!-- Tailwindcss -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- scripts -->
+    <script type="module" src="/src/js/firebaseConfig.js"></script>
+    <script type="module" src="/src/js/authentication.js"></script>
+    <script type="module" src="/src/js/profile.js"></script>
     <!-- back button -->
     <script type="module">
       import { BackButton } from "../components/BackButton.js";
       document.body.appendChild(BackButton({ target: "main.html" }));
     </script>
-    <!-- Firebase and profile scripts -->
-    <script type="module" src="/src/js/firebaseConfig.js"></script>
-    <script type="module" src="/src/js/authentication.js"></script>
-    <script type="module" src="/src/js/profile.js"></script>
     <!-- nav bar -->
     <script type="module">
       import { Navbar } from "../components/Navbar.js";
@@ -35,41 +35,16 @@
   </head>
   <body class="bg-background-main text-nunito">
     <div class="flex flex-col justify-center items-center pt-4 my-10">
-      <!-- Profile Image -->
+      <!-- profile image -->
       <img
         class="w-35 h-35 rounded-full border-5 border-slate-50 object-cover"
         src="../../images/default-avatar.jpg"
         alt="Profile image"
       />
-      <!-- Username-->
+      <!-- username -->
       <h1 id="userName" class="text-5xl font-bold my-4"></h1>
-      <!-- Log-In / Create Account -->
-      <!-- I think we can get rid of this. -->
-      <!-- if the user has not logged in,  -->
-      <!-- when clicking on the profile icon -->
-      <!-- it should redirect back to sign up page -->
-      <div
-        id="authButtons"
-        class="hidden flex-row justify-center items-center gap-4"
-      >
-        <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
-          onclick="window.location.href='/src/pages/sign-in.html'"
-        >
-          Log-In
-        </button>
-        <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-6 rounded-full"
-          onclick="window.location.href='/src/pages/sign-in.html'"
-        >
-          Create Account
-        </button>
-      </div>
-      <!-- Buttons -->
+      <!-- settings -->
       <div class="flex flex-col w-full max-w-sm text-left">
-        <!-- Account Section -->
-        <!-- Later these buttons should redirect to a user form -->
-        <!-- Later I would also like to add svg icons to each button -->
         <h2 class="text-2xl font-bold mb-2">Account Settings</h2>
         <button
           class="btn-primary text-lg font-bold py-3 rounded-t-lg border border-slate-950 cursor-pointer"
@@ -86,30 +61,121 @@
         >
           Change Password
         </button>
-        <!-- About Us section -->
-        <!-- Will make buttons accordian with information -->
+        <!-- more information -->
         <h2 class="text-2xl font-bold mt-5 mb-3">More From MealWave</h2>
         <button
+          onclick="toggleAccordion('about')"
           class="btn-primary text-lg font-bold py-3 rounded-t-lg border border-slate-950 cursor-pointer"
         >
           About Us
         </button>
+        <div
+          id="content-about"
+          class="hidden bg-inherit border-x border-slate-950 p-4 text-base"
+        >
+          <p>
+            We are dedicated to helping diners plan their restaurant visits more
+            efficiently by sharing and browsing real-time wait times from the
+            community.
+          </p>
+        </div>
         <button
+          onclick="toggleAccordion('faq')"
           class="btn-primary text-lg font-bold py-3 border-x border-b border-slate-950 cursor-pointer"
         >
           Frequently Asked Questions
         </button>
+        <div
+          id="content-faq"
+          class="hidden bg-inherit border-x border-slate-950 p-4 text-base"
+        >
+          <p>Nulla, tellus proin justo, pharetra.</p>
+        </div>
         <button
+          onclick="toggleAccordion('contact')"
           class="btn-primary text-lg font-bold py-3 border-x border-slate-950 cursor-pointer"
         >
           Contact Information
         </button>
+        <div
+          id="content-contact"
+          class="hidden bg-inherit border-x border-slate-950 p-4 text-base"
+        >
+          <p>Have any question? Reach out to us.</p>
+          <div class="flex space-x-3 my-2">
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-[#1977F3] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-[#1D9DF0] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-[#E84852] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-[#1A83BA] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+          <div>
+            <ul>
+              <li class="mb-3 flex items-start">
+                <i class="fas fa-map-marker-alt mr-2 mt-1 text-highlight"></i>
+                555 Seymour St Vancouver, BC V6B 3H6, Canada
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-phone mr-2 text-highlight"></i>
+                <a
+                  href="tel:+1234567890"
+                  class="hover:text-highlight transition-colors"
+                  >+1 (234) 567-890</a
+                >
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-envelope mr-2 text-highlight"></i>
+                <a
+                  href="mailto:contact@example.com"
+                  class="hover:text-highlight transition-colors"
+                  >contact@example.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
         <button
+          onclick="toggleAccordion('report')"
           class="btn-primary text-lg font-bold py-3 rounded-b-lg border border-slate-950 cursor-pointer"
         >
           Report an Issue
         </button>
-
+        <div
+          id="content-report"
+          class="hidden bg-inherit border-x border-b border-slate-950 p-4 text-base"
+        >
+          <p>
+            Found a bug or issue? Please let us know so we can improve your
+            experience.
+          </p>
+          <p class="mt-2 font-bold">
+            Submit a report:
+            <a
+              href="mailto:support@mealwave.com"
+              class="text-blue-600 underline"
+              >support@mealwave.com</a
+            >
+          </p>
+        </div>
         <!-- Logout Button -->
         <button
           id="toLogout"
@@ -118,14 +184,13 @@
           Log out
         </button>
       </div>
-
+      <!-- copyright -->
       <div
         class="my-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
       >
         <p>&copy; 2025 MealWave. All rights reserved.</p>
       </div>
     </div>
-
     <div id="navbar"></div>
   </body>
 </html>
