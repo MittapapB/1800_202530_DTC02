@@ -4,42 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile - MealWave</title>
-    <!-- style.css -->
     <link rel="stylesheet" href="../css/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
     />
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <body
-    class="bg-[#FEF3E2] min-h-screen flex justify-center text-nunito"
-  >
-    <!-- import back button -->
+    <!-- Tailwindcss -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- back button -->
     <script type="module">
       import { BackButton } from "../components/BackButton.js";
       document.body.appendChild(BackButton({ target: "main.html" }));
     </script>
-    <div
-      class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center pt-4"
-    >
+    <!-- Firebase and profile scripts -->
+    <script type="module" src="/src/js/firebaseConfig.js"></script>
+    <script type="module" src="/src/js/authentication.js"></script>
+    <script type="module" src="/src/js/profile.js"></script>
+    <!-- nav bar -->
+    <script type="module">
+      import { Navbar } from "../components/Navbar.js";
+      document.getElementById("navbar").appendChild(Navbar());
+    </script>
+  </head>
+  <body class="bg-background-main text-nunito">
+    <div class="flex flex-col justify-center items-center pt-4 my-10">
       <!-- Profile Image -->
       <img
-        class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover mt-10"
+        class="w-35 h-35 rounded-full border-5 border-slate-50 object-cover"
         src="../../images/default-avatar.jpg"
-        alt="Profile"
+        alt="Profile image"
       />
-      <!-- User's Name Shown when logged in -->
-        <h1 id="userName" class="text-2xl font-bold hidden"></h1>
+      <!-- Username-->
+      <h1 id="userName" class="text-5xl font-bold my-4"></h1>
       <!-- Log-In / Create Account -->
-      <div id="authButtons" class="flex flex-row justify-center items-center gap-4">
+      <!-- I think we can get rid of this. -->
+      <!-- if the user has not logged in,  -->
+      <!-- when clicking on the profile icon -->
+      <!-- it should redirect back to sign up page -->
+      <div
+        id="authButtons"
+        class="hidden flex-row justify-center items-center gap-4"
+      >
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
           onclick="window.location.href='/src/pages/sign-in.html'"
@@ -53,162 +65,67 @@
           Create Account
         </button>
       </div>
-      
-      <!-- Sections -->
-      <div class="flex flex-col w-full max-w-xs space-y-4 text-center">
+      <!-- Buttons -->
+      <div class="flex flex-col w-full max-w-sm text-left">
         <!-- Account Section -->
-        <h2 class="text-lg font-bold">Account</h2>
+        <!-- Later these buttons should redirect to a user form -->
+        <!-- Later I would also like to add svg icons to each button -->
+        <h2 class="text-2xl font-bold mb-2">Account Settings</h2>
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+          class="btn-primary text-lg font-bold py-3 rounded-t-lg border border-slate-950 cursor-pointer"
         >
           Update Profile
         </button>
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+          class="btn-primary text-lg font-bold py-3 border-x border-slate-950 cursor-pointer"
+        >
+          Change Email
+        </button>
+        <button
+          class="btn-primary text-lg font-bold py-3 rounded-b-lg border border-slate-950 cursor-pointer"
         >
           Change Password
         </button>
-
-        <!-- My Data Section -->
-        <h2 class="text-lg font-bold mt-4">My Data</h2>
+        <!-- About Us section -->
+        <!-- Will make buttons accordian with information -->
+        <h2 class="text-2xl font-bold mt-5 mb-3">More From MealWave</h2>
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+          class="btn-primary text-lg font-bold py-3 rounded-t-lg border border-slate-950 cursor-pointer"
         >
-          My Recent
+          About Us
         </button>
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+          class="btn-primary text-lg font-bold py-3 border-x border-b border-slate-950 cursor-pointer"
         >
-          My Comments
+          Frequently Asked Questions
         </button>
         <button
-          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+          class="btn-primary text-lg font-bold py-3 border-x border-slate-950 cursor-pointer"
         >
-          Saved Favourites
+          Contact Information
+        </button>
+        <button
+          class="btn-primary text-lg font-bold py-3 rounded-b-lg border border-slate-950 cursor-pointer"
+        >
+          Report an Issue
         </button>
 
-      <!-- Logout Button -->
-      <button
-        id="toLogout"
-        class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full mt-6"
-      >
-        Log-out
-      </button>
-    </div>
-    <footer class="bg-gray-900 text-gray-100 py-12 mt-10">
-      <div class="max-w-6xl mx-auto px-6">
-        <!-- Top Section -->
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
-          <!-- About Us -->
-          <div>
-            <h5 class="text-lg font-semibold mb-4">About Us</h5>
-            <p class="mb-4 text-gray-300">
-              We are dedicated to helping diners plan their restaurant visits
-              more efficiently by sharing and browsing real-time wait times from
-              the community.
-            </p>
-            <div class="flex space-x-3">
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-sky-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
-              >
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Support & Settings -->
-          <div>
-            <h5 class="text-lg font-semibold mb-4">Support & Settings</h5>
-            <ul>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="text-gray-100 hover:text-highlight transition-colors"
-                  >FAQ</a
-                >
-              </li>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="text-gray-100 hover:text-highlight transition-colors"
-                  >Settings</a
-                >
-              </li>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="text-gray-100 hover:text-highlight transition-colors"
-                  >Report an Issue</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact Info -->
-          <div>
-            <h5 class="text-lg font-semibold mb-4">Contact Info</h5>
-            <ul>
-              <li class="mb-3 flex items-start">
-                <i class="fas fa-map-marker-alt mr-2 mt-1 text-highlight"></i>
-                555 Seymour St Vancouver, BC V6B 3H6, Canada
-              </li>
-              <li class="mb-3 flex items-center">
-                <i class="fas fa-phone mr-2 text-highlight"></i>
-                <a
-                  href="tel:+1234567890"
-                  class="hover:text-highlight transition-colors"
-                  >+1 (234) 567-890</a
-                >
-              </li>
-              <li class="mb-3 flex items-center">
-                <i class="fas fa-envelope mr-2 text-highlight"></i>
-                <a
-                  href="mailto:contact@example.com"
-                  class="hover:text-highlight transition-colors"
-                  >contact@example.com</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Bottom Divider -->
-        <div
-          class="my-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+        <!-- Logout Button -->
+        <button
+          id="toLogout"
+          class="btn-primary text-lg font-bold mt-10 py-3 rounded-lg border border-slate-950 cursor-pointer"
         >
-          <p>&copy; 2025 MealWave. All rights reserved.</p>
-        </div>
+          Log out
+        </button>
       </div>
-    </footer>
 
-    <script type="module" src="/src/js/firebaseConfig.js"></script>
-    <script type="module" src="/src/js/authentication.js"></script>
-    <script type="module" src="/src/js/profile.js"></script>
-    <!-- import navbar -->
+      <div
+        class="my-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+      >
+        <p>&copy; 2025 MealWave. All rights reserved.</p>
+      </div>
+    </div>
+
     <div id="navbar"></div>
-    <script type="module">
-      import { Navbar } from "../components/Navbar.js";
-      document.getElementById("navbar").appendChild(Navbar());
-    </script>
-    <script type="module" src="../js/submit-record.js"></script>
   </body>
 </html>
