@@ -4,32 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile - MealWave</title>
-    <!-- style.css -->
     <link rel="stylesheet" href="../css/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
     />
-    <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body
-    class="bg-[#FEF3E2] min-h-screen flex justify-center text-nunito"
+    class="bg-background-main min-h-screen text-nunito"
   >
     <!-- import back button -->
     <script type="module">
       import { BackButton } from "../components/BackButton.js";
       document.body.appendChild(BackButton({ target: "main.html" }));
     </script>
-    <div
-      class="bg-[#FEF3E2] min-h-[60vh] flex flex-col justify-center items-center pt-4"
-    >
+
+    <div class="flex flex-col justify-center items-center pt-4">
       <!-- Profile Image -->
       <img
         class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover mt-10"
@@ -39,6 +36,10 @@
       <!-- User's Name Shown when logged in -->
         <h1 id="userName" class="text-2xl font-bold hidden"></h1>
       <!-- Log-In / Create Account -->
+      <!-- I think we can get rid of this. -->
+      <!-- if the user has not logged in,  -->
+      <!-- when clicking on the profile icon -->
+      <!-- it should redirect back to sign up page -->
       <div id="authButtons" class="flex flex-row justify-center items-center gap-4">
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-10 rounded-full"
@@ -95,7 +96,7 @@
         Log-out
       </button>
     </div>
-    <footer class="bg-gray-900 text-gray-100 py-12 mt-10">
+    <footer class="hidden bg-gray-900 text-gray-100 py-12 mt-10">
       <div class="max-w-6xl mx-auto px-6">
         <!-- Top Section -->
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
