@@ -28,15 +28,15 @@
     </script>
   </head>
   <body class="bg-background-main text-nunito">
-    <div class="flex flex-col justify-center items-center pt-4 mt-10">
+    <div class="flex flex-col justify-center items-center pt-4 my-12">
       <!-- Profile Image -->
       <img
         class="w-30 h-30 rounded-full border-5 border-slate-50 object-cover"
         src="../../images/default-avatar.jpg"
         alt="Profile image"
       />
-      <!-- User's Name Shown when logged in -->
-        <h1 id="userName" class="text-2xl font-bold hidden"></h1>
+      <!-- Username-->
+      <h1 id="userName" class="text-4xl font-bold my-4"></h1>
       <!-- Log-In / Create Account -->
       <!-- I think we can get rid of this. -->
       <!-- if the user has not logged in,  -->
@@ -56,11 +56,10 @@
           Create Account
         </button>
       </div>
-      
       <!-- Sections -->
-      <div class="flex flex-col w-full max-w-xs space-y-4 text-center">
+      <div class="flex flex-col w-full max-w-xs text-left">
         <!-- Account Section -->
-        <h2 class="text-lg font-bold">Account</h2>
+        <h2 class="text-lg font-bold">Account Settings</h2>
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
         >
@@ -69,25 +68,30 @@
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
         >
+          Change Email
+        </button>
+        <button
+          class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
+        >
           Change Password
         </button>
 
         <!-- My Data Section -->
-        <h2 class="text-lg font-bold mt-4">My Data</h2>
+        <h2 class="text-lg font-bold mt-4">About MealWave</h2>
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
         >
-          My Recent
+          About Us
         </button>
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
         >
-          My Comments
+          Frequently Asked Questions
         </button>
         <button
           class="bg-[#F6D860] hover:bg-[#95CD41] font-bold py-2 px-4 rounded-full w-full"
         >
-          Saved Favourites
+          Contact Information
         </button>
 
       <!-- Logout Button -->
@@ -98,7 +102,9 @@
         Log-out
       </button>
     </div>
-    <footer class="hidden bg-gray-900 text-gray-100 py-12 mt-10">
+
+
+    <footer class="bg-gray-900 text-gray-100 py-12 mt-10">
       <div class="max-w-6xl mx-auto px-6">
         <!-- Top Section -->
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
