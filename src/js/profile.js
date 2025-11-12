@@ -23,21 +23,21 @@ function initProfilePage() {
   logoutBtn?.addEventListener("click", logoutUser);
 }
 
-function toggleAccordion(id) {
-  const content = document.getElementById(`content-${id}`);
-  const icon = document.getElementById(`icon-${id}`);
-  const allContents = document.querySelectorAll('[id^="content-"]');
-  const allIcons = document.querySelectorAll('[id^="icon-"]');
-
-  const isOpen = !content.classList.contains("hidden");
-
-  allContents.forEach((el) => el.classList.add("hidden"));
-  allIcons.forEach((el) => (el.textContent = "+"));
-
-  if (!isOpen) {
-    content.classList.remove("hidden");
-    icon.textContent = "−";
-  }
-}
+// function toggleAccordion(id) {
+//   const content = document.getElementById(`content-${id}`);
+//   const icon = document.getElementById(`icon-${id}`);
+//   const allContents = document.querySelectorAll('[id^="content-"]');
+//   const allIcons = document.querySelectorAll('[id^="icon-"]');
+//
+//   const isOpen = !content.classList.contains("hidden");
+//
+//   allContents.forEach((el) => el.classList.add("hidden"));
+//   allIcons.forEach((el) => (el.textContent = "+"));
+//
+//   if (!isOpen) {
+//     content.classList.remove("hidden");
+//     icon.textContent = "−";
+//   }
+// }
 
 document.addEventListener("DOMContentLoaded", initProfilePage);
