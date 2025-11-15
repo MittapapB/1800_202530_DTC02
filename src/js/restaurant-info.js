@@ -33,6 +33,12 @@ async function loadRestaurantData() {
     document.getElementById("overview-address").textContent = data.address;
     document.getElementById("overview-avg").textContent =
       data.avg_wait_time.toFixed(1);
+
+    const restaurantImg = document.getElementById("restaurant-img");
+    if (restaurantImg) {
+      restaurantImg.src = data.image_url || "";
+      restaurantImg.alt = data.name || "Restaurant";
+    }
   } catch (err) {
     console.error("Error loading restaurant:", err);
   }
