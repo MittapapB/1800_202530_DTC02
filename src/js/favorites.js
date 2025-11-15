@@ -11,6 +11,21 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   await loadFavoritesForUser(user.uid);
+
+  favoritesList.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const deleteBtn = e.target.closest(".delete-btn");
+    if (deleteBtn) return;
+
+    const card = e.target.closest(".restaurant-card");
+    if (!card) return;
+
+    const restaurantId = card.dataset.id;
+    if (restaurantId) {
+      window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
+    }
+  });
 });
 
 function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
@@ -21,11 +36,11 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
     <div class="relative w-full">
       <button
         type="button"
-        class="absolute top-3 right-3 text-white hover:text-[#fa9500] z-10 hover:cursor-pointer"
+        class="delete-btn absolute top-3 right-3 text-white hover:text-[#fa9500] z-10 hover:cursor-pointer"
       >
         <i class="fa-solid fa-trash text-lg"></i>
       </button>
-      <a href="" class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
+      <div data-id="${id}" class="restaurant-card bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
         <img
           src="${imgSrc}"
           alt="${name ? name : "Restaurant"}"
@@ -43,7 +58,7 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
           </div>
           <span class="text-secondary mt-1">Avg Wait: ${avg}</span>
         </div>
-      </a>
+      </div>
     </div>
     `;
 }
