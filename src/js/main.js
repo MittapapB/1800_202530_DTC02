@@ -26,25 +26,43 @@ function showDashboard() {
   });
 }
 
+//randomly pick 6 restaurants
+function randomPick(arr) {
+  const randomRes = [...arr];
+  for (let i = randomRes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [randomRes[i], randomRes[j]] = [randomRes[j], randomRes[i]];
+  }
+  return randomRes.slice(0, 6);
+}
+
 const grid = document.getElementById("restaurant-grid");
 
-function cardTemplate({ id, name, image_url, avg_wait_time, index }) {
+function cardTemplate({ id, name, address, image_url, avg_wait_time, index }) {
   const imgSrc = image_url ? image_url : `../../images/resto${index}.jpg`;
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
 
   const href = `./restaurant-info.html?restaurant-id=${id}`;
 
   return `
-      <a href="${href}" class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col items-center p-4 hover:shadow-md transition">
+      <a href="${href}" class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition">
         <img
           src="${imgSrc}"
           alt="${name ? name : "Restaurant"}"
-          class="w-full h-32 object-cover rounded-lg mb-2"
+          class="w-full h-32 object-cover rounded-t-lg"
         />
-        <span class="font-bold sm:text-lg text-md text-gray-900">${
-          name || "Restaurant"
-        }</span>
-        <span class="text-secondary mt-1">Avg Wait: ${avg}</span>
+
+        <div class="flex flex-col p-4 h-40">
+          <div>
+            <span class="font-bold sm:text-lg text-md text-title">${
+              name || "Restaurant"
+            }</span>
+            <p class="text-secondary text-sm mt-2 truncate text-gray-900">${
+              address || "No address available"
+            }</p>
+          </div>
+          <span class="text-secondary mt-1">Avg Wait: ${avg}</span>
+        </div>
       </a>
     `;
 }
@@ -68,6 +86,7 @@ async function loadRestaurants() {
         cardTemplate({
           id: doc.id,
           name: data.name,
+          address: data.address,
           image_url: data.image_url,
           avg_wait_time: data.avg_wait_time,
           index: index,
@@ -76,7 +95,10 @@ async function loadRestaurants() {
       index += 1;
     });
 
-    grid.innerHTML = cards.join("");
+    const sixRandom = randomPick(cards);
+
+    // grid.innerHTML = cards.join("");
+    grid.innerHTML = sixRandom.join("");
   } catch (err) {
     console.error(err);
   }
