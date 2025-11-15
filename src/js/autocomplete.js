@@ -6,13 +6,13 @@ const suggestions = document.getElementById("suggestions");
 
 let restaurants = [];
 
-async function loadRestaurantNames() {
+async function loadRestaurant() {
   try {
     const snap = await getDocs(collection(db, "restaurant"));
     restaurants = [];
     snap.forEach((docSnap) => {
       const data = docSnap.data();
-      if (data?.name && typeof data.name === "string") {
+      if (data?.name && docSnap.id) {
         restaurants.push({
           id: docSnap.id,
           name: data.name.trim(),
@@ -62,7 +62,7 @@ searchInput.addEventListener("input", () => {
     r.name.toLowerCase().includes(query)
   );
 
-  renderSuggestions(filtered.slice(0, 10));
+  renderSuggestions(filtered.slice(0, 5));
 });
 
 document.addEventListener("click", (event) => {
@@ -72,4 +72,4 @@ document.addEventListener("click", (event) => {
   }
 });
 
-loadRestaurantNames();
+loadRestaurant();

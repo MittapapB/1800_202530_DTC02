@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,6 +13,11 @@
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body class="bg-background-main text-nunito">
@@ -23,67 +28,18 @@
       MealWave
     </div>
 
-    <div
+    <main
       class="flex flex-col items-center mt-24 mb-10 space-y-6 w-full mx-auto px-4"
     >
-      <!-- + New List 大按钮 -->
-      <button
-        class="w-full bg-[#EB6424] text-white font-bold py-2 text-lg rounded-2xl border-4 border-[#FF7F3F] hover:border-[#EA5C2B] shadow-lg transition-all duration-200"
-      >
-        + New List
-      </button>
-
-      <div class="flex flex-col items-center w-full space-y-4 max-w-md">
-        <!-- 3 buttons -->
-        <button
-          class="w-full bg-[#89AC46] text-white font-bold py-3 rounded-xl shadow hover:bg-[#76a234] transition-colors duration-200"
-        >
-          Favourite Places
-        </button>
-        <button
-          class="w-full bg-[#89AC46] text-white font-bold py-3 rounded-xl shadow hover:bg-[#76a234] transition-colors duration-200"
-        >
-          Want to Go
-        </button>
-        <button
-          class="w-full bg-[#EB6424] text-white font-bold py-3 rounded-xl shadow hover:bg-[#d3541a] transition-colors duration-200"
-        >
-          Reviewed Places
-        </button>
-      </div>
-      <div class="relative container flex flex-col items-center mb-5">
-        <!--view more -->
-        View More
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 mb-20">
-      <!-- card 1 -->
-      <div
-        class="bg-[#FEF3E2] rounded-2xl shadow-lg overflow-hidden flex flex-col items-center p-4 transition-transform duration-200 hover:scale-105"
-      >
-        <img
-          src="../../images/resto1.jpg"
-          alt="Restaurant A"
-          class="w-full h-40 object-cover rounded-xl mb-3"
-        />
-        <span class="font-bold text-lg text-title">Restaurant A</span>
-        <span class="text-[#89AC46] mt-1">Last Wait: 15 min</span>
-      </div>
-
-      <!-- card 2 -->
-      <div
-        class="bg-[#FEF3E2] rounded-2xl shadow-lg overflow-hidden flex flex-col items-center p-4 transition-transform duration-200 hover:scale-105"
-      >
-        <img
-          src="../../images/resto2.jpg"
-          alt="Restaurant B"
-          class="w-full h-40 object-cover rounded-xl mb-3"
-        />
-        <span class="font-bold text-lg text-title">Restaurant B</span>
-        <span class="text-[#89AC46] mt-1">Last Wait: 12 min</span>
-      </div>
-    </div>
+      <header class="w-full max-w-4xl mx-auto px-4 mb-0">
+        <h1 class="text-2xl font-bold text-title">Favorites</h1>
+        <p class="text-title">Your saved restaurants in one place.</p>
+      </header>
+      <section
+        id="favorites-list"
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 mb-20 w-full max-w-4xl mx-auto"
+      ></section>
+    </main>
 
     <!-- import navbar -->
     <div id="navbar"></div>
@@ -91,6 +47,6 @@
       import { Navbar } from "../components/Navbar.js";
       document.getElementById("navbar").appendChild(Navbar());
     </script>
-    <script type="module" src="../js/submit-record.js"></script>
+    <script type="module" src="../js/favorites.js"></script>
   </body>
 </html>
