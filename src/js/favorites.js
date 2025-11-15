@@ -1,0 +1,93 @@
+import { db, auth } from "./firebaseConfig.js";
+import { collection, doc, getDocs, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+
+const favoritesList = document.getElementById("favorites-list");
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "./login.html";
+    return;
+  }
+
+  await loadFavoritesForUser(user.uid);
+});
+
+function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
+  const imgSrc = image_url ? image_url : "";
+  const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
+
+  return `
+    <div class="relative w-full">
+      <button
+        type="button"
+        class="absolute top-3 right-3 text-white hover:text-[#fa9500] z-10 hover:cursor-pointer"
+      >
+        <i class="fa-solid fa-trash text-lg"></i>
+      </button>
+      <a href="" class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
+        <img
+          src="${imgSrc}"
+          alt="${name ? name : "Restaurant"}"
+          class="w-full h-32 object-cover rounded-t-lg"
+        />
+
+        <div class="flex flex-col p-4 min-h-fit">
+          <div>
+            <span class="font-bold sm:text-lg text-md text-title">${
+              name || "Restaurant"
+            }</span>
+            <p class="text-secondary text-sm mt-2 truncate text-gray-900">${
+              address || "No address available"
+            }</p>
+          </div>
+          <span class="text-secondary mt-1">Avg Wait: ${avg}</span>
+        </div>
+      </a>
+    </div>
+    `;
+}
+
+async function loadFavoritesForUser(uid) {
+  try {
+    favoritesList.innerHTML = "";
+
+    const favoritesRef = collection(db, "users", uid, "favorite_list");
+    const favoriteDoc = await getDocs(favoritesRef);
+
+    if (favoriteDoc.empty) {
+      favoritesList.innerHTML = `
+      <div
+        class="max-w-2xl w-9/12 mx-auto my-20 p-4 bg-backgroud-card rounded-2xl shadow-md"
+      >
+        <p class='text-gray-500 text-center'>You don't have any favorites yet.</p>
+      </div>
+    `;
+      return;
+    }
+
+    const cardHTML = [];
+    for (let element of favoriteDoc.docs) {
+      const favData = element.data();
+      const restaurantId = favData.restaurant_id;
+
+      const restaurantRef = doc(db, "restaurant", restaurantId);
+      const restaurantSnap = await getDoc(restaurantRef);
+      const restaurant = restaurantSnap.data();
+
+      cardHTML.push(
+        cardTemplate({
+          id: restaurantId,
+          name: restaurant.name,
+          address: restaurant.address,
+          image_url: restaurant.image_url,
+          avg_wait_time: restaurant.avg_wait_time,
+        })
+      );
+    }
+
+    favoritesList.innerHTML = cardHTML.join("");
+  } catch (err) {
+    console.error(err);
+  }
+}
