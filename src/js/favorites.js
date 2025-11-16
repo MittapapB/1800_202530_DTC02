@@ -1,8 +1,15 @@
 import { db, auth } from "./firebaseConfig.js";
-import { collection, doc, getDocs, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 const favoritesList = document.getElementById("favorites-list");
+let favoriteMap = {};
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -12,35 +19,54 @@ onAuthStateChanged(auth, async (user) => {
 
   await loadFavoritesForUser(user.uid);
 
-  favoritesList.addEventListener("click", (e) => {
+  favoritesList.addEventListener("click", async (e) => {
     e.preventDefault();
-
-    const deleteBtn = e.target.closest(".delete-btn");
-    if (deleteBtn) return;
 
     const card = e.target.closest(".restaurant-card");
     if (!card) return;
 
     const restaurantId = card.dataset.id;
-    if (restaurantId) {
-      window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
+    if (!restaurantId) return;
+
+    const deleteBtn = e.target.closest(".delete-btn");
+    if (deleteBtn) {
+      await DeleteFavorite(user.uid, restaurantId);
+      return;
     }
+
+    window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
   });
 });
+
+async function DeleteFavorite(userId, restaurantId) {
+  const modal = document.getElementById("confirm-modal");
+  const favorite = favoriteMap[restaurantId];
+
+  modal.open(
+    `Remove ${favorite.restaurantName} from your favorites?`,
+    async () => {
+      const favoriteId = favorite.favoriteId;
+      const favDocRef = doc(db, "users", userId, "favorite_list", favoriteId);
+
+      await deleteDoc(favDocRef);
+      await loadFavoritesForUser(userId);
+    }
+  );
+}
 
 function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
   const imgSrc = image_url ? image_url : "";
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
 
   return `
-    <div class="relative w-full">
-      <button
-        type="button"
-        class="delete-btn absolute top-3 right-3 text-white hover:text-[#fa9500] z-10 hover:cursor-pointer"
-      >
-        <i class="fa-solid fa-trash text-lg"></i>
-      </button>
-      <div data-id="${id}" class="restaurant-card bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
+    <div class="w-full">
+      <div data-id="${id}" class="relative restaurant-card bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
+        <button
+          type="button"
+          class="delete-btn absolute top-3 right-3 text-white hover:text-[#fa9500] z-10 hover:cursor-pointer"
+        >
+          <i class="fa-solid fa-trash text-lg"></i>
+        </button>
         <img
           src="${imgSrc}"
           alt="${name ? name : "Restaurant"}"
@@ -66,6 +92,7 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
 async function loadFavoritesForUser(uid) {
   try {
     favoritesList.innerHTML = "";
+    favoriteMap = {};
 
     const favoritesRef = collection(db, "users", uid, "favorite_list");
     const favoriteDoc = await getDocs(favoritesRef);
@@ -85,10 +112,16 @@ async function loadFavoritesForUser(uid) {
     for (let element of favoriteDoc.docs) {
       const favData = element.data();
       const restaurantId = favData.restaurant_id;
+      const favoriteId = element.id;
 
       const restaurantRef = doc(db, "restaurant", restaurantId);
       const restaurantSnap = await getDoc(restaurantRef);
       const restaurant = restaurantSnap.data();
+
+      favoriteMap[restaurantId] = {
+        favoriteId: favoriteId,
+        restaurantName: restaurant.name,
+      };
 
       cardHTML.push(
         cardTemplate({

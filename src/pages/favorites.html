@@ -41,12 +41,15 @@
       ></section>
     </main>
 
+    <confirm-modal id="confirm-modal"></confirm-modal>
+
     <!-- import navbar -->
     <div id="navbar"></div>
     <script type="module">
       import { Navbar } from "../components/Navbar.js";
       document.getElementById("navbar").appendChild(Navbar());
     </script>
+    <script type="module" src="/src/components/confirm-modal.js"></script>
     <script type="module" src="../js/favorites.js"></script>
   </body>
 </html>
