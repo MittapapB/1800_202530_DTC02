@@ -67,12 +67,26 @@ export async function fetchUserComments() {
           user.avatar = data.avatar || default_avatar;
         }
       }
-      return { record, user };
+
+      //get and format visit_timestamp data from firebase
+      let visitTime = "-";
+      if (record.visit_timestamp && record.visit_timestamp.toDate) {
+        const dateObj = record.visit_timestamp.toDate(); // Firestore Timestamp → JS Date
+        visitTime = dateObj.toLocaleString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      return { record, user, visitTime };
     });
 
     const results = await Promise.all(promises);
 
-    results.forEach(({ record, user }) => {
+    results.forEach(({ record, user, visitTime }) => {
       const card = document.createElement("div");
       card.className =
         "flex items-start gap-4 p-4 mb-4 bg-white rounded-2xl shadow-sm border border-gray-100";
@@ -94,8 +108,13 @@ export async function fetchUserComments() {
             <h4 class="font-semibold text-title">${
               user.name || "Anonymous"
             }</h4>
-            <p class="text-sm text-gray-500">
-              Waited: <span class="font-medium text-[#EB6424]">${
+            <p class="text-sm text-gray-500 font-semibold flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#EB6424]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+              Waited: <span class="font-bold text-[#EB6424]">${
                 record.wait_time_minutes || "-"
               } min</span>
             </p>
@@ -104,6 +123,7 @@ export async function fetchUserComments() {
           <p class="text-gray-700 text-sm md:text-base leading-relaxed">
             ${record.comments || "(No comment)"}
           </p>
+           <p class="text-gray-400 text-xs mt-1">Visited: ${visitTime}</p> 
         </div>
       `;
 
