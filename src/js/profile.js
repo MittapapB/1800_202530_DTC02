@@ -1,7 +1,9 @@
 import { logoutUser } from "/src/js/authentication.js";
-import { auth } from "/src/js/firebaseConfig.js";
+import { auth, storage } from "/src/js/firebaseConfig.js";
 import { onAuthStateChanged, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+let currentUser = null;
 
 function initProfilePage() {
   const logoutBtn = document.getElementById("toLogout");
@@ -9,45 +11,47 @@ function initProfilePage() {
   const userName = document.getElementById("userName");
 
   const profileImage = document.getElementById("profileImage");
-  const fileInput = document.getElementById("fileInput");
+  const fileInput = document.getElementById("profileImageInput");
 
   fileInput?.addEventListener("change", async (e) => {
-    const file = e.target.file[0];
-
-    if (!user) return;
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!currentUser) return;
 
     try {
-      const storagePath = `user_profiles/${user.uid}/${Date.now()}-${file.name}`;
+      const storagePath = `user_profiles/${currentUser.uid}/${Date.now()}-${file.name}`;
       const storageRef = ref(storage, storagePath);
 
       await uploadBytes(storageRef, file);
       const downloadURL = await getDownloadURL(storageRef);
 
-      await updateProfile(user, { photoURL: downloadURL });
+      await updateProfile(currentUser, { photoURL: downloadURL });
 
       profileImage.src = downloadURL;
 
       alert("Profile Updated.");
     } catch (error) {
-      console.error("Upload Failed.");
+      console.error("Upload Failed.", error);
       alert("Faild to upload image.");
     }
   });
 
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      if (authButtons) authButtons.classList.add("hidden");
-
-      if (userName) {
-        userName.textContent = user.displayName || user.email;
-        userName.classList.remove("hidden");
-      }
-
-      if (profileImage && user.photoURL) {
-        profileImage.src = user.photoURL;
-      }
-    } else {
+    if (!user) {
       window.location.href = "/src/pages/sign-in.html";
+      return;
+    }
+    currentUser = user;
+
+    if (authButtons) authButtons.classList.add("hidden");
+
+    if (userName) {
+      userName.textContent = user.displayName || user.email;
+      userName.classList.remove("hidden");
+    }
+
+    if (profileImage && user.photoURL) {
+      profileImage.src = user.photoURL;
     }
   });
 
