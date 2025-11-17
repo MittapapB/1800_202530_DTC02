@@ -35,7 +35,8 @@
           Restaurant Name
         </div>
         <button
-          class="w-10 h-10 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#FEF3E2] text-[#EB6424] text-lg shadow border border-black/10 transition-all duration-200 hover:bg-[#EB6424] group"
+          id="fav-btn"
+          class="w-10 h-10 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#FEF3E2] text-[#EB6424] text-lg shadow border border-black/10 transition-all duration-200 hover:cursor-pointer hover:bg-[#EB6424] group"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +47,7 @@
             stroke-width="2"
           >
             <path
+              id="fav-path"
               class="group-hover:fill-[#FEF3E2] group-hover:stroke-[#FEF3E2]"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -228,10 +230,13 @@
       </div>
     </section>
 
+    <confirm-modal id="confirm-modal"></confirm-modal>
+
     <!-- import user feedback JS -->
     <script type="module" src="../js/fetch-comments.js"></script>
     <script type="module" src="../js/time-records.js"></script>
     <script type="module" src="../js/restaurant-info.js"></script>
+    <script type="module" src="/src/components/confirm-modal.js"></script>
 
     <!-- import navbar component -->
     <div id="navbar"></div>
