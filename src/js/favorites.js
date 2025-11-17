@@ -43,6 +43,7 @@ async function DeleteFavorite(userId, restaurantId) {
   const favorite = favoriteMap[restaurantId];
 
   modal.open(
+    "Remove",
     `Remove ${favorite.restaurantName} from your favorites?`,
     async () => {
       const favoriteId = favorite.favoriteId;

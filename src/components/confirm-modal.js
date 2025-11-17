@@ -31,7 +31,7 @@ class ConfirmModal extends HTMLElement {
     `;
 
     this.modal = this.querySelector("#data-modal");
-    this.titleEl = this.querySelector("#data-title");
+    this.titleMessage = this.querySelector("#data-title");
     this.cancelBtn = this.querySelector("#data-cancel");
     this.confirmBtn = this.querySelector("#data-confirm");
   }
@@ -53,9 +53,10 @@ class ConfirmModal extends HTMLElement {
     });
   }
 
-  open(title, onConfirm) {
-    this.titleEl.textContent = title || "Are you sure?";
+  open(confirmMessage, title, onConfirm) {
+    this.titleMessage.innerHTML = title || "Are you sure?";
     this.onConfirm = onConfirm;
+    this.confirmBtn.innerHTML = confirmMessage;
     this.modal.classList.remove("hidden");
     this.modal.classList.add("flex");
   }
