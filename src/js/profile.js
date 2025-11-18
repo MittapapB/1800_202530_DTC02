@@ -1,17 +1,25 @@
+import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+
 import { logoutUser } from "/src/js/authentication.js";
-import { auth, storage } from "/src/js/firebaseConfig.js";
+import { auth, db, storage } from "/src/js/firebaseConfig.js";
 import { onAuthStateChanged, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 let currentUser = null;
 
 function initProfilePage() {
+  // Show user's name
   const logoutBtn = document.getElementById("toLogout");
   const authButtons = document.getElementById("authButtons");
   const userName = document.getElementById("userName");
 
   const profileImage = document.getElementById("profileImage");
   const fileInput = document.getElementById("profileImageInput");
+
+  const updateProfileBtn = document.getElementById("updateProfileBtn");
+  const formContainer = document.getElementById("profileFormContainer");
+  const profileForm = document.getElementById("profileForm");
+  const closeFormBtn = document.getElementById("closeFormBtn");
 
   fileInput?.addEventListener("change", async (e) => {
     const file = e.target.files[0];
@@ -33,6 +41,58 @@ function initProfilePage() {
     } catch (error) {
       console.error("Upload Failed.", error);
       alert("Faild to upload image.");
+    }
+  });
+
+  updateProfileBtn.addEventListener("click", async () => {
+    if (!currentUser) return;
+
+    // Load existing Firestore data into inputs
+    const userDocRef = doc(db, "users", currentUser.uid);
+    const userSnap = await getDoc(userDocRef);
+
+    if (userSnap.exists()) {
+      const data = userSnap.data();
+      document.getElementById("fullNameInput").value = data.fullName || "";
+      document.getElementById("phoneInput").value = data.phone || "";
+      document.getElementById("cityInput").value = data.city || "";
+    }
+
+    formContainer.classList.remove("hidden");
+    formContainer.classList.add("flex");
+  });
+
+  closeFormBtn.addEventListener("click", () => {
+    formContainer.classList.add("hidden");
+    formContainer.classList.remove("flex");
+  });
+
+  profileForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+
+    const fullName = document.getElementById("fullNameInput").value.trim();
+    const phone = document.getElementById("phoneInput").value.trim();
+    const city = document.getElementById("cityInput").value.trim();
+
+    try {
+      const userDocRef = doc(db, "users", currentUser.uid);
+      await setDoc(
+        userDocRef,
+        {
+          fullName,
+          phone,
+          city,
+          updatedAt: Date.now(),
+        },
+        { merge: true },
+      );
+
+      alert("Profile information updated!");
+      formContainer.classList.add("hidden");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("Could not update your profile.");
     }
   });
 
