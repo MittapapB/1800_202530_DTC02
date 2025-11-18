@@ -50,6 +50,9 @@ form.addEventListener("submit", async (e) => {
 
     confirmation.classList.remove("hidden");
     form.reset();
+    const encodeParam = encodeURIComponent(restaurantId);
+    const targetPage = "restaurant-info.html";
+    window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
   } catch (error) {
     console.error("Error adding restaurant:", error);
     alert("Failed to add restaurant. Please try again.");

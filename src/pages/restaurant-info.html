@@ -25,7 +25,12 @@
           <!-- import back button -->
           <script type="module">
             import { BackButton } from "../components/BackButton.js";
-            document.body.appendChild(BackButton({ target: "main.html" }));
+            const lastPage = sessionStorage.getItem("lastPage");
+            const btn = BackButton({ target: "main.html" });
+            if (lastPage && lastPage.includes("favorites.html")) {
+              btn.onclick = () => history.back();
+            }
+            document.body.appendChild(btn);
           </script>
         </div>
         <div
