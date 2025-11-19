@@ -33,7 +33,7 @@ onAuthStateChanged(auth, async (user) => {
       await DeleteFavorite(user.uid, restaurantId);
       return;
     }
-
+    sessionStorage.setItem("lastPage", window.location.pathname);
     window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
   });
 });
