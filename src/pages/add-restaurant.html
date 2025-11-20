@@ -105,24 +105,33 @@
           />
         </div>
 
+        <div id="formMessages" class="mt-4">
+          <!-- Confirmation Message -->
+          <div
+            id="confirmation"
+            class="hidden mb-4 p-3 bg-green-100 text-green-800 rounded-lg text-center"
+          >
+            Restaurant added successfully!
+          </div>
+
+          <!-- Error Message -->
+          <div
+            id="errorMsg"
+            class="hidden mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-center"
+          >
+            Failed to add restaurant. Please try again.
+          </div>
+        </div>
         <!-- Submit Button -->
-        <div class="text-center mt-15">
+        <div class="text-center mt-8">
           <button
             type="submit"
-            class="bg-dark-green text-lightest font-semibold rounded-full shadow text-lg md:text-xl py-3 px-6 w-[60%] md:w-[60%]"
+            class="bg-dark-green text-lightest font-semibold rounded-full shadow text-lg md:text-xl py-3 px-6 w-[70%] md:w-[70%]"
           >
             Submit Restaurant
           </button>
         </div>
       </form>
-
-      <!-- Confirmation Message -->
-      <div
-        id="confirmation"
-        class="hidden mt-4 p-3 bg-green-100 text-green-800 rounded-lg text-center"
-      >
-        Thank you! The restaurant has been submitted.
-      </div>
     </section>
 
     <!-- Navbar -->

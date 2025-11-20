@@ -78,7 +78,7 @@
     >
       <form
         id="add-time-form"
-        class="flex flex-col space-y-4"
+        class="flex flex-col space-y-2"
         action="./thank-you.html"
         method="get"
       >
@@ -88,7 +88,7 @@
           class="form-group flex flex-col md:flex-row items-start md:items-center gap-2"
         >
           <label for="record-date" class="text-green-dark font-semibold w-28">
-            Date:
+            Visited Date:
           </label>
           <input
             type="date"
@@ -106,7 +106,7 @@
             for="record-time"
             class="text-green-dark font-semibold w-28 mt-4"
           >
-            Time:
+            Visited Time:
           </label>
           <input
             type="time"
@@ -122,7 +122,7 @@
         >
           <label
             for="waiting-time"
-            class="text-green-dark font-semibold w-28 mt-4"
+            class="text-green-dark font-semibold w-40 mt-4"
           >
             Waiting Time (min):
           </label>
@@ -137,7 +137,7 @@
 
         <!-- Wait Time Experience -->
         <div class="form-group mt-6 p-4 bg-white rounded-2xl shadow">
-          <h3 class="text-green-dark font-bold mb-3 text-lg">
+          <h3 class="text-green-dark font-bold mb-3 text-md">
             Wait Time Experience (Optional)
           </h3>
 
@@ -245,11 +245,24 @@
           ></textarea>
         </div>
 
+        <!-- Submit Message -->
+        <div
+          id="errorMsg"
+          class="hidden opacity-0 text-red-700 bg-red-100 mt-4 p-3 rounded text-center"
+        ></div>
+
+        <div
+          id="confirmation"
+          class="hidden opacity-0 text-green-800 bg-green-100 mt-4 p-3 rounded text-center"
+        >
+          Record added successfully!
+        </div>
+
         <!-- Submit Button -->
-        <div class="flex justify-center mt-8 pb-24">
+        <div class="flex justify-center mt-4 pb-8">
           <button
             type="submit"
-            class="bg-[#EB6424] hover:bg-[#d3541a] text-[#FEF3E2] font-bold text-lg md:text-xl py-3 px-6 rounded-full shadow-md transition-colors duration-200 w-[60%] md:w-[60%]"
+            class="bg-[#EB6424] hover:bg-[#d3541a] text-[#FEF3E2] font-bold text-lg md:text-xl py-3 px-6 rounded-full shadow-md transition-colors duration-200 w-[70%] md:w-[70%]"
           >
             Submit Record
           </button>
