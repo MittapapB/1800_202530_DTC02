@@ -51,7 +51,7 @@ onAuthStateChanged(auth, (user) => {
 
     setTimeout(() => {
       errorMsg.style.opacity = "0";
-    }, 9000);
+    }, 3000);
   };
 
   const showConfirmation = (msg) => {
@@ -108,8 +108,8 @@ onAuthStateChanged(auth, (user) => {
       setTimeout(() => {
         const encodeParam = encodeURIComponent(restaurantId);
         const targetPage = "restaurant-info.html";
-        // window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
-      }, 9000);
+        window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
+      }, 3000);
     } catch (err) {
       console.error(err);
       showError("Failed to submit record. Please try again.");

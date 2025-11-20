@@ -66,7 +66,7 @@ form.addEventListener("submit", async (e) => {
       const encodeParam = encodeURIComponent(restaurantId);
       const targetPage = "restaurant-info.html";
       window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
-    }, 5000);
+    }, 3000);
   } catch (error) {
     console.error("Error adding restaurant:", error);
     showError("Failed to add restaurant. Please try again.");
@@ -88,9 +88,8 @@ form.addEventListener("submit", async (e) => {
     confirmation.classList.remove("hidden");
     confirmation.style.opacity = "1";
 
-    // 5秒后自动隐藏
     setTimeout(() => {
       confirmation.style.opacity = "0";
-    }, 5000);
+    }, 3000);
   }
 });
