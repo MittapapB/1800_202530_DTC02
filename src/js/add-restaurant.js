@@ -25,7 +25,15 @@ form.addEventListener("submit", async (e) => {
     const restaurantDocSnap = await getDoc(restaurantDocRef);
 
     if (restaurantDocSnap.exists()) {
-      alert("This restaurant already exists!");
+      const errorMsg = document.getElementById("errorMsg");
+      errorMsg.textContent = "This restaurant already exists!";
+      errorMsg.classList.remove("hidden");
+      errorMsg.style.opacity = "1";
+
+      setTimeout(() => {
+        errorMsg.style.opacity = "0";
+      }, 3000);
+
       return;
     }
 
@@ -48,13 +56,40 @@ form.addEventListener("submit", async (e) => {
       avg_wait_time: 0,
     });
 
-    confirmation.classList.remove("hidden");
+    // Show popup message
+    showConfirmation("Restaurant added successfully!");
+    // Reset form
     form.reset();
-    const encodeParam = encodeURIComponent(restaurantId);
-    const targetPage = "restaurant-info.html";
-    window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
+
+    // Wait 3 seconds before auto navigating
+    setTimeout(() => {
+      const encodeParam = encodeURIComponent(restaurantId);
+      const targetPage = "restaurant-info.html";
+      window.location.href = `${targetPage}?restaurant-id=${encodeParam}`;
+    }, 3000);
   } catch (error) {
     console.error("Error adding restaurant:", error);
-    alert("Failed to add restaurant. Please try again.");
+    showError("Failed to add restaurant. Please try again.");
+  }
+  function showError(msg) {
+    const errorMsg = document.getElementById("errorMsg");
+    errorMsg.textContent = msg;
+    errorMsg.classList.remove("hidden");
+    errorMsg.style.opacity = "1";
+
+    setTimeout(() => {
+      errorMsg.style.opacity = "0";
+    }, 3000);
+  }
+
+  function showConfirmation(msg) {
+    const confirmation = document.getElementById("confirmation");
+    confirmation.textContent = msg;
+    confirmation.classList.remove("hidden");
+    confirmation.style.opacity = "1";
+
+    setTimeout(() => {
+      confirmation.style.opacity = "0";
+    }, 3000);
   }
 });
