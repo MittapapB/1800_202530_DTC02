@@ -27,10 +27,14 @@
         <script type="module">
           import { BackButton } from "../components/BackButton.js";
           const url = new URL(window.location.href);
-          const restaurantId = url.searchParams.get("restaurant-id");
+          const restaurantId = decodeURIComponent(
+            url.searchParams.get("restaurant-id")
+          );
           document.body.appendChild(
             BackButton({
-              target: `restaurant-info.html?restaurant-id=${restaurantId}`,
+              target: `restaurant-info.html?restaurant-id=${encodeURIComponent(
+                restaurantId
+              )}`,
             })
           );
         </script>

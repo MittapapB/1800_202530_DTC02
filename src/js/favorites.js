@@ -34,7 +34,9 @@ onAuthStateChanged(auth, async (user) => {
       return;
     }
     sessionStorage.setItem("lastPage", window.location.pathname);
-    window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
+    window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${encodeURIComponent(
+      restaurantId
+    )}`;
   });
 });
 
