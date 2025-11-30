@@ -119,7 +119,7 @@ async function loadRestaurantData() {
 
     const restaurantImg = document.getElementById("restaurant-img");
     if (restaurantImg) {
-      restaurantImg.src = data.image_url || "";
+      restaurantImg.src = data.image_url || "../../images/MealWaveLogo.png";
       restaurantImg.alt = data.name || "Restaurant";
     }
   } catch (err) {
