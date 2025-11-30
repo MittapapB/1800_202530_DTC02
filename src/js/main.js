@@ -39,10 +39,10 @@ function randomPick(arr) {
 const grid = document.getElementById("restaurant-grid");
 
 function cardTemplate({ id, name, address, image_url, avg_wait_time, index }) {
-  const imgSrc = image_url ? image_url : `../../images/resto${index}.jpg`;
+  const imgSrc = image_url ? image_url : `../../images/MealWaveLogo.png`;
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
 
-  const href = `./restaurant-info.html?restaurant-id=${id}`;
+  const href = `./restaurant-info.html?restaurant-id=${encodeURIComponent(id)}`;
 
   return `
       <a href="${href}" class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition h-[300px]">
@@ -77,7 +77,6 @@ async function loadRestaurants() {
     const restaurantDoc = await getDocs(restaurantRef);
 
     if (restaurantDoc.empty) {
-      console.log("Restaurant not found");
       return;
     }
 

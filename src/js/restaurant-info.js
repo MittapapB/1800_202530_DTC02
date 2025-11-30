@@ -11,7 +11,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 
 const url = new URL(window.location.href);
-const restaurantId = url.searchParams.get("restaurant-id");
+const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 let restaurantName = "";
 
 const favBtn = document.getElementById("fav-btn");
@@ -91,7 +91,9 @@ function addRecordBtnSetup() {
   if (restaurantId) {
     const addRecordBtn = document.getElementById("add-record-btn");
     if (addRecordBtn) {
-      addRecordBtn.href = `./add-record.html?restaurant-id=${restaurantId}`;
+      addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
+        restaurantId
+      )}`;
     }
   }
 }
@@ -103,7 +105,6 @@ async function loadRestaurantData() {
     const RestaurantDoc = await getDoc(RestaurantRef);
 
     if (!RestaurantDoc.exists()) {
-      console.log("Restaurant not found");
       return;
     }
 
@@ -119,7 +120,7 @@ async function loadRestaurantData() {
 
     const restaurantImg = document.getElementById("restaurant-img");
     if (restaurantImg) {
-      restaurantImg.src = data.image_url || "";
+      restaurantImg.src = data.image_url || "../../images/MealWaveLogo.png";
       restaurantImg.alt = data.name || "Restaurant";
     }
   } catch (err) {
@@ -128,7 +129,6 @@ async function loadRestaurantData() {
 }
 
 if (restaurantId) {
-  console.log("in");
   loadRestaurantData();
   addRecordBtnSetup();
 }

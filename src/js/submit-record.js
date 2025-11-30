@@ -31,7 +31,7 @@ if (starContainer) {
 paintStars(0);
 
 const url = new URL(window.location.href);
-const restaurantId = url.searchParams.get("restaurant-id");
+const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 const restaurantRef = doc(db, "restaurant", restaurantId);
 const restaurantDoc = await getDoc(restaurantRef);
 if (restaurantDoc.exists()) {
