@@ -45,19 +45,19 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time, index }) {
   const href = `./restaurant-info.html?restaurant-id=${encodeURIComponent(id)}`;
 
   return `
-      <a href="${href}" class="bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition h-[300px]">
-      
-        
-        <img
-          src="${imgSrc}"
-          alt="${name || "Restaurant"}"
-          class="w-[200px] h-[120px] object-cover mx-auto"
-        />
-      
+      <a href="${href}" class="bg-background-table rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-md transition w-[170px] sm:w-[200px] h-[250px]">
 
-        <div class="flex flex-col p-4 justify-between">
-          <div>
-            <span class="font-bold sm:text-lg text-md text-title">${
+        <div class="w-full h-[110px] sm:h-[130px] overflow-hidden">
+          <img
+            src="${imgSrc}"
+            alt="${name || "Restaurant"}"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="flex flex-col p-4 justify-between flex-1 space-y-2">
+          <div class="space-y-1">
+            <span class="font-bold sm:text-lg md:text-md text-sm text-title">${
               name || "Restaurant"
             }</span>
             <p class="text-secondary text-sm mt-2 truncate text-gray-900">${
