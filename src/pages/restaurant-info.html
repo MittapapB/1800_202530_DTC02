@@ -32,9 +32,10 @@
             document.body.appendChild(btn);
           </script>
         </div>
+        <div class="w-[36px] h-[36px] sm:hidden"></div>
         <div
           id="restaurant-name"
-          class="flex-1 text-center text-2xl text-title font-bold"
+          class="text-center text-2xl text-title font-bold"
         >
           Restaurant Name
         </div>
@@ -81,8 +82,13 @@
           class="rounded-2xl border border-gray-200 bg-background-main p-5 shadow-sm"
         >
           <!-- Name -->
-          <div class="flex items-center gap-2 mb-2">
-            <h3 id="overview-name" class="text-lg font-bold text-title">—</h3>
+          <div class="flex items-center gap-2 mb-2 justify-between">
+            <h3
+              id="overview-name"
+              class="text-md md:text-lg font-bold text-title w-[60%] md:w-fit"
+            >
+              —
+            </h3>
             <span
               id="overview-cuisine"
               class="inline-flex items-center rounded-full bg-backgroud-card px-3 py-1 text-sm font-medium text-[#EB6424] outline-1 outline-[#89AC46]"
