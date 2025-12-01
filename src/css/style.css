@@ -129,3 +129,44 @@
 .icon-light {
   color: #afa89d;
 } /* light text color */
+
+/* Google Places autocomplete dropdown */
+.pac-container {
+  border-radius: 12px !important;
+  border: 1px solid #f0c9a0 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+  font-family: "Nunito Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif !important;
+  z-index: 9999 !important;
+  margin-top: 4px !important;
+  background-color: #fff8f0;
+}
+
+/* Each suggestion item */
+.pac-item {
+  padding: 8px 12px !important;
+  font-size: 0.9rem !important;
+  border-top: 1px solid #ffe1c4 !important;
+}
+
+/* Main name (first line) */
+.pac-item .pac-item-query {
+  font-weight: 600 !important;
+  color: #e75f24 !important;
+}
+
+/* Secondary text (address) */
+.pac-item span {
+  color: #666666 !important;
+}
+
+/* Hover & keyboard-selected state */
+.pac-item:hover,
+.pac-item.pac-item-selected {
+  background-color: #fef3e2 !important;
+}
+
+/* Optional: tweak the "powered by Google" row spacing */
+.pac-container:after {
+  padding: 6px 8px !important;
+}

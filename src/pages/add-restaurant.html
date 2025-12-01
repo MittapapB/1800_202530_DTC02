@@ -46,7 +46,7 @@
         Help us add a new restaurant 🍴
       </h2>
 
-      <form id="addRestaurantForm" class="space-y-5">
+      <form id="addRestaurantForm" class="space-y-5" novalidate>
         <!-- Restaurant name -->
         <div>
           <label for="restaurantName" class="block text-subtitle mb-1 text-base"
@@ -60,6 +60,9 @@
             placeholder="e.g. Sushi Hana"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#EB6424]"
           />
+          <p id="restaurantNameError" class="mt-1 text-sm text-red-500 hidden">
+            Please enter the restaurant name.
+          </p>
         </div>
 
         <!-- Address -->
@@ -75,6 +78,9 @@
             placeholder="e.g. 123 Main St, Vancouver, BC"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#EB6424]"
           />
+          <p id="addressError" class="mt-1 text-sm text-red-500 hidden">
+            Address must include street number and city.
+          </p>
         </div>
 
         <!-- Cuisine Type -->
@@ -89,6 +95,9 @@
             placeholder="e.g. Japanese, Italian, Korean BBQ..."
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#EB6424]"
           />
+          <p id="cuisineError" class="mt-1 text-sm text-red-500 hidden">
+            Numbers are not allowed in cuisine types.
+          </p>
         </div>
 
         <!-- Upload image -->
@@ -103,6 +112,9 @@
             accept="image/*"
             class="w-full text-sm text-gray-700 border rounded-lg cursor-pointer file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-[#EB6424] file:text-[#FEF3E2] hover:file:bg-[#d3541a]"
           />
+          <p id="imageError" class="mt-1 text-sm text-red-500 hidden">
+            Please upload an image smaller than 2MB.
+          </p>
         </div>
 
         <div id="formMessages" class="mt-4">
@@ -142,5 +154,10 @@
     </script>
 
     <script type="module" src="../js/add-restaurant.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-9SihsBi8ggZznyQZIkxgG7xaA0dBuiw&libraries=places&language=en&region=CA&loading=async&callback=initPlaces"
+      async
+      defer
+    ></script>
   </body>
 </html>

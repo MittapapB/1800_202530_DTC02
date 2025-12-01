@@ -34,7 +34,9 @@ onAuthStateChanged(auth, async (user) => {
       return;
     }
     sessionStorage.setItem("lastPage", window.location.pathname);
-    window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
+    window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${encodeURIComponent(
+      restaurantId
+    )}`;
   });
 });
 
@@ -56,18 +58,12 @@ async function DeleteFavorite(userId, restaurantId) {
 }
 
 function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
-  const imgSrc = image_url ? image_url : "";
+  const imgSrc = image_url ? image_url : "../../images/MealWaveLogo.png";
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
 
   return `
     <div class="w-full">
-      <div data-id="${id}" class="relative restaurant-card bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
-        <button
-          type="button"
-          class="delete-btn absolute top-3 right-3 text-white hover:text-[#fa9500] z-10 hover:cursor-pointer"
-        >
-          <i class="fa-solid fa-trash text-lg"></i>
-        </button>
+      <div data-id="${id}" class="restaurant-card bg-background-table rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition mb-4">
         <img
           src="${imgSrc}"
           alt="${name ? name : "Restaurant"}"
@@ -75,15 +71,23 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
         />
 
         <div class="flex flex-col p-4 min-h-fit">
-          <div>
-            <span class="font-bold sm:text-lg text-md text-title">${
-              name || "Restaurant"
-            }</span>
-            <p class="text-secondary text-sm mt-2 truncate text-gray-900">${
-              address || "No address available"
-            }</p>
+          <div class="flex flex-row justify-between">
+            <div>
+              <span class="font-bold sm:text-lg text-md text-title">${
+                name || "Restaurant"
+              }</span>
+              <p class="text-secondary text-sm text-gray-900">${
+                address || "No address available"
+              }</p>
+            </div>
+            <button
+              type="button"
+              class="delete-btn text-[#fa9500] hover:text-[#eb6424] hover:cursor-pointer"
+            >
+              <i class="fa-solid fa-trash text-lg"></i>
+            </button>
           </div>
-          <span class="text-secondary mt-1">Avg Wait: ${avg}</span>
+          <span class="text-green-dark mt-1">Avg Wait: ${avg}</span>
         </div>
       </div>
     </div>

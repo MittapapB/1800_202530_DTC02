@@ -46,7 +46,9 @@ function renderSuggestions(items) {
 }
 
 function goToRestaurant(restaurantId) {
-  const url = `/src/pages/restaurant-info.html?restaurant-id=${restaurantId}`;
+  const url = `/src/pages/restaurant-info.html?restaurant-id=${encodeURIComponent(
+    restaurantId
+  )}`;
   window.location.href = url;
 }
 
