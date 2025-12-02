@@ -11,28 +11,35 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 
 const starContainer = document.getElementById("star-rating");
+
+// visually fill stars based on rating n
 const paintStars = (n) => {
   [...starContainer.querySelectorAll("svg")].forEach((el) => {
     const v = Number(el.dataset.value || 0);
     el.setAttribute("fill", v <= n ? "#fa9500" : "none");
   });
+  // store current rating in container
   starContainer.dataset.rating = String(n);
 };
 
 let current = 0;
+// add click event listener to the star container
 if (starContainer) {
   starContainer.addEventListener("click", (e) => {
     const svg = e.target.closest("svg");
-    if (!svg) return;
-    current = Number(svg.dataset.value || 0);
-    paintStars(current);
+    if (!svg) return; // exit if click is outside a star
+    current = Number(svg.dataset.value || 0); // update current rating
+    paintStars(current); // update current rating
   });
 }
+
+// initialize stars to 0 (no rating)
 paintStars(0);
 
 const url = new URL(window.location.href);
 const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 const restaurantRef = doc(db, "restaurant", restaurantId);
+// fetch restaurant data and display its name
 const restaurantDoc = await getDoc(restaurantRef);
 if (restaurantDoc.exists()) {
   document.getElementById("restaurant-name").textContent =
@@ -44,6 +51,7 @@ onAuthStateChanged(auth, (user) => {
   const errorMsg = document.getElementById("errorMsg");
   const confirmation = document.getElementById("confirmation");
 
+  // show error messages
   const showError = (msg) => {
     errorMsg.textContent = msg;
     errorMsg.classList.remove("hidden");
@@ -53,7 +61,7 @@ onAuthStateChanged(auth, (user) => {
       errorMsg.style.opacity = "0";
     }, 3000);
   };
-
+  // show confirmation messages
   const showConfirmation = (msg) => {
     confirmation.textContent = msg;
     confirmation.classList.remove("hidden");
@@ -71,11 +79,15 @@ onAuthStateChanged(auth, (user) => {
       const waitTime = parseInt(document.getElementById("waiting-time").value);
       const dateStr = document.getElementById("record-date").value;
       const timeStr = document.getElementById("record-time").value;
+
+      // convert date and time to a Firestore timestamp
       const visitDate = new Date(`${dateStr}T${timeStr}`);
       const visitTimestamp = Timestamp.fromDate(visitDate);
+
       const comments = (document.getElementById("feedback").value || "").trim();
       const rating = Number(starContainer.dataset.rating || 0);
 
+      // add a new time record document under the restaurant's subcollection
       await addDoc(collection(db, "restaurant", restaurantId, "time_record"), {
         user_id: user.uid,
         wait_time_minutes: waitTime,
@@ -85,6 +97,7 @@ onAuthStateChanged(auth, (user) => {
         submitted_at: serverTimestamp(),
       });
 
+      // update restaurant's average wait time and total record count
       const restaurantSnapshot = await getDoc(restaurantRef);
       if (restaurantSnapshot.exists()) {
         const data = restaurantSnapshot.data();
@@ -105,6 +118,7 @@ onAuthStateChanged(auth, (user) => {
       form.reset();
       paintStars(0);
 
+      // redirect to restaurant page
       setTimeout(() => {
         const encodeParam = encodeURIComponent(restaurantId);
         const targetPage = "restaurant-info.html";

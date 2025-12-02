@@ -179,6 +179,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  // generate unique restaurant ID based on name + address
   const restaurantId = (name + "_" + address)
     .toLowerCase()
     .replaceAll(" ", "_")
@@ -190,19 +191,21 @@ form.addEventListener("submit", async (e) => {
     const restaurantDocRef = doc(db, "restaurant", restaurantId);
     const restaurantDocSnap = await getDoc(restaurantDocRef);
 
+    // if restaurant exists, show error message and exit
     if (restaurantDocSnap.exists()) {
       const errorMsg = document.getElementById("errorMsg");
       errorMsg.textContent = "This restaurant already exists!";
       errorMsg.classList.remove("hidden");
       errorMsg.style.opacity = "1";
 
+      // hide after 3 seconds
       setTimeout(() => {
         errorMsg.style.opacity = "0";
       }, 3000);
 
       return;
     }
-
+    //  // if user uploaded an image, upload to Firebase Storage
     let imageUrl = "";
     if (imageFile) {
       const storagePath = `restaurant_images/${restaurantId}/${Date.now()}-${
@@ -237,6 +240,7 @@ form.addEventListener("submit", async (e) => {
     console.error("Error adding restaurant:", error);
     showError("Failed to add restaurant. Please try again.");
   }
+  // show error message
   function showError(msg) {
     const errorMsg = document.getElementById("errorMsg");
     errorMsg.textContent = msg;
@@ -247,7 +251,7 @@ form.addEventListener("submit", async (e) => {
       errorMsg.style.opacity = "0";
     }, 3000);
   }
-
+  // show confirmation message
   function showConfirmation(msg) {
     const confirmation = document.getElementById("confirmation");
     confirmation.textContent = msg;
