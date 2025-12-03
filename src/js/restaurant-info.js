@@ -96,6 +96,19 @@ async function toggleFavorite() {
 
 // setup "Add Record" button to link to add-record page with restaurant ID
 function addRecordBtnSetup() {
+  if (!restaurantId) return;
+
+  const addRecordBtn = document.getElementById("add-record-btn");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
+        restaurantId
+      )}`;
+    } else {
+      addRecordBtn.href = "./sign-in.html";
+    }
+  });
   if (restaurantId) {
     const addRecordBtn = document.getElementById("add-record-btn");
     if (addRecordBtn) {
@@ -119,6 +132,14 @@ async function loadRestaurantData() {
 
     const data = RestaurantDoc.data();
     restaurantName = data.name;
+
+    if (!data.cuisine) {
+      document
+        .getElementById("overview-cuisine")
+        .classList.remove("inline-flex");
+      document.getElementById("overview-cuisine").classList.add("hidden");
+    }
+
     // update DOM elements with restaurant info
     document.getElementById("restaurant-name").textContent = data.name;
     document.getElementById("overview-name").textContent = data.name;

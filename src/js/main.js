@@ -1,5 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { onAuthReady } from "./authentication.js";
-import { db } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig.js";
 import { collection, getDocs } from "firebase/firestore";
 
 function showDashboard() {
@@ -105,6 +106,18 @@ async function loadRestaurants() {
     console.error(err);
   }
 }
+
+const addRestaurantBtn = document.getElementById("add-restaurant");
+addRestaurantBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location.href = "./add-restaurant.html";
+    } else {
+      window.location.href = "./sign-in.html";
+    }
+  });
+});
 
 showDashboard();
 loadRestaurants();

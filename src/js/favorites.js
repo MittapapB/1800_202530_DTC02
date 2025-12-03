@@ -13,7 +13,7 @@ let favoriteMap = {};
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "./login.html";
+    window.location.href = "./sign-in.html";
     return;
   }
 

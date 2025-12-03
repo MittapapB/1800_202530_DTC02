@@ -24,25 +24,6 @@ window.initPlaces = function () {
       nameInput.value = place.name;
     }
 
-    if (!place || !place.place_id) {
-      showFieldError(
-        "restaurantNameError",
-        "Please select a restaurant from the suggestions."
-      );
-      return;
-    }
-
-    //check it's actually a restaurant
-    const isRestaurant = place.types && place.types.includes("restaurant");
-    if (!isRestaurant) {
-      showFieldError(
-        "restaurantNameError",
-        "Please choose a restaurant, not another type of place."
-      );
-    } else {
-      clearFieldError("restaurantNameError");
-    }
-
     // auto-fill address if available
     if (place.formatted_address) {
       addressInput.value = place.formatted_address;
@@ -90,24 +71,9 @@ function validateForm() {
     isValid = false;
   }
 
-  if (
-    !selectedPlace ||
-    !selectedPlace.place_id ||
-    selectedPlace.name !== name
-  ) {
-    showFieldError(
-      "restaurantNameError",
-      "Please select a restaurant from the suggestions."
-    );
-    isValid = false;
-  }
-
   // Address: required (usually auto-filled by Places)
   if (!address) {
-    showFieldError(
-      "addressError",
-      "Address is required. Please select a restaurant."
-    );
+    showFieldError("addressError", "Address is required.");
     isValid = false;
   }
 
