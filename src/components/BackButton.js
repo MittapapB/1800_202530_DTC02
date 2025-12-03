@@ -3,7 +3,7 @@ export function BackButton({ target = "main.html" }) {
   const btn = document.createElement("button");
 
   btn.className = `
-    fixed top-4 left-4 md:left-8 lg:left-12 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center
+    fixed top-3 left-4 md:left-8 lg:left-12 w-10 h-10 flex items-center justify-center
     rounded-full bg-[#FEF3E2] text-[#EB6424] text-lg md:text-xl
     shadow border border-black/10 transition-colors duration-200
     hover:cursor-pointer
