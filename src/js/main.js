@@ -1,5 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { onAuthReady } from "./authentication.js";
-import { db } from "./firebaseConfig.js";
+import { db, auth } from "./firebaseConfig.js";
 import { collection, getDocs } from "firebase/firestore";
 
 function showDashboard() {
@@ -39,7 +40,7 @@ function randomPick(arr) {
 const grid = document.getElementById("restaurant-grid");
 
 function cardTemplate({ id, name, address, image_url, avg_wait_time, index }) {
-  const imgSrc = image_url ? image_url : `../../images/MealWaveLogo.png`;
+  const imgSrc = image_url ? image_url : `/images/MealWaveLogo.png`;
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
 
   const href = `./restaurant-info.html?restaurant-id=${encodeURIComponent(id)}`;
@@ -106,5 +107,17 @@ async function loadRestaurants() {
   }
 }
 
+const addRestaurantBtn = document.getElementById("addRestaurantBtn");
+addRestaurantBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location.href = "./add-restaurant.html";
+    } else {
+      window.location.href = "./sign-in.html";
+    }
+  });
+});
 showDashboard();
 loadRestaurants();

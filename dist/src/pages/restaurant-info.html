@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/restaurantInfo-vIJgnyzV.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/firebaseConfig-BGUxOqTk.js">
+    <link rel="modulepreload" crossorigin href="/assets/BackButton-VMeNE0XH.js">
+    <link rel="modulepreload" crossorigin href="/assets/confirm-modal-Djzis-F8.js">
+    <link rel="modulepreload" crossorigin href="/assets/Navbar-CLB9A0dp.js">
+    <link rel="stylesheet" crossorigin href="/assets/style-CgxvytrP.css">
+  </head>
+
+  <body class="bg-background-main text-nunito mx-auto">
+    <header>
+      <div class="flex justify-between w-full px-4 py-3 bg-[#FEF3E2]">
+        <div class="w-10 h-10">
+          <!-- import back button -->
+        </div>
+        <!-- <div class="w-[36px] h-[36px] sm:hidden"></div> -->
+        <div
+          id="restaurant-name"
+          class="flex-1 self-center text-center text-2xl text-title font-bold"
+        >
+          Restaurant Name
+        </div>
+        <button
+          id="fav-btn"
+          class="w-10 h-10 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#FEF3E2] text-[#EB6424] text-lg shadow border border-black/10 transition-all duration-200 hover:cursor-pointer hover:bg-[#EB6424] group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 md:w-6 md:h-6 transition-all duration-200"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              id="fav-path"
+              class="group-hover:fill-[#FEF3E2] group-hover:stroke-[#FEF3E2]"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 12.572l-7.5 7.428l-7.5-7.428a5 5 0 1 1 7.5-6.566a5 5 0 1 1 7.5 6.572"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 my-6 justify-center items-center w-[80%] mx-auto"
+      >
+        <img
+          id="restaurant-img"
+          alt="Restaurant Image"
+          class="w-full sm:w-1/2 max-w-[400px] rounded-2xl shadow-lg object-cover"
+        />
+      </div>
+
+      <!-- Overview -->
+      <div class="m-4 md:m-8 mt-8 p-4 bg-backgroud-card rounded-2xl shadow-md">
+        <h2 class="text-xl md:text-2xl font-semibold text-[#EB6424] mb-2">
+          Overview
+        </h2>
+        <!-- Overview -->
+        <section
+          class="rounded-2xl border border-gray-200 bg-background-main p-5 shadow-sm"
+        >
+          <!-- Name -->
+          <div class="flex items-center gap-2 mb-2 justify-between">
+            <h3
+              id="overview-name"
+              class="text-md md:text-lg font-bold text-title w-[60%] md:w-fit"
+            >
+              —
+            </h3>
+            <span
+              id="overview-cuisine"
+              class="inline-flex items-center rounded-full bg-backgroud-card px-3 py-1 text-sm font-medium text-[#EB6424] outline-1 outline-[#89AC46]"
+              >—</span
+            >
+          </div>
+
+          <!-- Address -->
+          <div class="flex items-start gap-3">
+            <!-- pin icon -->
+            <svg
+              class="mt-0.5 h-5 w-5 text-[#89AC46]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 21s-7-5.33-7-11a7 7 0 1 1 14 0c0 5.67-7 11-7 11Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <div class="flex flex-col gap-1">
+              <p id="overview-address" class="text-title">—</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 mt-4">
+            <svg
+              class="h-5 w-5 text-[#89AC46]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l3 3"></path>
+            </svg>
+            <p class="text-title font-medium">
+              Average wait time:
+              <span id="overview-avg" class="text-[#89AC46] font-semibold"
+                >—</span
+              >
+              minutes
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <section class="m-4 md:m-8 mt-8 text-nunito">
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
+        <h2
+          class="text-xl md:text-2xl font-semibold text-[#EB6424] self-start sm:self-auto w-full sm:w-auto text-left sm:text-left"
+        >
+          Past Waiting Times
+        </h2>
+        <a
+          id="add-record-btn"
+          href="./add-record.html"
+          class="mt-2 sm:mt-0 flex items-center gap-2 px-3 py-1.5 bg-[#FEF3E2] text-[#EB6424] rounded-full border border-[#EB6424]/30 transition-all duration-200 group hover:bg-[#EB6424] hover:text-[#FEF3E2] hover:shadow-md hover:-translate-y-[1px] self-center sm:self-auto"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-5 h-5"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+            <path d="M13.5 6.5l4 4" />
+            <path d="M16 19h6" />
+            <path d="M19 16v6" />
+          </svg>
+          <span class="text-sm font-medium">Add a record</span>
+        </a>
+      </div>
+      <!-- Original Table view, removed -->
+      <!-- <div
+        class="max-w-2xl mx-auto mt-4 p-4 pb-20 mb-20 bg-backgroud-card rounded-2xl shadow-md text-sm md:text-base"
+      >
+      
+        <div id="table-view" class="overflow-x-auto max-h-[400px]">
+          <table class="w-full border-collapse table-auto text-center">
+            <thead class="sticky top-0 bg-[#89AC46]/20 z-10">
+              <tr>
+                <th
+                  class="border px-3 py-2 text-left text-[#EB6424] font-medium"
+                >
+                  Time Slot
+                </th>
+                <th class="border px-3 py-2 text-[#EB6424] font-medium">
+                  Avg (min)
+                </th>
+                <th class="border px-3 py-2 text-[#EB6424] font-medium">
+                  Min (min)
+                </th>
+                <th class="border px-3 py-2 text-[#EB6424] font-medium">
+                  Max (min)
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white">
+                <td class="border px-3 py-2 text-left">10:00 - 12:00</td>
+                <td class="border px-3 py-2">13</td>
+                <td class="border px-3 py-2">9</td>
+                <td class="border px-3 py-2">18</td>
+              </tr>
+              <tr class="bg-[#FEF3E2]">
+                <td class="border px-3 py-2 text-left">12:00 - 14:00</td>
+                <td class="border px-3 py-2">15</td>
+                <td class="border px-3 py-2">10</td>
+                <td class="border px-3 py-2">20</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="border px-3 py-2 text-left">14:00 - 16:00</td>
+                <td class="border px-3 py-2">16</td>
+                <td class="border px-3 py-2">11</td>
+                <td class="border px-3 py-2">22</td>
+              </tr>
+              <tr class="bg-[#FEF3E2]">
+                <td class="border px-3 py-2 text-left">16:00 - 18:00</td>
+                <td class="border px-3 py-2">17</td>
+                <td class="border px-3 py-2">12</td>
+                <td class="border px-3 py-2">23</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="border px-3 py-2 text-left">18:00 - 20:00</td>
+                <td class="border px-3 py-2">18</td>
+                <td class="border px-3 py-2">12</td>
+                <td class="border px-3 py-2">25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+    </section>
+
+    <!-- user feedback -->
+    <section class="m-4 md:m-8 mt-4 mb-20 text-nunito">
+      <div
+        class="max-w-2xl mx-auto p-4 bg-backgroud-card rounded-2xl shadow-md"
+      >
+        <div id="comments-container"></div>
+      </div>
+    </section>
+
+    <confirm-modal id="confirm-modal"></confirm-modal>
+
+    <!-- import user feedback JS -->
+
+    <!-- import navbar component -->
+    <div id="navbar"></div>
+  </body>
+</html>

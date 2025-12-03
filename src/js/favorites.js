@@ -13,7 +13,7 @@ let favoriteMap = {};
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "./login.html";
+    window.location.href = "./sign-in.html";
     return;
   }
 
@@ -58,7 +58,7 @@ async function DeleteFavorite(userId, restaurantId) {
 }
 
 function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
-  const imgSrc = image_url ? image_url : "../../images/MealWaveLogo.png";
+  const imgSrc = image_url ? image_url : "/images/MealWaveLogo.png";
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
 
   return `

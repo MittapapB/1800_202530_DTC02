@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/main-C77V6c5F.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/firebaseConfig-BGUxOqTk.js">
+    <link rel="modulepreload" crossorigin href="/assets/Navbar-CLB9A0dp.js">
+    <link rel="modulepreload" crossorigin href="/assets/authentication-CA3jcVaF.js">
+    <link rel="stylesheet" crossorigin href="/assets/style-CgxvytrP.css">
+  </head>
+  <body class="bg-background-main text-nunit">
+    <div
+      class="bg-[#fa9500] text-[#FEF3E2] text-center p-1 fixed top-0 w-full text-logo-lobster z-20"
+    >
+      MealWave
+    </div>
+    <!-- Search bar -->
+    <div
+      class="relative w-full max-w-md mx-auto mt-25 z-10 md:w-[70%] md:max-w-2xl"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
+        />
+      </svg>
+      <svg
+        class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-filter"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z"
+        />
+      </svg>
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search restaurants here..."
+        autocomplete="off"
+        class="border-[#eb6424] border-2 rounded-full p-2 pl-10 pr-10 w-full max-w-md sm:max-w-lg md:max-w-2xl focus:outline-none"
+      />
+
+      <div
+        id="suggestions"
+        class="absolute left-0 right-0 mt-2 bg-background-main text-[#eb6424] border border-gray-200 rounded-xl shadow-lg hidden max-h-64 overflow-y-auto"
+      ></div>
+    </div>
+
+    <!--  Welcome Banner    -->
+    <div class="max-w-md mt-6 mx-4 md:mx-auto md:max-w-lg">
+      <h1 class="text-xl font-bold leading-none mt-3 mb-3 text-title">
+        Welcome to MealWave <span id="name-goes-here">friend</span>
+      </h1>
+      <p class="text-title">
+        Check the current wait times and plan your next meal smarter.
+      </p>
+    </div>
+
+    <!-- Add Restaurant Button -->
+    <div class="max-w-4xl mx-auto mt-5 flex justify-end px-4">
+      <a
+        id="addRestaurantBtn"
+        href="./add-restaurant.html"
+        class="bg-primary text-white font-semibold py-2 px-4 rounded-full shadow-md transition"
+      >
+        + Add a Restaurant
+      </a>
+    </div>
+
+    <!-- Recommend info -->
+    <div
+      id="restaurant-grid"
+      class="max-w-6xl mx-auto mt-6 mb-10 p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-center place-items-center text-green-dark bg-background-main rounded-lg overflow-y-auto max-h-[585px] md:max-h-[750px]"
+    ></div>
+
+    <footer class="hidden bg-gray-900 text-gray-100 py-12 md:mt-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <!-- Top Section -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-between">
+          <!-- About Us -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">About Us</h5>
+            <p class="mb-4 text-gray-300">
+              We are dedicated to helping diners plan their restaurant visits
+              more efficiently by sharing and browsing real-time wait times from
+              the community.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-sky-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-[#fa9500] hover:bg-[#eb6424] text-white transition-transform transform hover:-translate-y-1"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Support & Settings -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Support & Settings</h5>
+            <ul>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-highlight transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-highlight transition-colors"
+                  >Settings</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#"
+                  class="text-gray-100 hover:text-highlight transition-colors"
+                  >Report an Issue</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Contact Info</h5>
+            <ul>
+              <li class="mb-3 flex items-start">
+                <i class="fas fa-map-marker-alt mr-2 mt-1 text-highlight"></i>
+                555 Seymour St Vancouver, BC V6B 3H6, Canada
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-phone mr-2 text-highlight"></i>
+                <a
+                  href="tel:+1234567890"
+                  class="hover:text-highlight transition-colors"
+                  >+1 (234) 567-890</a
+                >
+              </li>
+              <li class="mb-3 flex items-center">
+                <i class="fas fa-envelope mr-2 text-highlight"></i>
+                <a
+                  href="mailto:contact@example.com"
+                  class="hover:text-highlight transition-colors"
+                  >contact@example.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Divider -->
+        <div
+          class="my-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
+        >
+          <p>&copy; 2025 MealWave. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- import navbar -->
+    <div id="navbar"></div>
+    <!-- <script type="module" src="../js/submit-record.js"></script> -->
+  </body>
+</html>

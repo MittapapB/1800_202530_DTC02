@@ -87,15 +87,35 @@ async function toggleFavorite() {
   );
 }
 
+// function addRecordBtnSetup() {
+//   if (restaurantId) {
+//     const addRecordBtn = document.getElementById("add-record-btn");
+//     if (addRecordBtn) {
+//       addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
+//         restaurantId
+//       )}`;
+//     }
+//   }
+// }
+
 function addRecordBtnSetup() {
-  if (restaurantId) {
-    const addRecordBtn = document.getElementById("add-record-btn");
-    if (addRecordBtn) {
+  if (!restaurantId) return;
+
+  const addRecordBtn = document.getElementById("add-record-btn");
+  if (!addRecordBtn) return;
+
+  // Wait for Firebase to tell us if there is a user
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Signed in → go to add-record with restaurant id
       addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
         restaurantId
       )}`;
+    } else {
+      // Not signed in → go to sign-in page
+      addRecordBtn.href = "./sign-in.html";
     }
-  }
+  });
 }
 
 async function loadRestaurantData() {
@@ -111,6 +131,13 @@ async function loadRestaurantData() {
     const data = RestaurantDoc.data();
     restaurantName = data.name;
 
+    if (!data.cuisine) {
+      document
+        .getElementById("overview-cuisine")
+        .classList.remove("inline-flex");
+      document.getElementById("overview-cuisine").classList.add("hidden");
+    }
+
     document.getElementById("restaurant-name").textContent = data.name;
     document.getElementById("overview-name").textContent = data.name;
     document.getElementById("overview-cuisine").textContent = data.cuisine;
@@ -120,7 +147,7 @@ async function loadRestaurantData() {
 
     const restaurantImg = document.getElementById("restaurant-img");
     if (restaurantImg) {
-      restaurantImg.src = data.image_url || "../../images/MealWaveLogo.png";
+      restaurantImg.src = data.image_url || "/images/MealWaveLogo.png";
       restaurantImg.alt = data.name || "Restaurant";
     }
   } catch (err) {

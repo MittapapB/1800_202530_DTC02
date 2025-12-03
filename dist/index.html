@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- tailwind cdn package -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font-Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font-Itim -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link rel="stylesheet" crossorigin href="/assets/style-CgxvytrP.css">
+  </head>
+  <body
+    class="p-4 bg-[url(/images/orange-background.jpg)] bg-cover bg-center bg-no-repeat min-h-screen text-nunito"
+  >
+    <div
+      class="max-w-screen-md mt-12 text-center flex flex-col justify-between w-full h-[90vh] mx-auto"
+    >
+      <div>
+        <h1
+          class="text-6xl text-logo-lobster text-highlight font-bold leading-none mt-3 mb-8"
+        >
+          MealWave<br /><span
+            class="text-2xl text-[#ffffff] text-nunito drop-shadow-2xl inline-block scale-105 hover:scale-110 transition-transform"
+          >
+            Know the Wait Before You Go</span
+          >
+        </h1>
+        <!-- <p class="text-xl sm:text-2xl text-gray-700">
+          Curious about how long the wait is at your favorite restaurant?
+          Discover real-time updates shared by diners like you —
+          <span class="font-semibold text-[#ffffff]"
+            >then sign in to share yours</span
+          >
+          and
+          <span class="font-semibold text-[#ffffff]"
+            >help others skip the wait!</span
+          >
+        </p> -->
+      </div>
+
+      <div class="w-2/3 mt-4 mb-4 flex flex-col items-center gap-2 mx-auto">
+        <button
+          type="button"
+          class="w-full inline-flex items-center justify-center rounded-full hover:cursor-pointer bg-[#eb6424] text-white/90 text-lg px-4 py-2"
+          onclick="window.location.href='/src/pages/sign-in.html'"
+        >
+          Sign in
+        </button>
+
+        <button
+          type="button"
+          class="w-full inline-flex items-center justify-center rounded-full border bg-white/90 text-[#eb6424] hover:cursor-pointer border-white text-lg px-4 py-2"
+          onclick="window.location.href='/src/pages/sign-in.html?mode=signup'"
+        >
+          Create an account
+        </button>
+
+        <a
+          href="/src/pages/main.html"
+          class="text-gray-700 self-start underline pl-4"
+          >Continue as a guest</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

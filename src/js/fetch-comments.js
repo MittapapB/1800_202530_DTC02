@@ -10,7 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-const default_avatar = "../../images/default-avatar.jpg";
+const default_avatar = "/images/default-avatar.jpg";
 
 export async function fetchUserComments() {
   const params = new URLSearchParams(window.location.search);
