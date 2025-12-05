@@ -1,13 +1,20 @@
 import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
 import { logoutUser } from "/src/js/authentication.js";
 import { auth, db, storage } from "/src/js/firebaseConfig.js";
-import { onAuthStateChanged, updateProfile } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  updateProfile,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+} from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 let currentUser = null;
 
 function initProfilePage() {
-  console.log("Initializing profile page..."); // Debug log
+  // Debug log
+  console.log("Initializing profile page...");
 
   // Get DOM elements with null checks
   const logoutBtn = document.getElementById("toLogout");
@@ -16,9 +23,15 @@ function initProfilePage() {
   const profileImage = document.getElementById("profileImage");
   const fileInput = document.getElementById("profileImageInput");
   const updateProfileBtn = document.getElementById("updateProfileBtn");
+  const changePasswordBtn = document.getElementById("changePasswordBtn");
   const formContainer = document.getElementById("profileFormContainer");
+  const passwordContainer = document.getElementById("changePasswordContainer");
   const profileForm = document.getElementById("profileForm");
+  const passwordForm = document.getElementById("changePasswordForm");
   const closeFormBtn = document.getElementById("closeFormBtn");
+  const closePasswordBtn = document.getElementById("closePasswordFormBtn");
+  const passwordError = document.getElementById("passwordError");
+  const passwordSuccess = document.getElementById("passwordSuccess");
 
   // Debug: Check if elements exist
   console.log("Elements found:", {
@@ -27,9 +40,13 @@ function initProfilePage() {
     profileImage: !!profileImage,
     fileInput: !!fileInput,
     updateProfileBtn: !!updateProfileBtn,
+    changePasswordBtn: !!changePasswordBtn,
     formContainer: !!formContainer,
+    passwordContainer: !!passwordContainer,
     profileForm: !!profileForm,
+    passwordForm: !!passwordForm,
     closeFormBtn: !!closeFormBtn,
+    closePasswordBtn: !!closePasswordBtn,
   });
 
   // Profile image upload
@@ -91,10 +108,34 @@ function initProfilePage() {
     }
   });
 
-  // Close form button
+  // Change Password button
+  changePasswordBtn?.addEventListener("click", () => {
+    if (!currentUser) {
+      alert("Please sign in to change your password.");
+      return;
+    }
+
+    // Clear any previous messages
+    if (passwordError) passwordError.classList.add("hidden");
+    if (passwordSuccess) passwordSuccess.classList.add("hidden");
+
+    // Reset form
+    if (passwordForm) passwordForm.reset();
+
+    // Show modal
+    passwordContainer.classList.remove("hidden");
+    passwordContainer.classList.add("flex");
+  });
+
+  // Close form buttons
   closeFormBtn?.addEventListener("click", () => {
     formContainer.classList.add("hidden");
     formContainer.classList.remove("flex");
+  });
+
+  closePasswordBtn?.addEventListener("click", () => {
+    passwordContainer.classList.add("hidden");
+    passwordContainer.classList.remove("flex");
   });
 
   // Profile form submission
@@ -138,9 +179,102 @@ function initProfilePage() {
     }
   });
 
+  // Password form submission
+  passwordForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+
+    const currentPass = document.getElementById("currentPassword").value;
+    const newPass = document.getElementById("newPassword").value;
+    const confirmPass = document.getElementById("confirmPassword").value;
+
+    // Clear previous messages
+    if (passwordError) {
+      passwordError.classList.add("hidden");
+      passwordError.textContent = "";
+    }
+    if (passwordSuccess) {
+      passwordSuccess.classList.add("hidden");
+      passwordSuccess.textContent = "";
+    }
+
+    // Validation
+    if (newPass.length < 6) {
+      showError("Password must be at least 6 characters long");
+      return;
+    }
+
+    if (newPass !== confirmPass) {
+      showError("New passwords do not match");
+      return;
+    }
+
+    try {
+      // Re-authenticate user
+      const credential = EmailAuthProvider.credential(
+        currentUser.email,
+        currentPass,
+      );
+      await reauthenticateWithCredential(currentUser, credential);
+
+      // Update password
+      await updatePassword(currentUser, newPass);
+
+      // Show success message
+      showSuccess("Password updated successfully!");
+
+      // Reset form
+      passwordForm.reset();
+
+      // Close modal after 2 seconds
+      setTimeout(() => {
+        passwordContainer.classList.add("hidden");
+        passwordContainer.classList.remove("flex");
+      }, 2000);
+    } catch (error) {
+      console.error("Password update error:", error);
+
+      // Handle specific errors
+      switch (error.code) {
+        case "auth/wrong-password":
+          showError("Current password is incorrect");
+          break;
+        case "auth/weak-password":
+          showError(
+            "New password is too weak. Please use a stronger password.",
+          );
+          break;
+        case "auth/requires-recent-login":
+          showError("Session expired. Please log in again and try.");
+          setTimeout(() => {
+            logoutUser();
+          }, 1500);
+          break;
+        default:
+          showError("Failed to update password. Please try again.");
+      }
+    }
+  });
+
+  // Helper functions
+  function showError(message) {
+    if (passwordError) {
+      passwordError.textContent = message;
+      passwordError.classList.remove("hidden");
+    }
+  }
+
+  function showSuccess(message) {
+    if (passwordSuccess) {
+      passwordSuccess.textContent = message;
+      passwordSuccess.classList.remove("hidden");
+    }
+  }
+
   // Auth state listener
   onAuthStateChanged(auth, (user) => {
-    console.log("Auth state changed:", user); // Debug log
+    // Debug log
+    console.log("Auth state changed:", user);
 
     if (!user) {
       window.location.href = "/src/pages/sign-in.html";
@@ -154,7 +288,8 @@ function initProfilePage() {
 
     // Update user name
     if (userName) {
-      userName.textContent = user.displayName || user.email;
+      const displayName = user.displayName || user.email || "User";
+      userName.textContent = `Hi, ${displayName}`;
       userName.classList.remove("hidden");
     }
 
@@ -192,6 +327,7 @@ function toggleAccordion(id) {
     }
   }
 }
+
 // Initialize when DOM is ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initProfilePage);
