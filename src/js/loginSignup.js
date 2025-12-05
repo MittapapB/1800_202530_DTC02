@@ -1,11 +1,3 @@
-// -------------------------------------------------------------
-// src/loginSignup.js
-// -------------------------------------------------------------
-// Part of the COMP1800 Projects 1 Course (BCIT).
-// Starter code provided for students to use and adapt.
-// Manages the login/signup form behaviour and redirects.
-// -------------------------------------------------------------
-
 import { loginUser, signupUser, authErrorMessage } from "./authentication.js";
 
 // --- Login and Signup Page ---
@@ -51,6 +43,7 @@ function initAuthUI() {
     if (submitBtn) submitBtn.disabled = disabled;
   }
 
+  // Open signup view when ?mode=signup
   const params = new URLSearchParams(window.location.search);
   if (params.get("mode") === "signup") {
     setVisible(loginView, false);

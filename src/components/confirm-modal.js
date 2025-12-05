@@ -1,11 +1,12 @@
 class ConfirmModal extends HTMLElement {
   constructor() {
     super();
-    this.render();
-    this.attachEvents();
-    this.onConfirm = null;
+    this.render(); // Build the modal HTML
+    this.attachEvents(); // Attach button and overlay events
+    this.onConfirm = null; // Callback to run when user confirms
   }
 
+  // Render modal structure
   render() {
     this.innerHTML = `
       <div id="data-modal" class="fixed inset-0 bg-black/50 items-center justify-center z-50 hidden">
@@ -30,6 +31,7 @@ class ConfirmModal extends HTMLElement {
       </div>
     `;
 
+    // Store value for using later
     this.modal = this.querySelector("#data-modal");
     this.titleMessage = this.querySelector("#data-title");
     this.cancelBtn = this.querySelector("#data-cancel");
@@ -37,15 +39,18 @@ class ConfirmModal extends HTMLElement {
   }
 
   attachEvents() {
+    // Cancel button closes modal
     this.cancelBtn.addEventListener("click", () => {
       this.close();
     });
 
+    // Confirm button triggers callback for confirmation then closes modal
     this.confirmBtn.addEventListener("click", () => {
       this.onConfirm();
       this.close();
     });
 
+    // Clicking outside the modal closes it
     this.modal.addEventListener("click", (e) => {
       if (e.target === this.modal) {
         this.close();
@@ -53,6 +58,7 @@ class ConfirmModal extends HTMLElement {
     });
   }
 
+  // Open the modal with custom label and title
   open(confirmMessage, title, onConfirm) {
     this.titleMessage.innerHTML = title || "Are you sure?";
     this.onConfirm = onConfirm;
@@ -61,9 +67,11 @@ class ConfirmModal extends HTMLElement {
     this.modal.classList.add("flex");
   }
 
+  // Hide the modal
   close() {
     this.modal.classList.add("hidden");
   }
 }
 
+// Define custom element so it can be used in HTML
 customElements.define("confirm-modal", ConfirmModal);

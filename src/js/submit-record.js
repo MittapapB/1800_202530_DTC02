@@ -12,15 +12,22 @@ import { onAuthStateChanged } from "firebase/auth";
 
 const starContainer = document.getElementById("star-rating");
 
-// visually fill stars based on rating n
-const paintStars = (n) => {
-  [...starContainer.querySelectorAll("svg")].forEach((el) => {
-    const v = Number(el.dataset.value || 0);
-    el.setAttribute("fill", v <= n ? "#fa9500" : "none");
+// visually fill stars based on rating
+function paintStars(rating) {
+  if (!starContainer) return;
+
+  const stars = starContainer.querySelectorAll("svg");
+
+  // Highlight stars based on rating
+  stars.forEach((star) => {
+    const starValue = Number(star.dataset.value || 0);
+    const isActive = starValue <= rating;
+    star.setAttribute("fill", isActive ? "#fa9500" : "none");
   });
-  // store current rating in container
-  starContainer.dataset.rating = String(n);
-};
+
+  // Store current rating on the container
+  starContainer.dataset.rating = String(rating);
+}
 
 let current = 0;
 // add click event listener to the star container

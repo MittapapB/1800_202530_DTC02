@@ -48,7 +48,7 @@ async function checkIsFavorite() {
   setHeart(favoriteDocId !== null);
 }
 
-// update heart button based on favourite status
+// update heart button based on favorite status
 function setHeart(isFav) {
   if (isFav) {
     favIconPath.setAttribute("fill", "#EB6424");
@@ -96,27 +96,22 @@ async function toggleFavorite() {
 
 // setup "Add Record" button to link to add-record page with restaurant ID
 function addRecordBtnSetup() {
+  // No restaurant ID → button should not update
   if (!restaurantId) return;
 
   const addRecordBtn = document.getElementById("add-record-btn");
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      // Logged in → go to Add Record page
       addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
         restaurantId
       )}`;
     } else {
+      // Not logged in → go to Sign-in page
       addRecordBtn.href = "./sign-in.html";
     }
   });
-  if (restaurantId) {
-    const addRecordBtn = document.getElementById("add-record-btn");
-    if (addRecordBtn) {
-      addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
-        restaurantId
-      )}`;
-    }
-  }
 }
 
 // load restaurant data from Firestore
@@ -131,8 +126,9 @@ async function loadRestaurantData() {
     }
 
     const data = RestaurantDoc.data();
-    restaurantName = data.name;
+    restaurantName = data.name; // Store name for later use
 
+    // Hide cuisine tag if the restaurant has no cuisine value
     if (!data.cuisine) {
       document
         .getElementById("overview-cuisine")
