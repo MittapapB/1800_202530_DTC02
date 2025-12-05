@@ -34,7 +34,7 @@
       document.getElementById("navbar").appendChild(Navbar());
     </script>
   </head>
-  <body class="bg-background-main text-nunito">
+  <body class="bg-background-main text-nunito text-[#eb6424]">
     <div class="flex flex-col justify-center items-center pt-4 my-10 px-4">
       <!-- profile image container -->
       <div class="relative w-32 h-32 md:w-35 md:h-35">
@@ -62,12 +62,17 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M6 16.5V9a2.25 2.25 0 012.25-2.25h1.086a2.25 2.25 0 001.59-.66l.828-.828a2.25 2.25 0 011.59-.66h2.326A2.25 2.25 0 0118 6.75V16.5m-12 0a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 16.5m-12 0H3.75m14.25 0H21m-9-6v6"
+              d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
             />
           </svg>
         </label>
 
-        <!-- hidden input -->
+        <!-- Hidden Input -->
         <input
           id="profileImageInput"
           type="file"
@@ -76,17 +81,17 @@
         />
       </div>
 
-      <!-- username -->
+      <!-- Username -->
       <h1
         id="userName"
-        class="text-3xl md:text-5xl font-bold my-4 text-center"
+        class="text-4xl md:text-5xl font-bold my-4 text-center"
       ></h1>
 
-      <!-- settings -->
+      <!-- Account Settings -->
       <div class="flex flex-col w-full max-w-sm md:max-w-md text-left">
         <h2 class="text-xl md:text-2xl font-bold mb-4">Account Settings</h2>
 
-        <!-- Update Profile Button -->
+        <!-- Update Profile -->
         <button id="updateProfileBtn" class="profile-btn rounded-t-lg">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center space-x-3">
@@ -171,45 +176,76 @@
           </div>
         </div>
 
-        <!-- Change Email Button -->
-        <button class="profile-btn border-t-0">
-          <div class="flex items-center justify-between w-full">
-            <div class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 md:w-6 md:h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        <!-- Change Password Form Modal -->
+        <div
+          id="changePasswordContainer"
+          class="hidden flex fixed inset-0 bg-black/40 items-center justify-center z-50 p-4"
+        >
+          <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
+            <h2 class="text-xl md:text-2xl font-bold mb-4">Change Password</h2>
+
+            <form id="changePasswordForm" class="flex flex-col space-y-4">
+              <div class="relative">
+                <input
+                  id="currentPassword"
+                  class="input w-full"
+                  type="password"
+                  placeholder="Current Password"
+                  required
                 />
-              </svg>
-              <span class="text-base md:text-lg font-semibold"
-                >Change Email</span
+              </div>
+              <div class="relative">
+                <input
+                  id="newPassword"
+                  class="input w-full"
+                  type="password"
+                  placeholder="New Password"
+                  required
+                  minlength="6"
+                />
+                <div class="text-xs text-gray-500 mt-1">
+                  Password must be at least 6 characters long
+                </div>
+              </div>
+              <div class="relative">
+                <input
+                  id="confirmPassword"
+                  class="input w-full"
+                  type="password"
+                  placeholder="Confirm New Password"
+                  required
+                />
+              </div>
+
+              <div id="passwordError" class="text-red-500 text-sm hidden"></div>
+              <div
+                id="passwordSuccess"
+                class="text-green-500 text-sm hidden"
+              ></div>
+
+              <div
+                class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2"
               >
-            </div>
-            <svg
-              class="w-4 h-4 md:w-5 md:h-5 transform rotate-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+                <button type="submit" class="btn-primary py-2 flex-1">
+                  Update Password
+                </button>
+                <button
+                  type="button"
+                  id="closePasswordFormBtn"
+                  class="py-2 border rounded flex-1"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
-        </button>
+        </div>
 
         <!-- Change Password Button -->
-        <button class="profile-btn rounded-b-lg border-t-0">
+        <button
+          id="changePasswordBtn"
+          class="profile-btn rounded-b-lg border-t-0"
+        >
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center space-x-3">
               <svg
@@ -244,7 +280,6 @@
             </svg>
           </div>
         </button>
-
         <!-- more information -->
         <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">
           More From MealWave
