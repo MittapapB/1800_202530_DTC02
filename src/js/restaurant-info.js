@@ -115,8 +115,18 @@ async function loadRestaurantData() {
     document.getElementById("overview-name").textContent = data.name;
     document.getElementById("overview-cuisine").textContent = data.cuisine;
     document.getElementById("overview-address").textContent = data.address;
-    document.getElementById("overview-avg").textContent =
-      data.avg_wait_time.toFixed(1);
+    // if no time record yet, display msg instead of 0 min
+    const avgEl = document.getElementById("overview-avg");
+    let avg = data.avg_wait_time;
+    if (!avg || isNaN(avg)) {
+      avgEl.textContent = "No time record yet.";
+      avgEl.style.color = "gray";
+      avgEl.style.fontStyle = "italic";
+    } else {
+      avgEl.textContent = avg.toFixed(1) + " minutes";
+      avgEl.style.color = "";
+      avgEl.style.fontStyle = "";
+    }
 
     const restaurantImg = document.getElementById("restaurant-img");
     if (restaurantImg) {
