@@ -5,12 +5,14 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const form = document.getElementById("addRestaurantForm");
 const confirmation = document.getElementById("confirmation");
 
+// track the selected Google Place
 let selectedPlace = null;
 
 window.initPlaces = function () {
   const nameInput = document.getElementById("restaurantName");
   const addressInput = document.getElementById("address");
 
+  // initialize autocomplete for restaurant names
   const autocomplete = new google.maps.places.Autocomplete(nameInput, {
     types: ["establishment"],
     componentRestrictions: { country: "ca" },
@@ -24,6 +26,7 @@ window.initPlaces = function () {
       nameInput.value = place.name;
     }
 
+    // validate that a place was selected
     if (!place || !place.place_id) {
       showFieldError(
         "restaurantNameError",
@@ -127,6 +130,7 @@ function validateForm() {
   return { isValid, name, address, cuisine, imageFile };
 }
 
+// name input validation
 document.getElementById("restaurantName").addEventListener("input", (event) => {
   const val = event.target.value.trim();
   if (!val) {
