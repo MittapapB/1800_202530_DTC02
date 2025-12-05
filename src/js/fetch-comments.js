@@ -74,6 +74,7 @@ export async function fetchUserComments() {
         const userDoc = await getDoc(doc(db, "users", userId));
         if (userDoc.exists()) {
           const data = userDoc.data();
+          // use the correct field name
           user.name = data.name || "Anonymous";
           user.avatar = data.avatar || default_avatar;
         }
@@ -153,9 +154,7 @@ export async function fetchUserComments() {
 
           // update username
           const nameEl = card.querySelector(".user-name");
-          if (nameEl)
-            nameEl.textContent =
-              data.fullName || data.displayName || "Anonymous";
+          if (nameEl) nameEl.textContent = data.name || "Anonymous";
 
           // update avatar
           const avatarEl = card.querySelector(".user-avatar");
