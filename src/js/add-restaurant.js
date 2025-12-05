@@ -3,50 +3,31 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const form = document.getElementById("addRestaurantForm");
-const confirmation = document.getElementById("confirmation");
 
-// track the selected Google Place
-let selectedPlace = null;
-
+//Google Places Autocomplete for restaurant name and address
+//Drafted with ChatGPT and adapted to fit my project
 window.initPlaces = function () {
   const nameInput = document.getElementById("restaurantName");
   const addressInput = document.getElementById("address");
 
-  // initialize autocomplete for restaurant names
+  // Attach Google Places Autocomplete to the restaurant name field
+  // I restrict it to Canadian establishments because the app is focused on Canada
   const autocomplete = new google.maps.places.Autocomplete(nameInput, {
     types: ["establishment"],
     componentRestrictions: { country: "ca" },
   });
 
+  // When the user selects a place from the dropdown,
+  // store the full place and auto-fill the name and address fields
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
-    selectedPlace = place;
 
+    // Keep only the restaurant name
     if (place && place.name) {
       nameInput.value = place.name;
     }
 
-    // validate that a place was selected
-    if (!place || !place.place_id) {
-      showFieldError(
-        "restaurantNameError",
-        "Please select a restaurant from the suggestions."
-      );
-      return;
-    }
-
-    //check it's actually a restaurant
-    const isRestaurant = place.types && place.types.includes("restaurant");
-    if (!isRestaurant) {
-      showFieldError(
-        "restaurantNameError",
-        "Please choose a restaurant, not another type of place."
-      );
-    } else {
-      clearFieldError("restaurantNameError");
-    }
-
-    // auto-fill address if available
+    // auto-fill address
     if (place.formatted_address) {
       addressInput.value = place.formatted_address;
       clearFieldError("addressError");
@@ -54,6 +35,7 @@ window.initPlaces = function () {
   });
 };
 
+// Show a validation error message
 function showFieldError(id, message) {
   const elementDiv = document.getElementById(id);
   if (!elementDiv) return;
@@ -61,6 +43,7 @@ function showFieldError(id, message) {
   elementDiv.classList.remove("hidden");
 }
 
+// Hide the validation error message
 function clearFieldError(id) {
   const elementDiv = document.getElementById(id);
   if (!elementDiv) return;
@@ -93,24 +76,9 @@ function validateForm() {
     isValid = false;
   }
 
-  if (
-    !selectedPlace ||
-    !selectedPlace.place_id ||
-    selectedPlace.name !== name
-  ) {
-    showFieldError(
-      "restaurantNameError",
-      "Please select a restaurant from the suggestions."
-    );
-    isValid = false;
-  }
-
   // Address: required (usually auto-filled by Places)
   if (!address) {
-    showFieldError(
-      "addressError",
-      "Address is required. Please select a restaurant."
-    );
+    showFieldError("addressError", "Address is required.");
     isValid = false;
   }
 
@@ -130,7 +98,7 @@ function validateForm() {
   return { isValid, name, address, cuisine, imageFile };
 }
 
-// name input validation
+// Show or clear error while typing restaurant name
 document.getElementById("restaurantName").addEventListener("input", (event) => {
   const val = event.target.value.trim();
   if (!val) {
@@ -140,10 +108,10 @@ document.getElementById("restaurantName").addEventListener("input", (event) => {
   }
 });
 
-// Address
+// Show or clear error while typing Address
 document.getElementById("address").addEventListener("input", (event) => {
   const val = event.target.value.trim();
-  // number + optional space + street name
+  // check number + street name
   const streetPattern = /^\d+\s?[A-Za-z].*$/;
   if (!streetPattern.test(val)) {
     showFieldError(
@@ -155,7 +123,7 @@ document.getElementById("address").addEventListener("input", (event) => {
   }
 });
 
-// Cuisine Type
+// Show or clear error while typing Cuisine Type
 document.getElementById("cuisineType").addEventListener("input", (event) => {
   const val = event.target.value.trim();
   if (/\d/.test(val)) {
@@ -167,7 +135,7 @@ document.getElementById("cuisineType").addEventListener("input", (event) => {
 
 // Image size check when user picks file
 document.getElementById("image").addEventListener("change", (event) => {
-  const file = e.target.files[0];
+  const file = event.target.files[0];
   if (file && file.size > 2 * 1024 * 1024) {
     showFieldError("imageError", "Please upload an image smaller than 2MB.");
   } else {
@@ -183,6 +151,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  // generate unique restaurant ID based on name + address
   const restaurantId = (name + "_" + address)
     .toLowerCase()
     .replaceAll(" ", "_")
@@ -194,19 +163,21 @@ form.addEventListener("submit", async (e) => {
     const restaurantDocRef = doc(db, "restaurant", restaurantId);
     const restaurantDocSnap = await getDoc(restaurantDocRef);
 
+    // if restaurant exists, show error message and exit
     if (restaurantDocSnap.exists()) {
       const errorMsg = document.getElementById("errorMsg");
       errorMsg.textContent = "This restaurant already exists!";
       errorMsg.classList.remove("hidden");
       errorMsg.style.opacity = "1";
 
+      // hide after 3 seconds
       setTimeout(() => {
         errorMsg.style.opacity = "0";
       }, 3000);
 
       return;
     }
-
+    //  // if user uploaded an image, upload to Firebase Storage
     let imageUrl = "";
     if (imageFile) {
       const storagePath = `restaurant_images/${restaurantId}/${Date.now()}-${
@@ -241,6 +212,7 @@ form.addEventListener("submit", async (e) => {
     console.error("Error adding restaurant:", error);
     showError("Failed to add restaurant. Please try again.");
   }
+  // show error message
   function showError(msg) {
     const errorMsg = document.getElementById("errorMsg");
     errorMsg.textContent = msg;
@@ -251,7 +223,7 @@ form.addEventListener("submit", async (e) => {
       errorMsg.style.opacity = "0";
     }, 3000);
   }
-
+  // show confirmation message
   function showConfirmation(msg) {
     const confirmation = document.getElementById("confirmation");
     confirmation.textContent = msg;

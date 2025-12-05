@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
-// get the restaurant ID from the URL query parameter
+// get restaurant ID from URL query
 const url = new URL(window.location.href);
 const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 let restaurantName = "";
@@ -21,7 +21,7 @@ const favIconPath = document.getElementById("fav-path");
 let currentUser = null;
 let favoriteDocId = null;
 
-// listen for user authentication changes
+// listen to authentication state changes
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
   currentUser = user;
@@ -31,14 +31,14 @@ onAuthStateChanged(auth, async (user) => {
   favBtn.addEventListener("click", toggleFavorite);
 });
 
-// check if the restaurant is already a favorite
+// check if current restaurant is already in user's favourites
 async function checkIsFavorite() {
   const favRef = collection(db, "users", currentUser.uid, "favorite_list");
   const snapshot = await getDocs(favRef);
 
   favoriteDocId = null;
 
-  // loop through user's favorites to see if this restaurant exists
+  // loop through favourite_list to see if this restaurant is already favourited
   snapshot.forEach((docSnap) => {
     const data = docSnap.data();
     if (data.restaurant_id === restaurantId) {
@@ -49,6 +49,7 @@ async function checkIsFavorite() {
   setHeart(favoriteDocId !== null);
 }
 
+// update heart button based on favorite status
 function setHeart(isFav) {
   if (isFav) {
     favIconPath.setAttribute("fill", "#EB6424");
@@ -64,7 +65,7 @@ async function toggleFavorite() {
   if (!currentUser) return;
   const confirmModal = document.getElementById("confirm-modal");
 
-  // if not faved, add it to fav
+  // if restaurant is not a favorite, add it
   if (!favoriteDocId) {
     confirmModal.open(
       "Add",
@@ -81,7 +82,7 @@ async function toggleFavorite() {
     return;
   }
 
-  // if already faved, remove it
+  // if restaurant is already a favorite, remove it
   confirmModal.open(
     "Remove",
     `Remove ${restaurantName} from your favorites?`,
@@ -95,19 +96,27 @@ async function toggleFavorite() {
   );
 }
 
-// setup the "Add Record" button link with restaurant ID
+// setup "Add Record" button to link to add-record page with restaurant ID
 function addRecordBtnSetup() {
-  if (restaurantId) {
-    const addRecordBtn = document.getElementById("add-record-btn");
-    if (addRecordBtn) {
+  // No restaurant ID → button should not update
+  if (!restaurantId) return;
+
+  const addRecordBtn = document.getElementById("add-record-btn");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Logged in → go to Add Record page
       addRecordBtn.href = `./add-record.html?restaurant-id=${encodeURIComponent(
         restaurantId
       )}`;
+    } else {
+      // Not logged in → go to Sign-in page
+      addRecordBtn.href = "./sign-in.html";
     }
-  }
+  });
 }
 
-// load restaurant data from Firestore and populate the page
+// load restaurant data from Firestore
 async function loadRestaurantData() {
   try {
     const RestaurantRef = doc(db, "restaurant", restaurantId);
@@ -119,9 +128,17 @@ async function loadRestaurantData() {
     }
 
     const data = RestaurantDoc.data();
-    restaurantName = data.name;
+    restaurantName = data.name; // Store name for later use
 
-    // populate page elements with restaurant info
+    // Hide cuisine tag if the restaurant has no cuisine value
+    if (!data.cuisine) {
+      document
+        .getElementById("overview-cuisine")
+        .classList.remove("inline-flex");
+      document.getElementById("overview-cuisine").classList.add("hidden");
+    }
+
+    // update DOM elements with restaurant info
     document.getElementById("restaurant-name").textContent = data.name;
     document.getElementById("overview-name").textContent = data.name;
     document.getElementById("overview-cuisine").textContent = data.cuisine;
@@ -151,6 +168,7 @@ async function loadRestaurantData() {
 
 // initialize page
 if (restaurantId) {
+  //initialize page
   loadRestaurantData();
   addRecordBtnSetup();
 }

@@ -12,17 +12,17 @@ import { onAuthStateChanged } from "firebase/auth";
 const favoritesList = document.getElementById("favorites-list");
 let favoriteMap = {};
 
-// listen for authentication state changes
+// Handle user login state
 onAuthStateChanged(auth, async (user) => {
+  // Redirect to sign-in page if not logged in
   if (!user) {
-    // redirect to login if user is not signed in
-    window.location.href = "./login.html";
+    window.location.href = "./sign-in.html";
     return;
   }
   // load the current user's favorites
   await loadFavoritesForUser(user.uid);
 
-  // Add click event listener on the favorites list
+  // Handle click events inside the favorites list
   favoritesList.addEventListener("click", async (e) => {
     e.preventDefault();
 
@@ -32,27 +32,33 @@ onAuthStateChanged(auth, async (user) => {
     const restaurantId = card.dataset.id;
     if (!restaurantId) return;
 
-    // check if the delete button was clicked
+    // Handle delete button clicked
     const deleteBtn = e.target.closest(".delete-btn");
     if (deleteBtn) {
       // call delete function if delete button clicked
       await DeleteFavorite(user.uid, restaurantId);
       return;
     }
-    // go to restaurant info page, saving last page in session storage
+
+    // Save last page for back button navigation
     sessionStorage.setItem("lastPage", window.location.pathname);
+
+    // Open restaurant page
     window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${encodeURIComponent(
       restaurantId
     )}`;
   });
 });
 
-// delete a restaurant from user's favorites
+// Handle delete action for a user's favorite restaurant
 async function DeleteFavorite(userId, restaurantId) {
   const modal = document.getElementById("confirm-modal");
+
+  // Retrieve favorite info (favoriteId + restaurantName)
   const favorite = favoriteMap[restaurantId];
 
-  // open confirmation modal; delete only if user confirms
+  // Open confirmation modal
+  // Arguments (buttonLabel, message, callback)
   modal.open(
     "Remove",
     `Remove ${favorite.restaurantName} from your favorites?`,
@@ -60,13 +66,15 @@ async function DeleteFavorite(userId, restaurantId) {
       const favoriteId = favorite.favoriteId;
       const favDocRef = doc(db, "users", userId, "favorite_list", favoriteId);
 
+      // Delete from Firestore
       await deleteDoc(favDocRef);
+      // Reload updated favorites list
       await loadFavoritesForUser(userId);
     }
   );
 }
 
-// template for a restaurant card
+// Generate HTML card for one restaurant
 function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
   const imgSrc = image_url ? image_url : "../../images/MealWaveLogo.png";
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
@@ -104,7 +112,7 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
     `;
 }
 
-// load and display a user's favorite restaurants
+// Load and render user's favorite restaurants
 async function loadFavoritesForUser(uid) {
   try {
     favoritesList.innerHTML = "";
@@ -113,7 +121,7 @@ async function loadFavoritesForUser(uid) {
     const favoritesRef = collection(db, "users", uid, "favorite_list");
     const favoriteDoc = await getDocs(favoritesRef);
 
-    // if no favorites, show a placeholder message
+    // Show no favorites yet
     if (favoriteDoc.empty) {
       favoritesList.innerHTML = `
       <div
@@ -126,21 +134,24 @@ async function loadFavoritesForUser(uid) {
     }
 
     const cardHTML = [];
+    // Loop through user's favorites
     for (let element of favoriteDoc.docs) {
       const favData = element.data();
       const restaurantId = favData.restaurant_id;
       const favoriteId = element.id;
 
+      // Fetch restaurant details
       const restaurantRef = doc(db, "restaurant", restaurantId);
       const restaurantSnap = await getDoc(restaurantRef);
       const restaurant = restaurantSnap.data();
 
+      // Store reference for deletion
       favoriteMap[restaurantId] = {
         favoriteId: favoriteId,
         restaurantName: restaurant.name,
       };
 
-      // push the restaurant card HTML into array
+      // Build and store the HTML card for each restaurant
       cardHTML.push(
         cardTemplate({
           id: restaurantId,
@@ -152,6 +163,7 @@ async function loadFavoritesForUser(uid) {
       );
     }
 
+    // Render all user's favorites on the page
     favoritesList.innerHTML = cardHTML.join("");
   } catch (err) {
     console.error(err);

@@ -1,11 +1,3 @@
-// src/authentication.js
-// ------------------------------------------------------------
-// Part of the COMP1800 Projects 1 Course (BCIT).
-// Starter code provided for students to use and adapt.
-// Contains reusable Firebase Authentication functions
-// (login, signup, logout, and auth state checks).
-// -------------------------------------------------------------
-
 // Import the initialized Firebase Authentication object
 import { auth, db } from "/src/js/firebaseConfig.js";
 
@@ -87,7 +79,7 @@ export async function signupUser(name, email, password) {
 // -------------------------------------------------------------
 export async function logoutUser() {
   await signOut(auth);
-  window.location.href = "index.html";
+  window.location.href = "/index.html";
 }
 
 // -------------------------------------------------------------
@@ -112,7 +104,7 @@ export function checkAuthState() {
         const displayName = user.displayName || user.email;
         $("#welcomeMessage").text(`Hello, ${displayName}!`);
       } else {
-        window.location.href = "index.html";
+        window.location.href = "/index.html";
       }
     }
   });

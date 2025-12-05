@@ -15,11 +15,13 @@ const default_avatar = "../../images/default-avatar.jpg";
 
 // main function to fetch user comments for a restaurant
 export async function fetchUserComments() {
+  // get the restaurant ID from the URL query parameter
   const params = new URLSearchParams(window.location.search);
   const restaurantId = decodeURIComponent(params.get("restaurant-id") || "");
 
   // comment container
   const container = document.getElementById("comments-container");
+  // // exit if the container element is missing
   if (!container) return;
   container.innerHTML = "<p class='text-gray-500 text-center'>Loading...</p>";
 
@@ -31,13 +33,13 @@ export async function fetchUserComments() {
         "<p class='text-gray-500 text-center'>No restaurant specified.</p>";
       return;
     }
-
+    // validate Firestore instance
     if (!db || typeof db !== "object") {
       console.error("fetchUserComments: 'db' is not a Firestore instance:", db);
       throw new Error("Invalid Firestore instance");
     }
 
-    // // reference to the restaurant's time_record subcollection
+    // reference the time_record subcollection for the restaurant
     const recordsRef = collection(
       db,
       "restaurant",
@@ -45,7 +47,7 @@ export async function fetchUserComments() {
       "time_record"
     );
 
-    // create a query to fetch the latest 5 comments ordered by submitted_at
+    // order by submission time in descending order, 5 records limit
     const searchQuery = query(
       recordsRef,
       orderBy("submitted_at", "desc"),
@@ -61,7 +63,8 @@ export async function fetchUserComments() {
     }
 
     container.innerHTML = "";
-    // map snapshot docs to fetch user info
+
+    // proess on each record
     const promises = snapshot.docs.map(async (docSnap) => {
       const record = docSnap.data();
       const userId = record.user_id;
@@ -92,10 +95,11 @@ export async function fetchUserComments() {
       return { record, user, visitTime };
     });
 
+    // wait for all user info to be fetched
     const results = await Promise.all(promises);
 
-    // loop through results and show each comment
-    results.forEach(({ record, user, visitTime }, index) => {
+    // create each record card
+    results.forEach(({ record, user, visitTime }) => {
       const card = document.createElement("div");
       const commentId = `comment-${record.user_id}-${index}`;
       card.id = commentId;

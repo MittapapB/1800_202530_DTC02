@@ -1,6 +1,10 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { onAuthReady } from "./authentication.js";
-import { db } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig.js";
 import { collection, getDocs } from "firebase/firestore";
+
+const grid = document.getElementById("restaurant-grid");
+const addRestaurantBtn = document.getElementById("add-restaurant");
 
 function showDashboard() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
@@ -36,8 +40,7 @@ function randomPick(arr) {
   return randomRes.slice(0, 6);
 }
 
-const grid = document.getElementById("restaurant-grid");
-
+// Generate the HTML card for one restaurant
 function cardTemplate({ id, name, address, image_url, avg_wait_time, index }) {
   const imgSrc = image_url ? image_url : `../../images/MealWaveLogo.png`;
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
@@ -70,9 +73,9 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time, index }) {
     `;
 }
 
+// Fetch restaurants from Firestore and display 6 random ones on the homepage
 async function loadRestaurants() {
   try {
-    // const restaurantId = url.searchParams.get("restaurant_id");
     const restaurantRef = collection(db, "restaurant");
     const restaurantDoc = await getDocs(restaurantRef);
 
@@ -82,8 +85,10 @@ async function loadRestaurants() {
 
     const cards = [];
     let index = 1;
+    // Loop through all restaurants in Firestore
     restaurantDoc.forEach((doc) => {
       const data = doc.data();
+      // Build and store the HTML card for each restaurant
       cards.push(
         cardTemplate({
           id: doc.id,
@@ -98,13 +103,26 @@ async function loadRestaurants() {
     });
 
     const sixRandom = randomPick(cards);
-
-    // grid.innerHTML = cards.join("");
+    // Render 6 random restaurants into the page
     grid.innerHTML = sixRandom.join("");
   } catch (err) {
     console.error(err);
   }
 }
+
+// Redirect user depending on login state
+addRestaurantBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Logged in → go to add restaurant form
+      window.location.href = "./add-restaurant.html";
+    } else {
+      // Not logged in → ask to sign in
+      window.location.href = "./sign-in.html";
+    }
+  });
+});
 
 showDashboard();
 loadRestaurants();
