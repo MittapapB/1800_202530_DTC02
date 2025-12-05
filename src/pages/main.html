@@ -1,15 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="../css/style.css" />
 
@@ -19,12 +21,14 @@
       rel="stylesheet"
     />
   </head>
+
   <body class="bg-background-main text-nunit">
     <div
       class="bg-[#fa9500] text-[#FEF3E2] text-center p-1 fixed top-0 w-full text-logo-lobster z-20"
     >
       MealWave
     </div>
+
     <!-- Search bar -->
     <div
       class="relative w-full max-w-md mx-auto mt-25 z-10 md:w-[70%] md:max-w-2xl"
@@ -44,24 +48,6 @@
           d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
         />
       </svg>
-      <svg
-        class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-filter"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path
-          d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z"
-        />
-      </svg>
 
       <input
         id="searchInput"
@@ -71,17 +57,17 @@
         class="border-[#eb6424] border-2 rounded-full p-2 pl-10 pr-10 w-full max-w-md sm:max-w-lg md:max-w-2xl focus:outline-none"
       />
 
-      <!-- Container for dynamically generate autocomplete dropdown -->
+      <!-- Autocomplete dropdown -->
       <div
         id="suggestions"
         class="absolute left-0 right-0 mt-2 bg-background-main text-[#eb6424] border border-gray-200 rounded-xl shadow-lg hidden max-h-64 overflow-y-auto"
       ></div>
     </div>
 
-    <!--  Welcome Banner    -->
+    <!-- Welcome Banner -->
     <div class="max-w-md mt-6 mx-4 md:mx-auto md:max-w-lg">
       <h1 class="text-xl font-bold leading-none mt-3 mb-3 text-title">
-        Welcome to MealWave <span id="name-goes-here">friend</span>
+        Welcome to MealWave<span id="name-goes-here"></span>
       </h1>
       <p class="text-title">
         Check the current wait times and plan your next meal smarter.
@@ -99,18 +85,20 @@
       </a>
     </div>
 
-    <!-- Recommend info -->
+    <!-- Restaurant grid -->
     <div
       id="restaurant-grid"
-      class="max-w-6xl mx-auto mt-6 mb-10 p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-center place-items-center text-green-dark bg-background-main rounded-lg overflow-y-auto max-h-[585px] md:max-h-[750px]"
+      class="max-w-6xl mx-auto mt-6 mb-15 p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-center place-items-center text-green-dark bg-background-main rounded-lg overflow-y-auto max-h-[585px] md:max-h-[750px]"
     ></div>
 
-    <!-- import navbar -->
+    <!-- Navbar -->
     <div id="navbar"></div>
+
     <script type="module">
       import { Navbar } from "../components/Navbar.js";
       document.getElementById("navbar").appendChild(Navbar());
     </script>
+
     <script type="module" src="../js/autocomplete.js"></script>
     <script type="module" src="../js/main.js"></script>
   </body>
