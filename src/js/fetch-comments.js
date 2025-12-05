@@ -100,7 +100,7 @@ export async function fetchUserComments() {
     const results = await Promise.all(promises);
 
     // create each record card
-    results.forEach(({ record, user, visitTime }) => {
+    results.forEach(({ record, user, visitTime }, index) => {
       const card = document.createElement("div");
       const commentId = `comment-${record.user_id}-${index}`;
       card.id = commentId;
