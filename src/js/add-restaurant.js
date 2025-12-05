@@ -3,28 +3,31 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const form = document.getElementById("addRestaurantForm");
-const confirmation = document.getElementById("confirmation");
 
-let selectedPlace = null;
-
+//Google Places Autocomplete for restaurant name and address
+//Drafted with ChatGPT and adapted to fit my project
 window.initPlaces = function () {
   const nameInput = document.getElementById("restaurantName");
   const addressInput = document.getElementById("address");
 
+  // Attach Google Places Autocomplete to the restaurant name field
+  // I restrict it to Canadian establishments because the app is focused on Canada
   const autocomplete = new google.maps.places.Autocomplete(nameInput, {
     types: ["establishment"],
     componentRestrictions: { country: "ca" },
   });
 
+  // When the user selects a place from the dropdown,
+  // store the full place and auto-fill the name and address fields
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
-    selectedPlace = place;
 
+    // Keep only the restaurant name
     if (place && place.name) {
       nameInput.value = place.name;
     }
 
-    // auto-fill address if available
+    // auto-fill address
     if (place.formatted_address) {
       addressInput.value = place.formatted_address;
       clearFieldError("addressError");
@@ -32,6 +35,7 @@ window.initPlaces = function () {
   });
 };
 
+// Show a validation error message
 function showFieldError(id, message) {
   const elementDiv = document.getElementById(id);
   if (!elementDiv) return;
@@ -39,6 +43,7 @@ function showFieldError(id, message) {
   elementDiv.classList.remove("hidden");
 }
 
+// Hide the validation error message
 function clearFieldError(id) {
   const elementDiv = document.getElementById(id);
   if (!elementDiv) return;
@@ -93,6 +98,7 @@ function validateForm() {
   return { isValid, name, address, cuisine, imageFile };
 }
 
+// Show or clear error while typing restaurant name
 document.getElementById("restaurantName").addEventListener("input", (event) => {
   const val = event.target.value.trim();
   if (!val) {
@@ -102,10 +108,10 @@ document.getElementById("restaurantName").addEventListener("input", (event) => {
   }
 });
 
-// Address
+// Show or clear error while typing Address
 document.getElementById("address").addEventListener("input", (event) => {
   const val = event.target.value.trim();
-  // number + optional space + street name
+  // check number + street name
   const streetPattern = /^\d+\s?[A-Za-z].*$/;
   if (!streetPattern.test(val)) {
     showFieldError(
@@ -117,7 +123,7 @@ document.getElementById("address").addEventListener("input", (event) => {
   }
 });
 
-// Cuisine Type
+// Show or clear error while typing Cuisine Type
 document.getElementById("cuisineType").addEventListener("input", (event) => {
   const val = event.target.value.trim();
   if (/\d/.test(val)) {
@@ -129,7 +135,7 @@ document.getElementById("cuisineType").addEventListener("input", (event) => {
 
 // Image size check when user picks file
 document.getElementById("image").addEventListener("change", (event) => {
-  const file = e.target.files[0];
+  const file = event.target.files[0];
   if (file && file.size > 2 * 1024 * 1024) {
     showFieldError("imageError", "Please upload an image smaller than 2MB.");
   } else {

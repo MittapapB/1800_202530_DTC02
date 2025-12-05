@@ -14,21 +14,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Nunito+Sans:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <!-- Custom styles -->
     <link rel="stylesheet" href="../css/style.css" />
-
-    <!-- Google Font: Itim -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
-      rel="stylesheet"
-    /> -->
   </head>
 
   <body
@@ -37,6 +31,7 @@
     <main
       class="w-full max-w-md bg-background-main px-4 pb-8 pt-4 flex flex-col"
     >
+      <!-- Auth error alert -->
       <div
         id="authAlert"
         class="hidden w-full rounded-md border border-red-400 bg-red-100 text-red-700 text-sm px-3 py-2"
@@ -51,13 +46,6 @@
         </script>
       </div>
 
-      <!-- <button
-        class="mt-4 w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 text-[#eb5c2b] text-lg shadow border border-black/10 hover:cursor-pointer hover:bg-[#eb5c2b] hover:text-gray-200"
-        onclick="window.location.href='/src/pages/main.html'"
-      >
-        <i class="fa-solid fa-arrow-left"></i>
-      </button> -->
-
       <!-- Login view -->
       <section id="loginView" class="mt-8">
         <h1
@@ -69,13 +57,10 @@
           </span>
         </h1>
 
-        <!-- <h1 class="text-4xl font-bold text-[#eb5c2b] text-center">
-          Welcome back to<br />
-          <span class="text-logo-lobster">MealWave</span> !
-        </h1> -->
-
+        <!-- Login form -->
         <form id="loginForm" class="mt-16 flex flex-col gap-4">
           <div class="flex flex-col gap-1">
+            <!-- Login email -->
             <label
               for="loginEmail"
               class="text-base font-semibold text-[#eb5c2b]"
@@ -90,6 +75,7 @@
             />
           </div>
 
+          <!-- Login password -->
           <div class="flex flex-col gap-1">
             <label
               for="loginPassword"
@@ -112,6 +98,7 @@
             </div>
           </div>
 
+          <!-- Login submit button -->
           <button
             type="submit"
             class="w-full mt-8 rounded-md bg-primary text-white text-lg font-semibold py-3 border border-gray-400 shadow hover:cursor-pointer"
@@ -120,6 +107,7 @@
           </button>
         </form>
 
+        <!-- forgot password + switch to signup -->
         <div
           class="mt-4 flex flex-row justify-between text-[13px] text-black underline"
         >
@@ -133,13 +121,16 @@
         </div>
       </section>
 
+      <!-- Signup view (hidden by default) -->
       <section id="signupView" class="mt-8 flex flex-col hidden">
         <h1 class="text-center text-4xl font-bold text-[#eb5c2b]">
           Create your<br />MealWave account!
         </h1>
 
+        <!-- Signup form -->
         <form id="signupForm" class="mt-8 flex flex-col gap-4">
           <div class="flex flex-col gap-1">
+            <!-- Username -->
             <label
               for="signupName"
               class="text-base font-semibold text-[#eb5c2b]"
@@ -155,6 +146,7 @@
             />
           </div>
 
+          <!-- Signup email -->
           <div class="flex flex-col gap-1">
             <label
               for="signupEmail"
@@ -171,6 +163,7 @@
             />
           </div>
 
+          <!-- Signup password -->
           <div class="flex flex-col gap-1">
             <label
               for="signupPassword"
@@ -208,6 +201,7 @@
             </ul>
           </div>
 
+          <!-- Signup submit button -->
           <button
             type="submit"
             class="w-full mt-8 rounded-md bg-gray-300 text-[#eb5c2b] text-lg font-semibold py-3 border border-gray-400 shadow hover:bg-[#eb5c2b] hover:cursor-pointer hover:text-white"
@@ -216,6 +210,7 @@
           </button>
         </form>
 
+        <!-- Switch to login -->
         <div class="mt-4 flex flex-col text-center text-[13px] text-black">
           <p class="">
             Already have an account?
@@ -229,6 +224,8 @@
         </div>
       </section>
     </main>
+
+    <!-- Firebase + auth logic -->
     <script type="module" src="/src/js/firebaseConfig.js"></script>
     <script type="module" src="/src/js/authentication.js"></script>
     <script type="module" src="/src/js/loginSignup.js"></script>

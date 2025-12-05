@@ -16,6 +16,7 @@
   </head>
 
   <body class="bg-background-main text-nunito mx-auto">
+    <!-- Header-->
     <header>
       <div class="flex justify-between w-full px-4 py-3 bg-[#FEF3E2]">
         <div class="w-10 h-10">
@@ -30,12 +31,14 @@
             document.body.appendChild(btn);
           </script>
         </div>
+        <!-- Restaurant title (updated dynamically) -->
         <div
           id="restaurant-name"
           class="flex-1 self-center text-center text-2xl text-title font-bold"
         >
           Restaurant Name
         </div>
+        <!-- Heart Icon button -->
         <button
           id="fav-btn"
           class="w-10 h-10 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#FEF3E2] text-[#EB6424] text-lg shadow border border-black/10 transition-all duration-200 hover:cursor-pointer hover:bg-[#EB6424] group"
@@ -59,6 +62,7 @@
         </button>
       </div>
 
+      <!-- Restaurant image -->
       <div
         class="flex flex-col sm:flex-row gap-4 my-6 justify-center items-center w-[80%] mx-auto"
       >
@@ -110,6 +114,8 @@
               <p id="overview-address" class="text-title">—</p>
             </div>
           </div>
+
+          <!-- Average wait time -->
           <div class="flex items-start gap-2 mt-4">
             <svg
               class="h-5 w-5 text-[#89AC46]"
@@ -133,6 +139,7 @@
       </div>
     </header>
 
+    <!-- Past records + Add Record button -->
     <section class="m-4 md:m-8 mt-8 text-nunito">
       <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
         <h2

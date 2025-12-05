@@ -27,19 +27,24 @@
       MealWave
     </div>
 
+    <!-- Main content -->
     <main
       class="flex flex-col items-center mt-24 mb-10 space-y-6 w-full mx-auto px-4"
     >
+      <!-- Page title + description -->
       <header class="w-full max-w-4xl mx-auto px-4 mb-0">
         <h1 class="text-2xl font-bold text-title">Favorites</h1>
         <p class="text-title">Your saved restaurants in one place.</p>
       </header>
+
+      <!-- Container for dynamically generated favorite cards -->
       <section
         id="favorites-list"
         class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 mb-20 w-full max-w-4xl mx-auto"
       ></section>
     </main>
 
+    <!-- Confirmation modal component -->
     <confirm-modal id="confirm-modal"></confirm-modal>
 
     <!-- import navbar -->
