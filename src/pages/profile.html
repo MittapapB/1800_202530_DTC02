@@ -45,12 +45,11 @@
           alt="Profile image"
         />
 
-        <!-- floating edit button -->
+        <!-- Floating Camera/edit SVG -->
         <label
           for="profileImageInput"
           class="absolute bottom-1 right-1 w-8 h-8 md:w-10 md:h-10 bg-white shadow-md rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200 transition"
         >
-          <!-- camera/edit SVG -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -88,7 +87,9 @@
       ></h1>
 
       <!-- Account Settings -->
-      <div class="flex flex-col w-full max-w-sm md:max-w-md text-left">
+      <div
+        class="flex flex-col w-full max-w-sm md:max-w-md text-left space-y-2"
+      >
         <h2 class="text-xl md:text-2xl font-bold mb-4">Account Settings</h2>
 
         <!-- Update Profile -->
@@ -176,6 +177,46 @@
           </div>
         </div>
 
+        <!-- Change Password Button -->
+        <button
+          id="changePasswordBtn"
+          class="profile-btn rounded-b-lg border-t-0"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center space-x-3">
+              <svg
+                class="w-5 h-5 md:w-6 md:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+              <span class="text-base md:text-lg font-semibold"
+                >Change Password</span
+              >
+            </div>
+            <svg
+              class="w-4 h-4 md:w-5 md:h-5 transform rotate-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </div>
+        </button>
+
         <!-- Change Password Form Modal -->
         <div
           id="changePasswordContainer"
@@ -241,46 +282,7 @@
           </div>
         </div>
 
-        <!-- Change Password Button -->
-        <button
-          id="changePasswordBtn"
-          class="profile-btn rounded-b-lg border-t-0"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 md:w-6 md:h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-              <span class="text-base md:text-lg font-semibold"
-                >Change Password</span
-              >
-            </div>
-            <svg
-              class="w-4 h-4 md:w-5 md:h-5 transform rotate-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </button>
-        <!-- more information -->
+        <!-- More Information -->
         <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">
           More From MealWave
         </h2>
@@ -323,7 +325,10 @@
             </svg>
           </div>
         </button>
-        <div id="content-about" class="accordion-content hidden">
+        <div
+          id="content-about"
+          class="accordion-content pb-3 text-black hidden"
+        >
           <p class="text-sm md:text-base">
             We are dedicated to helping diners plan their restaurant visits more
             efficiently by sharing and browsing real-time wait times from the
@@ -371,9 +376,10 @@
             </svg>
           </div>
         </button>
-        <div id="content-faq" class="accordion-content hidden">
+        <div id="content-faq" class="accordion-content pb-3 text-black hidden">
+          <p class="text-sm md:text-base">Question: How do I log out?</p>
           <p class="text-sm md:text-base">
-            Nulla, tellus proin justo, pharetra.
+            Answer: At the bottom of this page.
           </p>
         </div>
 
@@ -417,11 +423,11 @@
             </svg>
           </div>
         </button>
-        <div id="content-contact" class="accordion-content hidden">
+        <div id="content-contact" class="accordion-content text-black hidden">
           <p class="text-sm md:text-base mb-4">
             Have any question? Reach out to us.
           </p>
-          <div class="flex space-x-3 my-4 justify-center sm:justify-start">
+          <div class="flex space-x-3 my-4 sm:justify-start">
             <a href="#" class="social-icon">
               <i class="fab fa-facebook-f"></i>
             </a>
@@ -459,8 +465,8 @@
                 ></i>
                 <a
                   href="mailto:contact@example.com"
-                  class="hover:text-highlight transition-colors text-sm md:text-base"
-                  >contact@example.com</a
+                  class="hover:text-highlight transition-colors text-sm text-blue-600 underline md:text-base"
+                  >dtc02@mealwave.com</a
                 >
               </li>
             </ul>
@@ -508,7 +514,7 @@
           </div>
         </button>
         <div id="content-report" class="accordion-content hidden">
-          <p class="text-sm md:text-base">
+          <p class="text-sm md:text-base text-black">
             Found a bug or issue? Please let us know so we can improve your
             experience.
           </p>

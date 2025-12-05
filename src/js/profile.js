@@ -13,7 +13,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 let currentUser = null;
 
 function initProfilePage() {
-  console.log("Initializing profile page..."); // Debug log
+  // Debug log
+  console.log("Initializing profile page...");
 
   // Get DOM elements with null checks
   const logoutBtn = document.getElementById("toLogout");
@@ -255,7 +256,7 @@ function initProfilePage() {
     }
   });
 
-  // Helper functions for error/success messages
+  // Helper functions
   function showError(message) {
     if (passwordError) {
       passwordError.textContent = message;
@@ -272,7 +273,8 @@ function initProfilePage() {
 
   // Auth state listener
   onAuthStateChanged(auth, (user) => {
-    console.log("Auth state changed:", user); // Debug log
+    // Debug log
+    console.log("Auth state changed:", user);
 
     if (!user) {
       window.location.href = "/src/pages/sign-in.html";
