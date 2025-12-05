@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
+// get the star container and paint stars based on selection
 const starContainer = document.getElementById("star-rating");
 const paintStars = (n) => {
   [...starContainer.querySelectorAll("svg")].forEach((el) => {
@@ -30,6 +31,7 @@ if (starContainer) {
 }
 paintStars(0);
 
+// get restaurant ID from URL and fetch its name
 const url = new URL(window.location.href);
 const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 const restaurantRef = doc(db, "restaurant", restaurantId);
@@ -44,6 +46,7 @@ onAuthStateChanged(auth, (user) => {
   const errorMsg = document.getElementById("errorMsg");
   const confirmation = document.getElementById("confirmation");
 
+  // show error msg
   const showError = (msg) => {
     errorMsg.textContent = msg;
     errorMsg.classList.remove("hidden");
@@ -54,6 +57,7 @@ onAuthStateChanged(auth, (user) => {
     }, 3000);
   };
 
+  // show confirmation msg
   const showConfirmation = (msg) => {
     confirmation.textContent = msg;
     confirmation.classList.remove("hidden");
@@ -68,6 +72,7 @@ onAuthStateChanged(auth, (user) => {
     }
 
     try {
+      // get form values
       const waitTime = parseInt(document.getElementById("waiting-time").value);
       const dateStr = document.getElementById("record-date").value;
       const timeStr = document.getElementById("record-time").value;
@@ -76,6 +81,7 @@ onAuthStateChanged(auth, (user) => {
       const comments = (document.getElementById("feedback").value || "").trim();
       const rating = Number(starContainer.dataset.rating || 0);
 
+      // add record to db
       await addDoc(collection(db, "restaurant", restaurantId, "time_record"), {
         user_id: user.uid,
         wait_time_minutes: waitTime,
@@ -85,6 +91,7 @@ onAuthStateChanged(auth, (user) => {
         submitted_at: serverTimestamp(),
       });
 
+      // update restaurant's avg wait time
       const restaurantSnapshot = await getDoc(restaurantRef);
       if (restaurantSnapshot.exists()) {
         const data = restaurantSnapshot.data();
@@ -105,6 +112,7 @@ onAuthStateChanged(auth, (user) => {
       form.reset();
       paintStars(0);
 
+      // redirect back to restaurant-info page after 3 seconds
       setTimeout(() => {
         const encodeParam = encodeURIComponent(restaurantId);
         const targetPage = "restaurant-info.html";

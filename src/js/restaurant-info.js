@@ -10,30 +10,35 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
+// get the restaurant ID from the URL query parameter
 const url = new URL(window.location.href);
 const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 let restaurantName = "";
 
+// elements for favorite button and heart icon
 const favBtn = document.getElementById("fav-btn");
 const favIconPath = document.getElementById("fav-path");
 let currentUser = null;
 let favoriteDocId = null;
 
+// listen for user authentication changes
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
   currentUser = user;
-
+  // check if this restaurant is already in user's favorites
   await checkIsFavorite();
-
+  // add click listener to favorite button
   favBtn.addEventListener("click", toggleFavorite);
 });
 
+// check if the restaurant is already a favorite
 async function checkIsFavorite() {
   const favRef = collection(db, "users", currentUser.uid, "favorite_list");
   const snapshot = await getDocs(favRef);
 
   favoriteDocId = null;
 
+  // loop through user's favorites to see if this restaurant exists
   snapshot.forEach((docSnap) => {
     const data = docSnap.data();
     if (data.restaurant_id === restaurantId) {
@@ -54,10 +59,12 @@ function setHeart(isFav) {
   }
 }
 
+// toggle favorite status when user clicks the heart
 async function toggleFavorite() {
   if (!currentUser) return;
   const confirmModal = document.getElementById("confirm-modal");
 
+  // if not faved, add it to fav
   if (!favoriteDocId) {
     confirmModal.open(
       "Add",
@@ -74,6 +81,7 @@ async function toggleFavorite() {
     return;
   }
 
+  // if already faved, remove it
   confirmModal.open(
     "Remove",
     `Remove ${restaurantName} from your favorites?`,
@@ -87,6 +95,7 @@ async function toggleFavorite() {
   );
 }
 
+// setup the "Add Record" button link with restaurant ID
 function addRecordBtnSetup() {
   if (restaurantId) {
     const addRecordBtn = document.getElementById("add-record-btn");
@@ -98,6 +107,7 @@ function addRecordBtnSetup() {
   }
 }
 
+// load restaurant data from Firestore and populate the page
 async function loadRestaurantData() {
   try {
     const RestaurantRef = doc(db, "restaurant", restaurantId);
@@ -111,6 +121,7 @@ async function loadRestaurantData() {
     const data = RestaurantDoc.data();
     restaurantName = data.name;
 
+    // populate page elements with restaurant info
     document.getElementById("restaurant-name").textContent = data.name;
     document.getElementById("overview-name").textContent = data.name;
     document.getElementById("overview-cuisine").textContent = data.cuisine;
@@ -138,6 +149,7 @@ async function loadRestaurantData() {
   }
 }
 
+// initialize page
 if (restaurantId) {
   loadRestaurantData();
   addRecordBtnSetup();
