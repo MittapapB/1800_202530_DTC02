@@ -8,6 +8,7 @@ import {
   orderBy,
   limit,
   getDocs,
+  onSnapshot,
 } from "firebase/firestore";
 
 const default_avatar = "../../images/default-avatar.jpg";
@@ -94,8 +95,10 @@ export async function fetchUserComments() {
     const results = await Promise.all(promises);
 
     // loop through results and show each comment
-    results.forEach(({ record, user, visitTime }) => {
+    results.forEach(({ record, user, visitTime }, index) => {
       const card = document.createElement("div");
+      const commentId = `comment-${record.user_id}-${index}`;
+      card.id = commentId;
       card.className =
         "flex items-start gap-4 p-4 mb-4 bg-white rounded-2xl shadow-sm border border-gray-100";
 
@@ -111,10 +114,10 @@ export async function fetchUserComments() {
 
       // fill the card HTML with user info and feedback
       card.innerHTML = `
-        <img src="${avatarUrl}" alt="User avatar" class="w-12 h-12 rounded-full object-cover border border-gray-200" />
+        <img src="${avatarUrl}" alt="User avatar" class="w-12 h-12 rounded-full object-cover border border-gray-200 user-avatar" />
         <div class="flex-1">
           <div class="flex justify-between items-center">
-            <h4 class="font-semibold text-title">${
+            <h4 class="font-semibold text-title user-name">${
               user.name || "Anonymous"
             }</h4>
             <p class="text-sm text-gray-500 font-semibold flex items-center gap-1">
@@ -137,6 +140,24 @@ export async function fetchUserComments() {
       `;
 
       container.appendChild(card);
+
+      if (record.user_id) {
+        const userRef = doc(db, "users", record.user_id);
+        onSnapshot(userRef, (userDoc) => {
+          if (!userDoc.exists()) return;
+          const data = userDoc.data();
+
+          // update username
+          const nameEl = card.querySelector(".user-name");
+          if (nameEl)
+            nameEl.textContent =
+              data.fullName || data.displayName || "Anonymous";
+
+          // update avatar
+          const avatarEl = card.querySelector(".user-avatar");
+          if (avatarEl && data.avatar) avatarEl.src = data.avatar;
+        });
+      }
     });
   } catch (err) {
     console.error(err);
