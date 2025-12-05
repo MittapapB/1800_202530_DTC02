@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
+// get the star container and paint stars based on selection
 const starContainer = document.getElementById("star-rating");
 
 // visually fill stars based on rating
@@ -43,6 +44,7 @@ if (starContainer) {
 // initialize stars to 0 (no rating)
 paintStars(0);
 
+// get restaurant ID from URL and fetch its name
 const url = new URL(window.location.href);
 const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 const restaurantRef = doc(db, "restaurant", restaurantId);
@@ -83,6 +85,7 @@ onAuthStateChanged(auth, (user) => {
     }
 
     try {
+      // get form values
       const waitTime = parseInt(document.getElementById("waiting-time").value);
       const dateStr = document.getElementById("record-date").value;
       const timeStr = document.getElementById("record-time").value;

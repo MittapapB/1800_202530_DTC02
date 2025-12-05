@@ -15,6 +15,7 @@ const url = new URL(window.location.href);
 const restaurantId = decodeURIComponent(url.searchParams.get("restaurant-id"));
 let restaurantName = "";
 
+// elements for favorite button and heart icon
 const favBtn = document.getElementById("fav-btn");
 const favIconPath = document.getElementById("fav-path");
 let currentUser = null;
@@ -24,9 +25,9 @@ let favoriteDocId = null;
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
   currentUser = user;
-
+  // check if this restaurant is already in user's favorites
   await checkIsFavorite();
-
+  // add click listener to favorite button
   favBtn.addEventListener("click", toggleFavorite);
 });
 
@@ -59,6 +60,7 @@ function setHeart(isFav) {
   }
 }
 
+// toggle favorite status when user clicks the heart
 async function toggleFavorite() {
   if (!currentUser) return;
   const confirmModal = document.getElementById("confirm-modal");
@@ -141,8 +143,18 @@ async function loadRestaurantData() {
     document.getElementById("overview-name").textContent = data.name;
     document.getElementById("overview-cuisine").textContent = data.cuisine;
     document.getElementById("overview-address").textContent = data.address;
-    document.getElementById("overview-avg").textContent =
-      data.avg_wait_time.toFixed(1);
+    // if no time record yet, display msg instead of 0 min
+    const avgEl = document.getElementById("overview-avg");
+    let avg = data.avg_wait_time;
+    if (!avg || isNaN(avg)) {
+      avgEl.textContent = "No time record yet.";
+      avgEl.style.color = "gray";
+      avgEl.style.fontStyle = "italic";
+    } else {
+      avgEl.textContent = avg.toFixed(1) + " minutes";
+      avgEl.style.color = "";
+      avgEl.style.fontStyle = "";
+    }
 
     const restaurantImg = document.getElementById("restaurant-img");
     if (restaurantImg) {
@@ -154,6 +166,7 @@ async function loadRestaurantData() {
   }
 }
 
+// initialize page
 if (restaurantId) {
   //initialize page
   loadRestaurantData();

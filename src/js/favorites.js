@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
+// get fav container
 const favoritesList = document.getElementById("favorites-list");
 let favoriteMap = {};
 
@@ -18,7 +19,7 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "./sign-in.html";
     return;
   }
-
+  // load the current user's favorites
   await loadFavoritesForUser(user.uid);
 
   // Handle click events inside the favorites list
@@ -34,6 +35,7 @@ onAuthStateChanged(auth, async (user) => {
     // Handle delete button clicked
     const deleteBtn = e.target.closest(".delete-btn");
     if (deleteBtn) {
+      // call delete function if delete button clicked
       await DeleteFavorite(user.uid, restaurantId);
       return;
     }

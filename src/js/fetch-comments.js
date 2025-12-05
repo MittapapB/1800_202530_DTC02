@@ -8,6 +8,7 @@ import {
   orderBy,
   limit,
   getDocs,
+  onSnapshot,
 } from "firebase/firestore";
 
 const default_avatar = "../../images/default-avatar.jpg";
@@ -18,12 +19,14 @@ export async function fetchUserComments() {
   const params = new URLSearchParams(window.location.search);
   const restaurantId = decodeURIComponent(params.get("restaurant-id") || "");
 
+  // comment container
   const container = document.getElementById("comments-container");
   // // exit if the container element is missing
   if (!container) return;
   container.innerHTML = "<p class='text-gray-500 text-center'>Loading...</p>";
 
   try {
+    // catch case when restaurantId is missing
     if (!restaurantId) {
       console.warn("fetchUserComments: missing restaurant-id query param");
       container.innerHTML =
@@ -52,6 +55,7 @@ export async function fetchUserComments() {
     );
     const snapshot = await getDocs(searchQuery);
 
+    // if no comments found, display a placeholder
     if (snapshot.empty) {
       container.innerHTML =
         "<p class='text-gray-500 text-center'>No comments yet.</p>";
@@ -97,6 +101,8 @@ export async function fetchUserComments() {
     // create each record card
     results.forEach(({ record, user, visitTime }) => {
       const card = document.createElement("div");
+      const commentId = `comment-${record.user_id}-${index}`;
+      card.id = commentId;
       card.className =
         "flex items-start gap-4 p-4 mb-4 bg-white rounded-2xl shadow-sm border border-gray-100";
 
@@ -110,11 +116,12 @@ export async function fetchUserComments() {
         }" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.917 1.536 8.277L12 18.896l-7.472 4.604 1.536-8.277L0 9.306l8.332-1.151z"/></svg>`;
       }).join("");
 
+      // fill the card HTML with user info and feedback
       card.innerHTML = `
-        <img src="${avatarUrl}" alt="User avatar" class="w-12 h-12 rounded-full object-cover border border-gray-200" />
+        <img src="${avatarUrl}" alt="User avatar" class="w-12 h-12 rounded-full object-cover border border-gray-200 user-avatar" />
         <div class="flex-1">
           <div class="flex justify-between items-center">
-            <h4 class="font-semibold text-title">${
+            <h4 class="font-semibold text-title user-name">${
               user.name || "Anonymous"
             }</h4>
             <p class="text-sm text-gray-500 font-semibold flex items-center gap-1">
@@ -137,6 +144,24 @@ export async function fetchUserComments() {
       `;
 
       container.appendChild(card);
+
+      if (record.user_id) {
+        const userRef = doc(db, "users", record.user_id);
+        onSnapshot(userRef, (userDoc) => {
+          if (!userDoc.exists()) return;
+          const data = userDoc.data();
+
+          // update username
+          const nameEl = card.querySelector(".user-name");
+          if (nameEl)
+            nameEl.textContent =
+              data.fullName || data.displayName || "Anonymous";
+
+          // update avatar
+          const avatarEl = card.querySelector(".user-avatar");
+          if (avatarEl && data.avatar) avatarEl.src = data.avatar;
+        });
+      }
     });
   } catch (err) {
     console.error(err);
