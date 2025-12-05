@@ -12,15 +12,18 @@ import {
 
 const default_avatar = "../../images/default-avatar.jpg";
 
+// main function to fetch user comments for a restaurant
 export async function fetchUserComments() {
   const params = new URLSearchParams(window.location.search);
   const restaurantId = decodeURIComponent(params.get("restaurant-id") || "");
 
+  // comment container
   const container = document.getElementById("comments-container");
   if (!container) return;
   container.innerHTML = "<p class='text-gray-500 text-center'>Loading...</p>";
 
   try {
+    // catch case when restaurantId is missing
     if (!restaurantId) {
       console.warn("fetchUserComments: missing restaurant-id query param");
       container.innerHTML =
@@ -33,12 +36,15 @@ export async function fetchUserComments() {
       throw new Error("Invalid Firestore instance");
     }
 
+    // // reference to the restaurant's time_record subcollection
     const recordsRef = collection(
       db,
       "restaurant",
       restaurantId,
       "time_record"
     );
+
+    // create a query to fetch the latest 5 comments ordered by submitted_at
     const searchQuery = query(
       recordsRef,
       orderBy("submitted_at", "desc"),
@@ -46,6 +52,7 @@ export async function fetchUserComments() {
     );
     const snapshot = await getDocs(searchQuery);
 
+    // if no comments found, display a placeholder
     if (snapshot.empty) {
       container.innerHTML =
         "<p class='text-gray-500 text-center'>No comments yet.</p>";
@@ -53,7 +60,7 @@ export async function fetchUserComments() {
     }
 
     container.innerHTML = "";
-
+    // map snapshot docs to fetch user info
     const promises = snapshot.docs.map(async (docSnap) => {
       const record = docSnap.data();
       const userId = record.user_id;
@@ -86,6 +93,7 @@ export async function fetchUserComments() {
 
     const results = await Promise.all(promises);
 
+    // loop through results and show each comment
     results.forEach(({ record, user, visitTime }) => {
       const card = document.createElement("div");
       card.className =
@@ -101,6 +109,7 @@ export async function fetchUserComments() {
         }" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.917 1.536 8.277L12 18.896l-7.472 4.604 1.536-8.277L0 9.306l8.332-1.151z"/></svg>`;
       }).join("");
 
+      // fill the card HTML with user info and feedback
       card.innerHTML = `
         <img src="${avatarUrl}" alt="User avatar" class="w-12 h-12 rounded-full object-cover border border-gray-200" />
         <div class="flex-1">
