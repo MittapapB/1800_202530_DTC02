@@ -8,17 +8,21 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
+// get fav container
 const favoritesList = document.getElementById("favorites-list");
 let favoriteMap = {};
 
+// listen for authentication state changes
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
+    // redirect to login if user is not signed in
     window.location.href = "./login.html";
     return;
   }
-
+  // load the current user's favorites
   await loadFavoritesForUser(user.uid);
 
+  // Add click event listener on the favorites list
   favoritesList.addEventListener("click", async (e) => {
     e.preventDefault();
 
@@ -28,11 +32,14 @@ onAuthStateChanged(auth, async (user) => {
     const restaurantId = card.dataset.id;
     if (!restaurantId) return;
 
+    // check if the delete button was clicked
     const deleteBtn = e.target.closest(".delete-btn");
     if (deleteBtn) {
+      // call delete function if delete button clicked
       await DeleteFavorite(user.uid, restaurantId);
       return;
     }
+    // go to restaurant info page, saving last page in session storage
     sessionStorage.setItem("lastPage", window.location.pathname);
     window.location.href = `/src/pages/restaurant-info.html?restaurant-id=${encodeURIComponent(
       restaurantId
@@ -40,10 +47,12 @@ onAuthStateChanged(auth, async (user) => {
   });
 });
 
+// delete a restaurant from user's favorites
 async function DeleteFavorite(userId, restaurantId) {
   const modal = document.getElementById("confirm-modal");
   const favorite = favoriteMap[restaurantId];
 
+  // open confirmation modal; delete only if user confirms
   modal.open(
     "Remove",
     `Remove ${favorite.restaurantName} from your favorites?`,
@@ -57,6 +66,7 @@ async function DeleteFavorite(userId, restaurantId) {
   );
 }
 
+// template for a restaurant card
 function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
   const imgSrc = image_url ? image_url : "../../images/MealWaveLogo.png";
   const avg = avg_wait_time >= 0 ? `${avg_wait_time.toFixed(1)} min` : "—";
@@ -94,6 +104,7 @@ function cardTemplate({ id, name, address, image_url, avg_wait_time }) {
     `;
 }
 
+// load and display a user's favorite restaurants
 async function loadFavoritesForUser(uid) {
   try {
     favoritesList.innerHTML = "";
@@ -102,6 +113,7 @@ async function loadFavoritesForUser(uid) {
     const favoritesRef = collection(db, "users", uid, "favorite_list");
     const favoriteDoc = await getDocs(favoritesRef);
 
+    // if no favorites, show a placeholder message
     if (favoriteDoc.empty) {
       favoritesList.innerHTML = `
       <div
@@ -128,6 +140,7 @@ async function loadFavoritesForUser(uid) {
         restaurantName: restaurant.name,
       };
 
+      // push the restaurant card HTML into array
       cardHTML.push(
         cardTemplate({
           id: restaurantId,
