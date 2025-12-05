@@ -130,6 +130,7 @@
   color: #afa89d;
 } /* light text color */
 
+/* Google Places autocomplete styling (initial draft assisted by ChatGPT) */
 /* Google Places autocomplete dropdown */
 .pac-container {
   border-radius: 12px !important;
