@@ -16,7 +16,7 @@ function initProfilePage() {
   // Debug log
   console.log("Initializing profile page...");
 
-  // Get DOM elements with null checks
+  // Get DOM elements
   const logoutBtn = document.getElementById("toLogout");
   const authButtons = document.getElementById("authButtons");
   const userName = document.getElementById("userName");
@@ -33,7 +33,7 @@ function initProfilePage() {
   const passwordError = document.getElementById("passwordError");
   const passwordSuccess = document.getElementById("passwordSuccess");
 
-  // Debug: Check if elements exist
+  // Debug
   console.log("Elements found:", {
     logoutBtn: !!logoutBtn,
     userName: !!userName,
@@ -94,7 +94,7 @@ function initProfilePage() {
 
       if (userSnap.exists()) {
         const data = userSnap.data();
-        document.getElementById("fullNameInput").value = data.fullName || "";
+        document.getElementById("fullNameInput").value = data.name || "";
         document.getElementById("phoneInput").value = data.phone || "";
         document.getElementById("cityInput").value = data.city || "";
       }
@@ -127,7 +127,7 @@ function initProfilePage() {
     passwordContainer.classList.add("flex");
   });
 
-  // Close form buttons
+  // Close
   closeFormBtn?.addEventListener("click", () => {
     formContainer.classList.add("hidden");
     formContainer.classList.remove("flex");
@@ -152,7 +152,7 @@ function initProfilePage() {
       await setDoc(
         userDocRef,
         {
-          fullName,
+          name,
           phone,
           city,
           updatedAt: Date.now(),
@@ -160,7 +160,7 @@ function initProfilePage() {
         { merge: true },
       );
 
-      // Update display name if changed
+      // Update display name
       if (fullName && fullName !== currentUser.displayName) {
         await updateProfile(currentUser, { displayName: fullName });
       }
@@ -226,11 +226,11 @@ function initProfilePage() {
       // Reset form
       passwordForm.reset();
 
-      // Close modal after 2 seconds
+      // Close modal
       setTimeout(() => {
         passwordContainer.classList.add("hidden");
         passwordContainer.classList.remove("flex");
-      }, 2000);
+      }, 2000); // 2 seconds
     } catch (error) {
       console.error("Password update error:", error);
 
@@ -283,10 +283,10 @@ function initProfilePage() {
 
     currentUser = user;
 
-    // Hide auth buttons if they exist
+    // Hide auth buttons
     if (authButtons) authButtons.classList.add("hidden");
 
-    // Update user name
+    // Update name
     if (userName) {
       const displayName = user.displayName || user.email || "User";
       userName.textContent = `Hi, ${displayName}`;
@@ -299,14 +299,32 @@ function initProfilePage() {
     }
   });
 
-  // Logout button
+  // Logout
   logoutBtn?.addEventListener("click", (e) => {
     e.preventDefault();
     logoutUser();
   });
 }
 
-// Add this function to your profile.js
+// Migration function to fix previous bug. (used fullName instead of name)
+async function migrateUserNames() {
+  const usersSnapshot = await getDocs(collection(db, "users"));
+  const batch = writeBatch(db);
+
+  usersSnapshot.docs.forEach((doc) => {
+    const data = doc.data();
+    if (data.fullName && !data.name) {
+      batch.update(doc.ref, {
+        name: data.fullName,
+      });
+    }
+  });
+
+  await batch.commit();
+  console.log("User names migrated successfully");
+}
+
+// accordion function
 function toggleAccordion(id) {
   const content = document.getElementById(`content-${id}`);
   const icon = document.getElementById(`icon-${id}`);
@@ -315,11 +333,11 @@ function toggleAccordion(id) {
 
   const isOpen = !content.classList.contains("hidden");
 
-  // Close all accordions
+  // Close
   allContents.forEach((el) => el.classList.add("hidden"));
   allIcons.forEach((el) => el.classList.remove("rotate-180"));
 
-  // Toggle current accordion
+  // Toggle
   if (!isOpen) {
     content.classList.remove("hidden");
     if (icon) {
@@ -328,7 +346,7 @@ function toggleAccordion(id) {
   }
 }
 
-// Initialize when DOM is ready
+// Initialize
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initProfilePage);
 } else {
